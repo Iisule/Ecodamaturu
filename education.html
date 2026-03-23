@@ -2,53 +2,51 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Report Issue — EcoDamaturu</title>
+<title>Education — EcoDamaturu</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 
 <style>
 :root{--g:#1a7a4a;--g2:#22a060;--g3:#b6f0d3;--navy:#0d1f2d;--earth:#c4813a;--bg:#f7f9f4;--white:#fff;--tx:#1a2a1e;--mu:#6b7f72;--red:#e05252;--sh:0 2px 16px rgba(26,122,74,.09);--r:16px;--px:clamp(16px,5vw,80px)}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--tx);line-height:1.6;display: flex;flex-direction: column;min-height: 100vh;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--tx);line-height:1.6;display:flex;flex-direction:column;min-height:100vh}
 h1,h2,h3,h4{font-family:'Syne',sans-serif}
 
 /* Navigation */
 nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:64px;padding:0 var(--px);display:flex;align-items:center;justify-content:space-between;background:rgba(247,249,244,.97);backdrop-filter:blur(12px);border-bottom:1px solid rgba(0,0,0,.05)}
 .logo{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;color:var(--g);text-decoration:none}
 .logo b{color:var(--earth)}
-.nav-links{display:none;gap:15px}@media(min-width:900px){.nav-links{display:flex}}
+.nav-links{display:none;gap:15px}@media(min-width:1100px){.nav-links{display:flex}}
 .nav-links a{text-decoration:none;color:var(--tx);font-size:0.85rem;font-weight:600}
+.nav-links a.cur{color:var(--g)}
 
-/* Header & Main */
+/* Header & Content */
 .ph{padding:calc(64px + 50px) var(--px) 40px; background:linear-gradient(135deg, #eef7f2, var(--bg))}
-.main-content{max-width:1100px; margin:0 auto; padding:40px var(--px); display:grid; grid-template-columns:1fr; gap:30px; flex: 1;}
-@media(min-width:900px){.main-content{grid-template-columns:1.6fr 1fr}}
+section{padding:60px var(--px); flex:1}
+.inner{max-width:1100px; margin:0 auto}
+
+/* Grid & Cards */
+.grid{display:grid; grid-template-columns:1fr; gap:25px; margin-top:30px}
+@media(min-width:768px){.grid{grid-template-columns:1fr 1fr}}
+.card{background:var(--white); border-radius:var(--r); padding:25px; box-shadow:var(--sh); display:flex; gap:20px; transition:0.3s}
+.card:hover{transform:translateY(-5px)}
+
+.tip-box{background:var(--g); color:white; padding:25px; border-radius:var(--r); margin-bottom:40px; display:flex; align-items:center; gap:20px}
+.tag{display:inline-block; background:rgba(26,122,74,.1); color:var(--g); font-size:0.7rem; font-weight:700; padding:5px 12px; border-radius:20px; text-transform:uppercase; margin-bottom:10px}
+
+/* Footer (Matching Report Page) */
+footer{background:var(--navy); color:#fff; padding:60px var(--px) 30px}
+.footer-grid{max-width:1100px; margin:0 auto; display:grid; grid-template-columns: 1fr 1fr; gap:40px}
+@media(min-width:768px){.footer-grid{grid-template-columns: 2fr 1fr 1fr 1fr}}
+.footer-logo{font-family:'Syne',sans-serif; font-size:1.5rem; font-weight:800; margin-bottom:15px}
+.fco h5{font-size:.84rem; font-weight:700; margin-bottom:15px; color:var(--g3); text-transform: uppercase;}
+.fco a{display:block; font-size:.88rem; color:rgba(255,255,255,0.5); text-decoration:none; margin-bottom:10px; transition: 0.2s}
+.fco a:hover{color:var(--white)}
+.footer-bottom{max-width:1100px; margin:40px auto 0; padding-top:20px; border-top:1px solid rgba(255,255,255,0.1); font-size:0.8rem; color:rgba(255,255,255,0.3); text-align:center}
 
 /* Components */
-.card{background:var(--white); border-radius:var(--r); padding:30px; box-shadow:var(--sh)}
-.input-group{margin-bottom:20px}
-label{display:block; font-size:0.85rem; font-weight:700; margin-bottom:8px}
-input, select, textarea{width:100%; padding:12px; border:1.5px solid #dce4e0; border-radius:10px; background:var(--bg); outline:none; font-family:inherit}
-
-.upload-zone{border:2px dashed #b6f0d3; padding:30px; text-align:center; border-radius:12px; cursor:pointer}
-.btn-primary{width:100%; padding:15px; background:var(--g); color:white; border:none; border-radius:50px; font-weight:700; cursor:pointer}
-
-/* AI Box */
-#ai-box{display:none; background:#f0f8ff; border:1px solid #cce5ff; padding:20px; border-radius:12px; margin-top:20px}
-.chip{display:inline-block; padding:4px 12px; border-radius:20px; font-size:0.75rem; font-weight:700; margin-right:5px; background:var(--g3); color:var(--g)}
-
-/* Footer */
-footer{background:var(--navy); color:#fff; padding:60px var(--px) 30px; margin-top: auto;}
-.footer-grid{max-width:1100px; margin:0 auto; display:grid; grid-template-columns: 1fr 1fr; gap:40px}
-@media(min-width:768px){.footer-grid{grid-template-columns: 2fr 1fr 1fr}}
-.footer-logo{font-family:'Syne',sans-serif; font-size:1.5rem; font-weight:800; margin-bottom:15px}
-.footer-links h5{margin-bottom:15px; color:var(--g3); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px;}
-.footer-links a{display:block; color:rgba(255,255,255,0.6); text-decoration:none; margin-bottom:8px; font-size:0.9rem}
-.footer-bottom{max-width:1100px; margin:40px auto 0; padding-top:20px; border-top:1px solid rgba(255,255,255,0.1); font-size:0.8rem; color:rgba(255,255,255,0.4); text-align:center}
-
-#toast-container{position:fixed; bottom:20px; left:50%; transform:translateX(-50%); z-index:9999}
-.toast{background:var(--navy); color:white; padding:12px 25px; border-radius:50px; margin-top:10px; font-size:0.9rem; animation:slideUp 0.4s ease forwards}
-@keyframes slideUp{from{transform:translateY(20px); opacity:0} to{transform:translateY(0); opacity:1}}
+.claim-btn{border:1.5px solid var(--g); background:none; color:var(--g); padding:6px 12px; border-radius:6px; font-size:0.75rem; font-weight:700; cursor:pointer; margin-top:10px}
+.claim-btn:disabled{background:var(--g); color:white; cursor:default}
 </style>
 </head>
 <body>
@@ -57,8 +55,11 @@ footer{background:var(--navy); color:#fff; padding:60px var(--px) 30px; margin-t
   <a href="index.html" class="logo">Eco<b>Damaturu</b></a>
   <div class="nav-links">
     <a href="index.html">Home</a>
-    <a href="education.html">Education</a>
-    <a href="report.html" style="color:var(--g)">Report Issue</a>
+    <a href="map.html">Live Map</a>
+    <a href="flood.html">Flood Alerts</a>
+    <a href="education.html" class="cur">Education</a>
+    <a href="report.html">Report Issue</a>
+    <a href="contact.html">Contact</a>
   </div>
   <div style="background:var(--g); color:white; padding:5px 15px; border-radius:50px; font-size:0.8rem; font-weight:700">
     🌱 <span id="pts-count">0</span> EcoPoints
@@ -66,147 +67,339 @@ footer{background:var(--navy); color:#fff; padding:60px var(--px) 30px; margin-t
 </nav>
 
 <div class="ph">
-  <h1 style="font-size:2.5rem; margin-bottom:10px">Report an Issue</h1>
-  <p style="color:var(--mu); max-width:500px">Submit environmental concerns directly to authorities. Earn rewards for helping keep Yobe clean.</p>
+  <div class="inner">
+    <div class="tag">Knowledge Hub</div>
+    <h1 style="font-size:2.5rem; margin-bottom:10px">Environmental Intelligence</h1>
+    <p style="color:var(--mu); max-width:600px">Become an environmental leader in Damaturu. Read our guides and earn points for your community impact.</p>
+  </div>
 </div>
 
-<main class="main-content">
-  <div class="card">
-    <div class="input-group">
-      <label>Full Name</label>
-      <input type="text" id="user-name" placeholder="Enter your name">
-    </div>
-    
-    <div class="input-group">
-      <label>Issue Category</label>
-      <select id="issue-type" onchange="runAISimulation()">
-        <option value="">Select Category</option>
-        <option value="waste">🗑️ Illegal Dumping</option>
-        <option value="flood">🌊 Active Flooding</option>
-        <option value="drain">🏗️ Blocked Drainage</option>
-      </select>
+<section>
+  <div class="inner">
+    <div class="tip-box">
+      <div style="font-size:2rem">💡</div>
+      <div>
+        <h5 style="font-size:0.75rem; text-transform:uppercase; opacity:0.8">Daily Eco-Tip</h5>
+        <p id="daily-tip" style="font-weight:700; font-size:1.1rem">Loading your daily environmental tip...</p>
+      </div>
     </div>
 
-    <div class="input-group">
-      <label>Description</label>
-      <textarea id="issue-desc" placeholder="Details..."></textarea>
-    </div>
+    <div class="tag">Health & Safety</div>
+    <h2>Environment & Your Health</h2>
+    <div class="grid" id="health-grid"></div>
 
-    <div class="input-group">
-      <button class="btn-primary" id="gps-btn" onclick="captureGPS()">📍 Capture GPS Location</button>
-      <p id="gps-status" style="font-size:0.75rem; color:var(--mu); margin-top:5px">Location required</p>
-    </div>
-
-    <div id="ai-box">
-      <div style="font-weight:800; color:var(--g); font-size:0.8rem; margin-bottom:10px">🤖 AI ANALYSIS</div>
-      <p id="ai-rec" style="font-size:0.85rem; margin-bottom:10px">Analyzing...</p>
-      <div id="ai-chips"></div>
-    </div>
-
-    <button class="btn-primary" style="margin-top:20px" id="submit-btn" onclick="submitReport()">Submit Report</button>
+    <div class="tag" style="margin-top:50px">Global Context</div>
+    <h2>World Sustainability News</h2>
+    <div class="grid" id="news-grid"></div>
   </div>
-
-  <div class="card" style="height: fit-content;">
-    <h4 style="margin-bottom:15px">Recent Submissions</h4>
-    <div id="history-list">
-      <p style="color:var(--mu); font-size: 0.85rem;">Your recent reports will appear here.</p>
-    </div>
-  </div>
-</main>
+</section>
 
 <footer>
   <div class="footer-grid">
-    <div>
+    <div class="fb2">
       <div class="footer-logo">Eco<span style="color:var(--earth)">Damaturu</span></div>
-      <p style="font-size: 0.9rem; color: rgba(255,255,255,0.6); max-width: 300px;">
-        Empowering citizens of Yobe State to protect their environment through AI-driven reporting and education.
+      <p style="font-size: 0.9rem; color: rgba(255,255,255,0.5); line-height: 1.6;">
+        AI-powered environmental platform for Yobe State. Protecting our community through technology and education.
       </p>
     </div>
-    <div class="footer-links">
-      <h5>Platform</h5>
+    <div class="fco">
+      <h5>Pages</h5>
       <a href="index.html">Home</a>
+      <a href="map.html">Live Map</a>
+      <a href="flood.html">Flood Alerts</a>
       <a href="education.html">Education</a>
-      <a href="report.html">Report Issue</a>
     </div>
-    <div class="footer-links">
-      <h5>Legal</h5>
-      <a href="#">Privacy Policy</a>
-      <a href="#">Terms of Use</a>
-      <a href="contact.html">Support</a>
+    <div class="fco">
+      <h5>Resources</h5>
+      <a href="report.html">Report Issue</a>
+      <a href="ecopoints.html">EcoPoints</a>
+      <a href="calendar.html">Events</a>
+      <a href="contact.html">Contact Us</a>
+    </div>
+    <div class="fco">
+      <h5>Connect</h5>
+      <a href="#">WhatsApp</a>
+      <a href="#">Twitter / X</a>
+      <a href="#">Facebook</a>
+      <a href="#">Instagram</a>
     </div>
   </div>
   <div class="footer-bottom">
-    &copy; 2026 EcoDamaturu. Protecting our home with technology.
+    &copy; 2026 EcoDamaturu. Protecting Damaturu, Yobe State. Nigeria 🇳🇬
   </div>
 </footer>
 
-<div id="toast-container"></div>
-
 <script>
-let currentGPS = null;
+// Content Data
+const tips = [
+  "Clear your gutters every Saturday to prevent urban flooding.",
+  "Planting a tree today provides natural cooling for decades.",
+  "Plastic takes 450 years to decompose—switch to reusable bags.",
+  "Report blocked drains immediately via the 'Report Issue' tab."
+];
+
+const healthData = [
+  {icon:'🦟', title:'Disease Prevention', desc:'Clean drains stop stagnant water, preventing Malaria and Cholera outbreaks.'},
+  {icon:'🫁', title:'Clean Air', desc:'Stopping trash burning prevents toxic fumes that cause respiratory issues.'}
+];
+
+const newsData = [
+  {icon:'🌍', title:'Great Green Wall', desc:'The pan-African tree project is moving closer to Yobe to stop desertification.'},
+  {icon:'♻️', title:'Global Plastic Pact', desc:'170+ nations are working on a treaty to end plastic pollution for good.'}
+];
+
+// EcoPoints Logic (Shared via LocalStorage)
 let points = parseInt(localStorage.getItem('ecoPoints')) || 0;
 document.getElementById('pts-count').textContent = points;
 
-function showToast(msg) {
-  const t = document.createElement('div');
-  t.className = 'toast'; t.textContent = msg;
-  document.getElementById('toast-container').appendChild(t);
-  setTimeout(() => t.remove(), 3000);
-}
-
-function captureGPS() {
-  const btn = document.getElementById('gps-btn');
-  const status = document.getElementById('gps-status');
-  btn.textContent = "🛰️ Locating...";
-  if(navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition((pos) => {
-      currentGPS = { lat: pos.coords.latitude, lng: pos.coords.longitude };
-      status.textContent = `📍 Captured: ${currentGPS.lat.toFixed(4)}, ${currentGPS.lng.toFixed(4)}`;
-      btn.textContent = "✅ Location Captured";
-      btn.style.background = "#22a060";
-    }, () => {
-      status.textContent = "📍 Fallback: Damaturu Central";
-      currentGPS = { lat: 11.747, lng: 11.961 };
-      btn.textContent = "✅ Location Set";
-    });
-  }
-}
-
-function runAISimulation() {
-  const type = document.getElementById('issue-type').value;
-  if(!type) return;
-  const box = document.getElementById('ai-box');
-  const rec = document.getElementById('ai-rec');
-  const chips = document.getElementById('ai-chips');
-  box.style.display = "block";
-  rec.textContent = "AI is processing images...";
-  setTimeout(() => {
-    const data = {
-      waste: { r: "Detected Waste. Routing to YOSEPA.", u: "High" },
-      flood: { r: "Flooding detected. Alerting Emergency Units.", u: "Critical" },
-      drain: { r: "Blocked Drainage. Notifying Public Works.", u: "Medium" }
-    }[type];
-    rec.textContent = data.r;
-    chips.innerHTML = `<span class="chip">Urgency: ${data.u}</span>`;
-  }, 1000);
-}
-
-function submitReport() {
-  const name = document.getElementById('user-name').value;
-  if(!name || !currentGPS) { showToast("⚠️ Name and GPS required"); return; }
-  const btn = document.getElementById('submit-btn');
+function claim(btn, id) {
+  if(localStorage.getItem('read-' + id)) return;
+  
+  points += 10;
+  localStorage.setItem('ecoPoints', points);
+  localStorage.setItem('read-' + id, 'true');
+  document.getElementById('pts-count').textContent = points;
+  
   btn.disabled = true;
-  btn.textContent = "Uploading...";
-  setTimeout(() => {
-    points += 50;
-    localStorage.setItem('ecoPoints', points);
-    document.getElementById('pts-count').textContent = points;
-    showToast("✅ +50 EcoPoints earned!");
-    btn.textContent = "Submit Report";
-    btn.disabled = false;
-    document.getElementById('history-list').innerHTML = `<strong>Last: ${document.getElementById('issue-type').value.toUpperCase()}</strong><br><small>Status: Pending Review</small>`;
-  }, 1500);
+  btn.textContent = "✓ Completed (+10)";
+  btn.style.background = "var(--g)";
+  btn.style.color = "white";
 }
+
+// Rendering Logic
+function render(data, targetId) {
+  const container = document.getElementById(targetId);
+  if(!container) return;
+  
+  container.innerHTML = data.map((item, i) => {
+    const uniqueId = targetId + i;
+    const isDone = localStorage.getItem('read-' + uniqueId);
+    return `
+      <div class="card">
+        <div style="font-size:2rem">${item.icon}</div>
+        <div>
+          <h4 style="font-weight:800">${item.title}</h4>
+          <p style="font-size:0.85rem; color:var(--mu); margin-bottom:10px">${item.desc}</p>
+          <button class="claim-btn" onclick="claim(this, '${uniqueId}')" ${isDone ? 'disabled' : ''}>
+            ${isDone ? '✓ Completed' : 'Mark as Read (+10)'}
+          </button>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Set random tip
+  document.getElementById('daily-tip').textContent = tips[Math.floor(Math.random()*tips.length)];
+  
+  // Render Dashboard
+  render(healthData, 'health-grid');
+  render(newsData, 'news-grid');
+});
 </script>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Education — EcoDamaturu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root{--g:#1a7a4a;--g2:#22a060;--g3:#b6f0d3;--navy:#0d1f2d;--earth:#c4813a;--bg:#f7f9f4;--white:#fff;--tx:#1a2a1e;--mu:#6b7f72;--red:#e05252;--sh:0 2px 16px rgba(26,122,74,.09);--r:16px;--px:clamp(16px,5vw,80px)}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--tx);line-height:1.6;display:flex;flex-direction:column;min-height:100vh}
+h1,h2,h3,h4{font-family:'Syne',sans-serif}
+
+/* Navigation */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:64px;padding:0 var(--px);display:flex;align-items:center;justify-content:space-between;background:rgba(247,249,244,.97);backdrop-filter:blur(12px);border-bottom:1px solid rgba(0,0,0,.05)}
+.logo{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;color:var(--g);text-decoration:none}
+.logo b{color:var(--earth)}
+.nav-links{display:none;gap:15px}@media(min-width:1100px){.nav-links{display:flex}}
+.nav-links a{text-decoration:none;color:var(--tx);font-size:0.85rem;font-weight:600}
+.nav-links a.cur{color:var(--g)}
+
+/* Header & Content */
+.ph{padding:calc(64px + 50px) var(--px) 40px; background:linear-gradient(135deg, #eef7f2, var(--bg))}
+section{padding:60px var(--px); flex:1}
+.inner{max-width:1100px; margin:0 auto}
+
+/* Grid & Cards */
+.grid{display:grid; grid-template-columns:1fr; gap:25px; margin-top:30px}
+@media(min-width:768px){.grid{grid-template-columns:1fr 1fr}}
+.card{background:var(--white); border-radius:var(--r); padding:25px; box-shadow:var(--sh); display:flex; gap:20px; transition:0.3s}
+.card:hover{transform:translateY(-5px)}
+
+.tip-box{background:var(--g); color:white; padding:25px; border-radius:var(--r); margin-bottom:40px; display:flex; align-items:center; gap:20px}
+.tag{display:inline-block; background:rgba(26,122,74,.1); color:var(--g); font-size:0.7rem; font-weight:700; padding:5px 12px; border-radius:20px; text-transform:uppercase; margin-bottom:10px}
+
+/* Footer (Matching Report Page) */
+footer{background:var(--navy); color:#fff; padding:60px var(--px) 30px}
+.footer-grid{max-width:1100px; margin:0 auto; display:grid; grid-template-columns: 1fr 1fr; gap:40px}
+@media(min-width:768px){.footer-grid{grid-template-columns: 2fr 1fr 1fr 1fr}}
+.footer-logo{font-family:'Syne',sans-serif; font-size:1.5rem; font-weight:800; margin-bottom:15px}
+.fco h5{font-size:.84rem; font-weight:700; margin-bottom:15px; color:var(--g3); text-transform: uppercase;}
+.fco a{display:block; font-size:.88rem; color:rgba(255,255,255,0.5); text-decoration:none; margin-bottom:10px; transition: 0.2s}
+.fco a:hover{color:var(--white)}
+.footer-bottom{max-width:1100px; margin:40px auto 0; padding-top:20px; border-top:1px solid rgba(255,255,255,0.1); font-size:0.8rem; color:rgba(255,255,255,0.3); text-align:center}
+
+/* Components */
+.claim-btn{border:1.5px solid var(--g); background:none; color:var(--g); padding:6px 12px; border-radius:6px; font-size:0.75rem; font-weight:700; cursor:pointer; margin-top:10px}
+.claim-btn:disabled{background:var(--g); color:white; cursor:default}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">Eco<b>Damaturu</b></a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="map.html">Live Map</a>
+    <a href="flood.html">Flood Alerts</a>
+    <a href="education.html" class="cur">Education</a>
+    <a href="report.html">Report Issue</a>
+    <a href="contact.html">Contact</a>
+  </div>
+  <div style="background:var(--g); color:white; padding:5px 15px; border-radius:50px; font-size:0.8rem; font-weight:700">
+    🌱 <span id="pts-count">0</span> EcoPoints
+  </div>
+</nav>
+
+<div class="ph">
+  <div class="inner">
+    <div class="tag">Knowledge Hub</div>
+    <h1 style="font-size:2.5rem; margin-bottom:10px">Environmental Intelligence</h1>
+    <p style="color:var(--mu); max-width:600px">Become an environmental leader in Damaturu. Read our guides and earn points for your community impact.</p>
+  </div>
+</div>
+
+<section>
+  <div class="inner">
+    <div class="tip-box">
+      <div style="font-size:2rem">💡</div>
+      <div>
+        <h5 style="font-size:0.75rem; text-transform:uppercase; opacity:0.8">Daily Eco-Tip</h5>
+        <p id="daily-tip" style="font-weight:700; font-size:1.1rem">Loading your daily environmental tip...</p>
+      </div>
+    </div>
+
+    <div class="tag">Health & Safety</div>
+    <h2>Environment & Your Health</h2>
+    <div class="grid" id="health-grid"></div>
+
+    <div class="tag" style="margin-top:50px">Global Context</div>
+    <h2>World Sustainability News</h2>
+    <div class="grid" id="news-grid"></div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div class="fb2">
+      <div class="footer-logo">Eco<span style="color:var(--earth)">Damaturu</span></div>
+      <p style="font-size: 0.9rem; color: rgba(255,255,255,0.5); line-height: 1.6;">
+        AI-powered environmental platform for Yobe State. Protecting our community through technology and education.
+      </p>
+    </div>
+    <div class="fco">
+      <h5>Pages</h5>
+      <a href="index.html">Home</a>
+      <a href="map.html">Live Map</a>
+      <a href="flood.html">Flood Alerts</a>
+      <a href="education.html">Education</a>
+    </div>
+    <div class="fco">
+      <h5>Resources</h5>
+      <a href="report.html">Report Issue</a>
+      <a href="ecopoints.html">EcoPoints</a>
+      <a href="calendar.html">Events</a>
+      <a href="contact.html">Contact Us</a>
+    </div>
+    <div class="fco">
+      <h5>Connect</h5>
+      <a href="#">WhatsApp</a>
+      <a href="#">Twitter / X</a>
+      <a href="#">Facebook</a>
+      <a href="#">Instagram</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    &copy; 2026 EcoDamaturu. Protecting Damaturu, Yobe State. Nigeria 🇳🇬
+  </div>
+</footer>
+
+<script>
+// Content Data
+const tips = [
+  "Clear your gutters every Saturday to prevent urban flooding.",
+  "Planting a tree today provides natural cooling for decades.",
+  "Plastic takes 450 years to decompose—switch to reusable bags.",
+  "Report blocked drains immediately via the 'Report Issue' tab."
+];
+
+const healthData = [
+  {icon:'🦟', title:'Disease Prevention', desc:'Clean drains stop stagnant water, preventing Malaria and Cholera outbreaks.'},
+  {icon:'🫁', title:'Clean Air', desc:'Stopping trash burning prevents toxic fumes that cause respiratory issues.'}
+];
+
+const newsData = [
+  {icon:'🌍', title:'Great Green Wall', desc:'The pan-African tree project is moving closer to Yobe to stop desertification.'},
+  {icon:'♻️', title:'Global Plastic Pact', desc:'170+ nations are working on a treaty to end plastic pollution for good.'}
+];
+
+// EcoPoints Logic (Shared via LocalStorage)
+let points = parseInt(localStorage.getItem('ecoPoints')) || 0;
+document.getElementById('pts-count').textContent = points;
+
+function claim(btn, id) {
+  if(localStorage.getItem('read-' + id)) return;
+  
+  points += 10;
+  localStorage.setItem('ecoPoints', points);
+  localStorage.setItem('read-' + id, 'true');
+  document.getElementById('pts-count').textContent = points;
+  
+  btn.disabled = true;
+  btn.textContent = "✓ Completed (+10)";
+  btn.style.background = "var(--g)";
+  btn.style.color = "white";
+}
+
+// Rendering Logic
+function render(data, targetId) {
+  const container = document.getElementById(targetId);
+  if(!container) return;
+  
+  container.innerHTML = data.map((item, i) => {
+    const uniqueId = targetId + i;
+    const isDone = localStorage.getItem('read-' + uniqueId);
+    return `
+      <div class="card">
+        <div style="font-size:2rem">${item.icon}</div>
+        <div>
+          <h4 style="font-weight:800">${item.title}</h4>
+          <p style="font-size:0.85rem; color:var(--mu); margin-bottom:10px">${item.desc}</p>
+          <button class="claim-btn" onclick="claim(this, '${uniqueId}')" ${isDone ? 'disabled' : ''}>
+            ${isDone ? '✓ Completed' : 'Mark as Read (+10)'}
+          </button>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Set random tip
+  document.getElementById('daily-tip').textContent = tips[Math.floor(Math.random()*tips.length)];
+  
+  // Render Dashboard
+  render(healthData, 'health-grid');
+  render(newsData, 'news-grid');
+});
+</script>
+
 </body>
 </html>
