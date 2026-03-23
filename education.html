@@ -92,26 +92,23 @@ footer{background:var(--navy);color:#fff;padding:48px var(--px) 24px}
     <div class="grid" id="health-grid"></div>
   </div>
 </section>
-<section style="background:var(--white)">
-  <div class="inner">
-    <div class="tag rv">Health & Safety</div>
-    <h2 class="rv d1" style="margin-bottom:28px">The Impact of a Clean Environment</h2>
-    <div class="grid" id="health-grid"></div> </div>
-</section>
 
 <section style="background:var(--bg)">
   <div class="inner">
     <div class="tag rv">Global Context</div>
     <h2 class="rv d1" style="margin-bottom:28px">World Sustainability News</h2>
-    <div class="grid" id="news-grid"></div> </div>
+    <div class="grid" id="news-grid"></div>
+  </div>
 </section>
 
 <section style="background:var(--white)">
   <div class="inner">
     <div class="tag rv">Action Guides</div>
     <h2 class="rv d1" style="margin-bottom:28px">Practical Community Skills</h2>
-    <div class="grid" id="skills-grid"></div> </div>
+    <div class="grid" id="skills-grid"></div>
+  </div>
 </section>
+
 <footer>
   <div style="text-align:center;opacity:.5;font-size:.8rem">
     © 2026 EcoDamaturu. Built for Yobe State, Nigeria.
@@ -119,109 +116,69 @@ footer{background:var(--navy);color:#fff;padding:48px var(--px) 24px}
 </footer>
 
 <script>
-<script>
 // --- UI Essentials ---
 function toggleDrw(){const d=document.getElementById('drw'),b=document.getElementById('hbg');d.classList.toggle('o');b.classList.toggle('o')}
-
 window.addEventListener('scroll',()=>{
   document.getElementById('nav').classList.toggle('sc',window.scrollY>60);
   const pb=document.getElementById('pb');
-  if(pb) pb.style.width=(window.scrollY/(document.body.scrollHeight-window.innerHeight)*100)+'%';
+  if(pb)pb.style.width=(window.scrollY/(document.body.scrollHeight-window.innerHeight)*100)+'%';
   document.querySelectorAll('.rv:not(.in)').forEach(el=>{if(el.getBoundingClientRect().top<window.innerHeight-60)el.classList.add('in')})
 });
 
-// --- EcoPoints & Data ---
-let currentPoints = parseInt(localStorage.getItem('ecoPoints')) || 0;
-
+// --- Data Arrays ---
 const tips = [
   "Clear your gutters every Saturday to prevent urban flooding.",
   "Planting a tree today provides natural cooling for decades.",
   "Plastic takes 450 years to decompose—switch to reusable bags.",
-  "Report blocked drains immediately via the 'Report Issue' tab."
+  "Report blocked drains immediately via the 'Report Issue' tab.",
+  "Properly disposed waste prevents Cholera and Malaria outbreaks."
 ];
 
 const healthData = [
-  {icon:'🦟',title:'Disease Prevention',desc:'Clean drains prevent stagnant water, stopping Malaria and Cholera outbreaks.'},
-  {icon:'🫁',title:'Clean Air',desc:'Stopping the burning of trash prevents toxic fumes that cause asthma in children.'}
+  {icon:'🦟',title:'Disease Prevention',desc:'Clean drains prevent stagnant water, the primary breeding ground for Malaria-carrying mosquitoes and Cholera bacteria.'},
+  {icon:'🫁',title:'Clean Air',desc:'Stopping the burning of plastic and tires prevents toxic fumes that lead to asthma and respiratory issues in children.'}
 ];
 
 const newsData = [
-  {icon:'🌍',title:'Great Green Wall',desc:'The Pan-African project to plant trees is moving closer to Yobe to stop the desert.'},
-  {icon:'♻️',title:'Global Plastic Pact',desc:'170+ countries are negotiating a treaty to end plastic pollution globally.'}
+  {icon:'🌍',title:'Great Green Wall',desc:'The multi-nation project to plant trees across the Sahel is moving closer to Yobe, aiming to stop desertification.'},
+  {icon:'♻️',title:'Global Plastic Pact',desc:'Over 170 countries are negotiating a treaty to end plastic pollution—a move that will change local markets forever.'}
 ];
 
 const skillsData = [
-  {icon:'🗑️',title:'Waste Segregation',desc:'Separate organic food waste from plastic and glass to make composting easier.'},
-  {icon:'🌳',title:'Urban Farming',desc:'Use small backyard spaces to grow food and absorb excess rainwater.'}
+  {icon:'🗑️',title:'Waste Segregation',desc:'Learn to separate organic waste for composting from recyclables like plastic and glass.'},
+  {icon:'🌳',title:'Urban Farming',desc:'Turn small backyard spaces into gardens to filter rainwater and grow fresh food for your family.'}
 ];
 
-// --- Core Functions ---
-
-function updatePointsDisplay() {
-    const el = document.getElementById('user-points');
-    if(el) el.textContent = currentPoints;
-    localStorage.setItem('ecoPoints', currentPoints);
-}
-
-function claimPoints(btn, uniqueKey) {
-    if(localStorage.getItem('read-' + uniqueKey)) return; // Already claimed
-
-    currentPoints += 10;
-    updatePointsDisplay();
-    localStorage.setItem('read-' + uniqueKey, 'true');
-
-    btn.style.background = "var(--g)";
-    btn.style.color = "#fff";
-    btn.textContent = "✓ +10 Points Earned";
-    btn.disabled = true;
-}
-
+// --- Rendering Logic ---
 function renderCards(data, targetId) {
-    const container = document.getElementById(targetId);
-    if(!container) {
-        console.error("Could not find ID: " + targetId);
-        return;
-    }
-    
-    container.innerHTML = data.map((item, i) => {
-        const uniqueKey = targetId + i;
-        const isClaimed = localStorage.getItem('read-' + uniqueKey);
-        
-        return `
-        <div class="card rv d${(i%3)+1}">
-          <div style="font-size:2rem">${item.icon}</div>
-          <div style="flex-grow:1">
-            <h4 style="font-size:1rem;font-weight:700;margin-bottom:5px;color:var(--navy)">${item.title}</h4>
-            <p style="font-size:.88rem;color:var(--mu);line-height:1.6;margin-bottom:10px">${item.desc}</p>
-            <button onclick="claimPoints(this, '${uniqueKey}')" 
-                ${isClaimed ? 'disabled style="background:var(--g); color:#fff;"' : ''}
-                style="border:1.5px solid var(--g); background:none; color:var(--g); padding:5px 10px; border-radius:6px; font-size:0.75rem; font-weight:700; cursor:pointer;">
-                ${isClaimed ? '✓ Completed' : 'Mark as Read (+10)'}
-            </button>
-          </div>
-        </div>`;
-    }).join('');
+  const container = document.getElementById(targetId);
+  if(!container) return;
+  container.innerHTML = data.map((item, i) => `
+    <div class="card rv d${(i%3)+1}">
+      <div style="font-size:2rem">${item.icon}</div>
+      <div>
+        <h4 style="font-size:1rem;font-weight:700;margin-bottom:5px;color:var(--navy)">${item.title}</h4>
+        <p style="font-size:.88rem;color:var(--mu);line-height:1.6">${item.desc}</p>
+      </div>
+    </div>
+  `).join('');
 }
 
-// --- Initialization ---
 document.addEventListener('DOMContentLoaded', () => {
-    // Set daily tip
-    const tipEl = document.getElementById('daily-tip');
-    if(tipEl) tipEl.textContent = tips[Math.floor(Math.random()*tips.length)];
-    
-    // Render all sections
-    renderCards(healthData, 'health-grid');
-    renderCards(newsData, 'news-grid');
-    renderCards(skillsData, 'skills-grid');
-    
-    updatePointsDisplay();
-    
-    // Reveal animation
-    setTimeout(() => {
-        document.querySelectorAll('.rv').forEach(el => {
-            if(el.getBoundingClientRect().top < window.innerHeight) el.classList.add('in');
-        });
-    }, 200);
+  // Set Random Tip
+  document.getElementById('daily-tip').textContent = tips[Math.floor(Math.random()*tips.length)];
+  
+  // Render Sections
+  renderCards(healthData, 'health-grid');
+  renderCards(newsData, 'news-grid');
+  renderCards(skillsData, 'skills-grid');
+  
+  // Initial Reveal
+  setTimeout(() => {
+    document.querySelectorAll('.rv').forEach(el => {
+      if(el.getBoundingClientRect().top < window.innerHeight) el.classList.add('in');
+    });
+  }, 100);
 });
 </script>
 </body>
