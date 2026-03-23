@@ -119,7 +119,63 @@ window.addEventListener('scroll',()=>{
   if(pb)pb.style.width=(window.scrollY/(document.body.scrollHeight-window.innerHeight)*100)+'%';
   document.querySelectorAll('.rv:not(.in)').forEach(el=>{if(el.getBoundingClientRect().top<window.innerHeight-60)el.classList.add('in')})
 });
+/**
+ * EcoDamaturu Footer Loader
+ * To use: Place <div id="footer-placeholder"></div> at the bottom of your HTML
+ */
 
+function loadFooter() {
+    const footerHTML = `
+    <footer>
+      <div class="ffg">
+        <div class="fb2">
+          <div style="font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:800;color:#fff">
+            Eco<span style="color:#c4813a">Damaturu</span>
+          </div>
+          <p>AI-powered environmental platform for Damaturu, Yobe State, Nigeria.</p>
+        </div>
+        <div class="fco">
+          <h5>Pages</h5>
+          <a href="index.html">Home</a>
+          <a href="features.html">Features</a>
+          <a href="report.html">Report Issue</a>
+          <a href="map.html">Live Map</a>
+        </div>
+        <div class="fco">
+          <h5>More</h5>
+          <a href="flood.html">Flood Alerts</a>
+          <a href="calendar.html">Calendar</a>
+          <a href="education.html">Education</a>
+          <a href="contact.html">Contact</a>
+        </div>
+        <div class="fco">
+          <h5>Connect</h5>
+          <a onclick="wa()" style="cursor:pointer">WhatsApp</a>
+          <a href="#">Twitter / X</a>
+          <a href="#">Facebook</a>
+          <a href="#">Instagram</a>
+        </div>
+      </div>
+      <div class="fbt">
+        <span>© 2026 EcoDamaturu. Protecting Damaturu with Technology.</span>
+        <span>Built for Yobe State, Nigeria 🇳🇬</span>
+      </div>
+    </footer>
+    `;
+
+    const placeholder = document.getElementById('footer-placeholder');
+    if (placeholder) {
+        placeholder.innerHTML = footerHTML;
+    }
+}
+
+// Function for WhatsApp (as requested in your HTML)
+function wa() {
+    window.open("https://wa.me/YOUR_NUMBER_HERE", "_blank");
+}
+
+// Run the function when the page loads
+document.addEventListener('DOMContentLoaded', loadFooter);
 // --- Data Arrays ---
 const tips = [
   "Clear your gutters every Saturday to prevent urban flooding.",
