@@ -41,6 +41,77 @@ section{padding:64px var(--px)}
 .d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
 footer{background:var(--navy);color:#fff;padding:48px var(--px) 24px}
 .tip-box{background:var(--g);color:#fff;padding:20px;border-radius:var(--r);margin-bottom:40px;display:flex;align-items:center;gap:15px}
+/* Footer Container */
+footer {
+  background: var(--navy);
+  color: #fff;
+  padding: 80px var(--px) 40px;
+  margin-top: auto;
+}
+
+/* The Grid Wrapper (.ffg) */
+.ffg {
+  max-width: 1150px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr; /* Single column on mobile */
+  gap: 40px;
+}
+
+/* Tablet & Desktop Layout */
+@media (min-width: 768px) {
+  .ffg {
+    grid-template-columns: 2fr 1fr 1fr 1fr; /* Brand wider, others equal */
+  }
+}
+
+/* Brand Section (.fb2) */
+.fb2 p {
+  margin-top: 15px;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.6;
+  max-width: 300px;
+}
+
+/* Column Styling (.fco) */
+.fco h5 {
+  color: var(--g3);
+  font-family: 'Syne', sans-serif;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+}
+
+.fco a {
+  display: block;
+  color: rgba(255, 255, 255, 0.5);
+  text-decoration: none;
+  font-size: 0.9rem;
+  margin-bottom: 12px;
+  transition: 0.3s ease;
+  cursor: pointer;
+}
+
+.fco a:hover {
+  color: #fff;
+  transform: translateX(5px); /* Slight slide effect on hover */
+}
+
+/* Bottom Bar (.fbt) */
+.fbt {
+  max-width: 1150px;
+  margin: 60px auto 0;
+  padding-top: 30px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.3);
+}
 </style>
 </head>
 <body>
@@ -119,63 +190,17 @@ window.addEventListener('scroll',()=>{
   if(pb)pb.style.width=(window.scrollY/(document.body.scrollHeight-window.innerHeight)*100)+'%';
   document.querySelectorAll('.rv:not(.in)').forEach(el=>{if(el.getBoundingClientRect().top<window.innerHeight-60)el.classList.add('in')})
 });
-/**
- * EcoDamaturu Footer Loader
- * To use: Place <div id="footer-placeholder"></div> at the bottom of your HTML
- */
-
-function loadFooter() {
-    const footerHTML = `
-    <footer>
-      <div class="ffg">
-        <div class="fb2">
-          <div style="font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:800;color:#fff">
-            Eco<span style="color:#c4813a">Damaturu</span>
-          </div>
-          <p>AI-powered environmental platform for Damaturu, Yobe State, Nigeria.</p>
-        </div>
-        <div class="fco">
-          <h5>Pages</h5>
-          <a href="index.html">Home</a>
-          <a href="features.html">Features</a>
-          <a href="report.html">Report Issue</a>
-          <a href="map.html">Live Map</a>
-        </div>
-        <div class="fco">
-          <h5>More</h5>
-          <a href="flood.html">Flood Alerts</a>
-          <a href="calendar.html">Calendar</a>
-          <a href="education.html">Education</a>
-          <a href="contact.html">Contact</a>
-        </div>
-        <div class="fco">
-          <h5>Connect</h5>
-          <a onclick="wa()" style="cursor:pointer">WhatsApp</a>
-          <a href="#">Twitter / X</a>
-          <a href="#">Facebook</a>
-          <a href="#">Instagram</a>
-        </div>
-      </div>
-      <div class="fbt">
-        <span>© 2026 EcoDamaturu. Protecting Damaturu with Technology.</span>
-        <span>Built for Yobe State, Nigeria 🇳🇬</span>
-      </div>
-    </footer>
-    `;
-
-    const placeholder = document.getElementById('footer-placeholder');
-    if (placeholder) {
-        placeholder.innerHTML = footerHTML;
-    }
-}
-
-// Function for WhatsApp (as requested in your HTML)
-function wa() {
-    window.open("https://wa.me/YOUR_NUMBER_HERE", "_blank");
-}
-
-// Run the function when the page loads
-document.addEventListener('DOMContentLoaded', loadFooter);
+const footerHTML = `
+<footer>
+  <div class="ffg">
+    <div class="fb2">...logo & description...</div>
+    <div class="fco"><h5>Pages</h5>...links...</div>
+    <div class="fco"><h5>More</h5>...links...</div>
+    <div class="fco"><h5>Connect</h5>...links...</div>
+  </div>
+  <div class="fbt">...copyright info...</div>
+</footer>
+`;
 // --- Data Arrays ---
 const tips = [
   "Clear your gutters every Saturday to prevent urban flooding.",
