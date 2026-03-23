@@ -137,51 +137,140 @@ footer{background:var(--navy);color:#fff;padding:48px var(--px) 24px}
 </footer>
 <div id="wafab"><button class="wabtn" onclick="wa()">💬</button></div>
 <script>
-function toggleDrw(){const d=document.getElementById('drw'),b=document.getElementById('hbg');const o=d.classList.contains('o');d.classList.toggle('o',!o);b.classList.toggle('o',!o)}
-document.addEventListener('click',e=>{const d=document.getElementById('drw'),b=document.getElementById('hbg');if(d&&d.classList.contains('o')&&!d.contains(e.target)&&b&&!b.contains(e.target)){d.classList.remove('o');b.classList.remove('o')}});
-window.addEventListener('scroll',()=>{document.getElementById('nav').classList.toggle('sc',window.scrollY>60);const p=document.getElementById('pb');if(p)p.style.width=(window.scrollY/(document.body.scrollHeight-window.innerHeight)*100)+'%';document.querySelectorAll('.rv:not(.in)').forEach(el=>{if(el.getBoundingClientRect().top<window.innerHeight-60)el.classList.add('in')})});
-function toast(m,t='i'){const el=document.createElement('div');el.className='t '+t;el.textContent=m;const w=document.getElementById('tw');if(w){w.appendChild(el);requestAnimationFrame(()=>requestAnimationFrame(()=>el.classList.add('s')));setTimeout(()=>{el.classList.remove('s');setTimeout(()=>el.remove(),400)},3000)}}
-function wa(){window.open('https://wa.me/2349034567890?text='+encodeURIComponent('Hi EcoDamaturu! I need help.'),'_blank')}
-function initRv(){setTimeout(()=>document.querySelectorAll('.rv').forEach(el=>{if(el.getBoundingClientRect().top<window.innerHeight)el.classList.add('in')}),100)}
+function toggleDrw() {
+    const d = document.getElementById('drw');
+    const b = document.getElementById('hbg');
+    if (!d || !b) return;
+    const isOpen = d.classList.contains('o');
+    d.classList.toggle('o', !isOpen);
+    b.classList.toggle('o', !isOpen);
+}
 
-const wards=[
-  {name:'Hausari',risk:78,level:'h'},{name:'Gujba Road',risk:71,level:'h'},
-  {name:'Bolori',risk:65,level:'m'},{name:'Pompomari',risk:55,level:'m'},
-  {name:'Gwange',risk:48,level:'m'},{name:'Sabon Gari',risk:44,level:'m'},
-  {name:'Fari',risk:32,level:'l'},{name:'Shehuri North',risk:22,level:'l'},
-  {name:'Buluburde',risk:58,level:'m'},{name:'Kaliyari',risk:38,level:'l'},
-  {name:'Kukareta',risk:45,level:'m'},{name:'Njiwaji',risk:27,level:'l'}
-];
-const wc={h:'#e05252',m:'#c4813a',l:'#1a7a4a'};
-const wl={h:'HIGH RISK',m:'MEDIUM RISK',l:'LOW RISK'};
-document.addEventListener('DOMContentLoaded',()=>{
-  initRv();
-  document.getElementById('wards-grid').innerHTML=wards.map(w=>`
-    <div style="background:var(--white);border-radius:var(--rs);padding:16px 18px;box-shadow:var(--sh);border-top:3px solid ${wc[w.level]}">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
-        <span style="font-weight:700;font-size:.92rem;color:var(--navy)">${w.name} Ward</span>
-        <span style="font-size:.76rem;font-weight:700;padding:3px 9px;border-radius:20px;background:${wc[w.level]}22;color:${wc[w.level]}">${wl[w.level]}</span>
-      </div>
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-        <span style="font-size:.82rem;color:var(--mu)">Flood probability</span>
-        <span style="font-weight:800;color:${wc[w.level]};font-family:'Syne',sans-serif;font-size:1.1rem">${w.risk}%</span>
-      </div>
-      <div style="height:8px;background:#e8f0ea;border-radius:4px;overflow:hidden"><div id="wf${w.name.replace(/\s/g,'')}" style="height:100%;width:0%;background:${wc[w.level]};border-radius:4px;transition:width 1.2s ease"></div></div>
-    </div>`).join('');
-  setTimeout(()=>wards.forEach(w=>{const el=document.getElementById('wf'+w.name.replace(/\s/g,''));if(el)el.style.width=w.risk+'%'}),300);
-  const guides=[
-    {level:'🔴 HIGH RISK (70%+)',col:'#e05252',bg:'#fff0f0',actions:['Move valuables and important documents to upper floors or higher ground','Prepare an emergency bag with water, food, medications, and torch','Identify your nearest evacuation route and assembly point','Check on elderly and vulnerable neighbours — offer to help them evacuate','Avoid crossing flooded roads — even shallow water can be dangerous']},
-    {level:'🟡 MEDIUM RISK (40–69%)',col:'#c4813a',bg:'#fff8ee',actions:['Monitor this page and local radio for updates every 2–3 hours','Clear debris and leaves from drains and gutters near your home','Park vehicles on higher ground if possible','Keep phone charged and have emergency contacts ready','Report any blocked drains using our Report page']},
-    {level:'🟢 LOW RISK (0–39%)',col:'#1a7a4a',bg:'#f0f9f4',actions:['Stay informed — conditions can change rapidly during rainy season','Ensure your home drains are clear and maintained','Know your ward's flood risk level and evacuation route','Report any early warning signs of waterlogging in your area','Subscribe to flood alerts via WhatsApp or SMS']}
-  ];
-  document.getElementById('guide-grid').innerHTML=guides.map(g=>`
-    <div style="background:${g.bg};border-radius:var(--r);padding:22px 24px;border-left:4px solid ${g.col}" class="rv">
-      <h4 style="font-size:.97rem;font-weight:800;color:${g.col};margin-bottom:12px">${g.level}</h4>
-      <ul style="list-style:none;display:flex;flex-direction:column;gap:8px">${g.actions.map(a=>`<li style="font-size:.875rem;color:var(--tx);display:flex;gap:8px;align-items:flex-start"><span style="color:${g.col};font-size:.9rem;flex-shrink:0">✓</span>${a}</li>`).join('')}</ul>
-    </div>`).join('');
+// Global click listener to close drawer when clicking outside
+document.addEventListener('click', e => {
+    const d = document.getElementById('drw');
+    const b = document.getElementById('hbg');
+    if (d && d.classList.contains('o') && !d.contains(e.target) && b && !b.contains(e.target)) {
+        d.classList.remove('o');
+        b.classList.remove('o');
+    }
 });
 
-document.addEventListener('DOMContentLoaded',initRv);
+// Scroll-based interactions: Progress bar, Nav styling, and Reveal animations
+window.addEventListener('scroll', () => {
+    const nav = document.getElementById('nav');
+    const pb = document.getElementById('pb');
+    
+    // Toggle nav shadow
+    if (nav) nav.classList.toggle('sc', window.scrollY > 60);
+    
+    // Update scroll progress bar
+    if (pb) {
+        const scrollPercent = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+        pb.style.width = scrollPercent + '%';
+    }
+    
+    // Trigger "Reveal" animations
+    document.querySelectorAll('.rv:not(.in)').forEach(el => {
+        if (el.getBoundingClientRect().top < window.innerHeight - 60) {
+            el.classList.add('in');
+        }
+    });
+});
+
+function wa() {
+    const msg = encodeURIComponent('Hi EcoDamaturu! I need help regarding flood alerts.');
+    window.open(`https://wa.me/2349034567890?text=${msg}`, '_blank');
+}
+
+function initRv() {
+    // Initial check for elements already in view on page load
+    setTimeout(() => {
+        document.querySelectorAll('.rv').forEach(el => {
+            if (el.getBoundingClientRect().top < window.innerHeight) {
+                el.classList.add('in');
+            }
+        });
+    }, 100);
+}
+
+// --- Data & Rendering ---
+
+const wards = [
+    { name: 'Hausari', risk: 78, level: 'h' }, { name: 'Gujba Road', risk: 71, level: 'h' },
+    { name: 'Bolori', risk: 65, level: 'm' }, { name: 'Pompomari', risk: 55, level: 'm' },
+    { name: 'Gwange', risk: 48, level: 'm' }, { name: 'Sabon Gari', risk: 44, level: 'm' },
+    { name: 'Fari', risk: 32, level: 'l' }, { name: 'Shehuri North', risk: 22, level: 'l' },
+    { name: 'Buluburde', risk: 58, level: 'm' }, { name: 'Kaliyari', risk: 38, level: 'l' },
+    { name: 'Kukareta', risk: 45, level: 'm' }, { name: 'Njiwaji', risk: 27, level: 'l' }
+];
+
+const wc = { h: '#e05252', m: '#c4813a', l: '#1a7a4a' };
+const wl = { h: 'HIGH RISK', m: 'MEDIUM RISK', l: 'LOW RISK' };
+
+function renderWards() {
+    const grid = document.getElementById('wards-grid');
+    if (!grid) return;
+
+    grid.innerHTML = wards.map((w, i) => `
+        <div style="background:var(--white);border-radius:var(--rs);padding:16px 18px;box-shadow:var(--sh);border-top:3px solid ${wc[w.level]}">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+                <span style="font-weight:700;font-size:.92rem;color:var(--navy)">${w.name} Ward</span>
+                <span style="font-size:.76rem;font-weight:700;padding:3px 9px;border-radius:20px;background:${wc[w.level]}22;color:${wc[w.level]}">${wl[w.level]}</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+                <span style="font-size:.82rem;color:var(--mu)">Flood probability</span>
+                <span style="font-weight:800;color:${wc[w.level]};font-family:'Syne',sans-serif;font-size:1.1rem">${w.risk}%</span>
+            </div>
+            <div style="height:8px;background:#e8f0ea;border-radius:4px;overflow:hidden">
+                <div id="bar-${i}" style="height:100%;width:0%;background:${wc[w.level]};border-radius:4px;transition:width 1.2s cubic-bezier(0.1, 0.5, 0.5, 1)"></div>
+            </div>
+        </div>`).join('');
+
+    // Animate bars after a short delay
+    setTimeout(() => {
+        wards.forEach((w, i) => {
+            const el = document.getElementById(`bar-${i}`);
+            if (el) el.style.width = w.risk + '%';
+        });
+    }, 300);
+}
+
+function renderGuides() {
+    const guideGrid = document.getElementById('guide-grid');
+    if (!guideGrid) return;
+
+    const guides = [
+        { 
+            level: '🔴 HIGH RISK (70%+)', col: '#e05252', bg: '#fff0f0', 
+            actions: ['Move valuables to upper floors', 'Prepare emergency bag', 'Identify evacuation routes', 'Check on vulnerable neighbors'] 
+        },
+        { 
+            level: '🟡 MEDIUM RISK (40–69%)', col: '#c4813a', bg: '#fff8ee', 
+            actions: ['Monitor updates every 2-3 hours', 'Clear debris from home drains', 'Park vehicles on higher ground', 'Keep phone charged'] 
+        },
+        { 
+            level: '🟢 LOW RISK (0–39%)', col: '#1a7a4a', bg: '#f0f9f4', 
+            actions: ['Stay informed via WhatsApp/SMS', 'Maintain home drainage', 'Know your ward evacuation route'] 
+        }
+    ];
+
+    guideGrid.innerHTML = guides.map(g => `
+        <div style="background:${g.bg};border-radius:var(--r);padding:22px 24px;border-left:4px solid ${g.col}" class="rv">
+            <h4 style="font-size:.97rem;font-weight:800;color:${g.col};margin-bottom:12px">${g.level}</h4>
+            <ul style="list-style:none;display:flex;flex-direction:column;gap:8px">
+                ${g.actions.map(a => `<li style="font-size:.875rem;color:var(--tx);display:flex;gap:8px;align-items:flex-start"><span style="color:${g.col}">✓</span>${a}</li>`).join('')}
+            </ul>
+        </div>`).join('');
+}
+
+// --- Initialization ---
+
+document.addEventListener('DOMContentLoaded', () => {
+    initRv();
+    renderWards();
+    renderGuides();
+});
 </script>
 </body>
 </html>
