@@ -2,242 +2,211 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Report Issue — EcoDamaturu</title>
+<title>Education — EcoDamaturu</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 
 <style>
 :root{--g:#1a7a4a;--g2:#22a060;--g3:#b6f0d3;--navy:#0d1f2d;--earth:#c4813a;--bg:#f7f9f4;--white:#fff;--tx:#1a2a1e;--mu:#6b7f72;--red:#e05252;--sh:0 2px 16px rgba(26,122,74,.09);--r:16px;--px:clamp(16px,5vw,80px)}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--tx);line-height:1.6}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--tx);line-height:1.6;display:flex;flex-direction:column;min-height:100vh}
 h1,h2,h3,h4{font-family:'Syne',sans-serif}
 
-/* Navigation */
-nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:64px;padding:0 var(--px);display:flex;align-items:center;justify-content:space-between;background:rgba(247,249,244,.97);backdrop-filter:blur(12px);border-bottom:1px solid rgba(0,0,0,.05)}
+/* --- Fixed Header Navigation --- */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:70px;padding:0 var(--px);display:flex;align-items:center;justify-content:space-between;background:rgba(247,249,244,.97);backdrop-filter:blur(12px);border-bottom:1px solid rgba(0,0,0,.08)}
 .logo{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;color:var(--g);text-decoration:none}
 .logo b{color:var(--earth)}
-.nav-links{display:none;gap:15px}@media(min-width:900px){.nav-links{display:flex}}
-.nav-links a{text-decoration:none;color:var(--tx);font-size:0.85rem;font-weight:600}
 
-/* Layout */
-.ph{padding:calc(64px + 50px) var(--px) 40px; background:linear-gradient(135deg, #eef7f2, var(--bg))}
-.main-content{max-width:1100px; margin:0 auto; padding:40px var(--px); display:grid; grid-template-columns:1fr; gap:30px}
-@media(min-width:900px){.main-content{grid-template-columns:1.6fr 1fr}}
+/* Desktop Links */
+.nav-group{display:none;align-items:center;gap:10px}
+@media(min-width:1100px){.nav-group{display:flex}}
+.nav-group a{text-decoration:none;color:var(--tx);font-size:0.82rem;font-weight:600;padding:8px 12px;border-radius:8px;transition:0.2s}
+.nav-group a:hover, .nav-group a.cur{color:var(--g);background:rgba(26,122,74,0.08)}
 
-/* Components */
-.card{background:var(--white); border-radius:var(--r); padding:30px; box-shadow:var(--sh)}
-.input-group{margin-bottom:20px}
-label{display:block; font-size:0.85rem; font-weight:700; margin-bottom:8px}
-input, select, textarea{width:100%; padding:12px; border:1.5px solid #dce4e0; border-radius:10px; background:var(--bg); outline:none; font-family:inherit}
-input:focus{border-color:var(--g)}
+/* Mobile Toggle */
+.menu-btn{display:block;background:none;border:none;font-size:1.5rem;cursor:pointer;color:var(--tx)}
+@media(min-width:1100px){.menu-btn{display:none}}
 
-.upload-zone{border:2px dashed #b6f0d3; padding:30px; text-align:center; border-radius:12px; cursor:pointer; transition:0.2s}
-.upload-zone:hover{background:#f0faf5; border-color:var(--g)}
-.preview-grid{display:flex; gap:10px; margin-top:15px}
-.thumb{width:60px; height:60px; border-radius:8px; object-fit:cover; border:2px solid var(--g3)}
+/* Mobile Drawer */
+#drawer{display:none;position:fixed;top:70px;left:0;right:0;bottom:0;background:var(--white);z-index:999;flex-direction:column;padding:20px var(--px);overflow-y:auto}
+#drawer a{font-size:1.1rem;font-weight:700;color:var(--tx);text-decoration:none;padding:15px 0;border-bottom:1px solid #eee}
 
-.btn-primary{width:100%; padding:15px; background:var(--g); color:white; border:none; border-radius:50px; font-weight:700; cursor:pointer; transition:0.3s}
-.btn-primary:disabled{opacity:0.6; cursor:not-allowed}
+/* EcoPoints Badge */
+.pts-badge{background:var(--g);color:white;padding:6px 16px;border-radius:50px;font-size:0.85rem;font-weight:700;display:flex;align-items:center;gap:6px}
 
-/* AI Result Box */
-#ai-box{display:none; background:#f0f8ff; border:1px solid #cce5ff; padding:20px; border-radius:12px; margin-top:20px}
-.chip{display:inline-block; padding:4px 12px; border-radius:20px; font-size:0.75rem; font-weight:700; margin-right:5px; background:var(--g3); color:var(--g)}
+/* --- Layout Sections --- */
+.ph{padding:calc(70px + 60px) var(--px) 40px; background:linear-gradient(135deg, #ecf7f1, var(--bg))}
+section{padding:40px var(--px); flex:1}
+.inner{max-width:1100px; margin:0 auto}
 
-/* Toast Notification */
-#toast-container{position:fixed; bottom:20px; left:50%; transform:translateX(-50%); z-index:9999}
-.toast{background:var(--navy); color:white; padding:12px 25px; border-radius:50px; margin-top:10px; font-size:0.9rem; animation:slideUp 0.4s ease forwards}
-@keyframes slideUp{from{transform:translateY(20px); opacity:0} to{transform:translateY(0); opacity:1}}
+.grid{display:grid; grid-template-columns:1fr; gap:25px; margin-top:30px}
+@media(min-width:768px){.grid{grid-template-columns:1fr 1fr}}
+.card{background:var(--white); border-radius:var(--r); padding:25px; box-shadow:var(--sh); display:flex; gap:20px; transition:0.3s}
+
+.tip-box{background:var(--g); color:white; padding:25px; border-radius:var(--r); margin-bottom:40px; display:flex; align-items:center; gap:20px}
+.tag{display:inline-block; background:rgba(26,122,74,.1); color:var(--g); font-size:0.7rem; font-weight:700; padding:5px 12px; border-radius:20px; text-transform:uppercase; margin-bottom:10px}
+
+/* --- Single Footer --- */
+footer{background:var(--navy); color:#fff; padding:60px var(--px) 30px; margin-top:auto}
+.f-grid{max-width:1100px; margin:0 auto; display:grid; grid-template-columns: 1fr; gap:40px}
+@media(min-width:768px){.f-grid{grid-template-columns: 2fr 1fr 1fr 1fr}}
+.f-logo{font-family:'Syne',sans-serif; font-size:1.5rem; font-weight:800; margin-bottom:15px}
+.f-col h5{font-size:.8rem; color:var(--g3); text-transform:uppercase; margin-bottom:20px; letter-spacing:1px}
+.f-col a{display:block; color:rgba(255,255,255,0.5); text-decoration:none; margin-bottom:12px; font-size:0.9rem}
+
+.claim-btn{border:1.5px solid var(--g); background:none; color:var(--g); padding:8px 15px; border-radius:8px; font-size:0.75rem; font-weight:700; cursor:pointer; margin-top:10px}
+.claim-btn:disabled{background:var(--g); color:white; cursor:default}
 </style>
 </head>
 <body>
 
 <nav>
-  <a href="index.html" class="logo">Eco<b>Damaturu</b></a>
-  <div class="nav-links">
-    <a href="index.html">Home</a>
-    <a href="education.html">Education</a>
-    <a href="report.html" style="color:var(--g)">Report Issue</a>
+  <div style="display:flex; align-items:center; gap:15px">
+    <button class="menu-btn" onclick="toggleMenu()">☰</button>
+    <a href="index.html" class="logo">Eco<b>Damaturu</b></a>
   </div>
-  <div id="pts-badge" style="background:var(--g); color:white; padding:5px 15px; border-radius:50px; font-size:0.8rem; font-weight:700">
-    🌱 <span id="pts-count">0</span> EcoPoints
+
+  <div class="nav-group">
+    <a href="index.html">Home</a>
+    <a href="map.html">Live Map</a>
+    <a href="flood.html">Flood Alerts</a>
+    <a href="calendar.html">Calendar</a>
+    <a href="education.html" class="cur">Education</a>
+    <a href="report.html">Report Issue</a>
+    <a href="contact.html">Contact</a>
+  </div>
+
+  <div class="pts-badge">
+    🌱 <span id="pts-count">0</span>
   </div>
 </nav>
 
+<div id="drawer">
+  <a href="index.html">Home</a>
+  <a href="map.html">Live Map</a>
+  <a href="flood.html">Flood Alerts</a>
+  <a href="calendar.html">Calendar</a>
+  <a href="education.html">Education</a>
+  <a href="report.html">Report Issue</a>
+  <a href="contact.html">Contact</a>
+</div>
+
 <div class="ph">
-  <h1 style="font-size:2.5rem; margin-bottom:10px">Report an Issue</h1>
-  <p style="color:var(--mu); max-width:500px">Your report helps keep Damaturu clean. Upload a photo and let our AI route it to the right department.</p>
-</div>
-
-<div class="main-content">
-  <div class="card">
-    <div class="input-group">
-      <label>Full Name</label>
-      <input type="text" id="user-name" placeholder="Ibrahim Sule">
-    </div>
-    
-    <div class="input-group">
-      <label>Issue Category</label>
-      <select id="issue-type" onchange="runAISimulation()">
-        <option value="">Select Category</option>
-        <option value="waste">🗑️ Illegal Dumping</option>
-        <option value="flood">🌊 Active Flooding</option>
-        <option value="drain">🏗️ Blocked Drainage</option>
-      </select>
-    </div>
-
-    <div class="input-group">
-      <label>Description</label>
-      <textarea id="issue-desc" placeholder="Describe the location and severity..."></textarea>
-    </div>
-
-    <div class="input-group">
-      <label>Upload Proof</label>
-      <div class="upload-zone" onclick="document.getElementById('file-input').click()">
-        <input type="file" id="file-input" hidden onchange="handleFiles(this.files)">
-        <span style="font-size:1.5rem">📷</span><br>Click to Upload Photo
-      </div>
-      <div id="preview-area" class="preview-grid"></div>
-    </div>
-
-    <div class="input-group">
-      <button class="btn-primary" id="gps-btn" onclick="captureGPS()">📍 Capture GPS Location</button>
-      <p id="gps-status" style="font-size:0.75rem; color:var(--mu); margin-top:5px">Location not captured</p>
-    </div>
-
-    <div id="ai-box">
-      <div style="font-weight:800; color:var(--g); font-size:0.8rem; margin-bottom:10px">🤖 AI ANALYSIS READY</div>
-      <p id="ai-rec" style="font-size:0.85rem; margin-bottom:10px">Identifying issue...</p>
-      <div id="ai-chips"></div>
-    </div>
-
-    <button class="btn-primary" style="margin-top:20px" id="submit-btn" onclick="submitReport()">Submit Report & Earn 50 Points</button>
-  </div>
-
-  <div>
-    <div class="card" style="margin-bottom:20px; background:var(--navy); color:white">
-      <h4>How it works</h4>
-      <p style="font-size:0.85rem; opacity:0.8; margin-top:10px">Your report is automatically verified using GPS and AI. Verified reports earn EcoPoints which can be redeemed for community benefits.</p>
-    </div>
-    
-    <div class="card">
-      <h4 style="margin-bottom:15px">Recent Activity</h4>
-      <div id="history-list" style="font-size:0.85rem">
-        <p style="color:var(--mu)">No recent reports found.</p>
-      </div>
-    </div>
+  <div class="inner">
+    <div class="tag">Knowledge Hub</div>
+    <h1 style="font-size:2.5rem; margin-bottom:10px">Environmental Intelligence</h1>
+    <p style="color:var(--mu); max-width:600px">Read educational content to earn EcoPoints and help protect Yobe State.</p>
   </div>
 </div>
 
-<div id="toast-container"></div>
+<section>
+  <div class="inner">
+    <div class="tip-box">
+      <div style="font-size:2rem">💡</div>
+      <div>
+        <h5 style="font-size:0.75rem; text-transform:uppercase; opacity:0.8">Daily Eco-Tip</h5>
+        <p id="daily-tip" style="font-weight:700; font-size:1.1rem">Loading tips...</p>
+      </div>
+    </div>
+
+    <div class="tag">Health & Safety</div>
+    <h2>Environment & Your Health</h2>
+    <div class="grid" id="health-grid"></div>
+
+    <div class="tag" style="margin-top:50px">Global Context</div>
+    <h2>World Sustainability News</h2>
+    <div class="grid" id="news-grid"></div>
+  </div>
+</section>
+
+<footer>
+  <div class="f-grid">
+    <div class="f-col">
+      <div class="f-logo">Eco<b>Damaturu</b></div>
+      <p style="font-size:0.9rem; color:rgba(255,255,255,0.5)">Empowering Damaturu through technology and environmental action.</p>
+    </div>
+    <div class="f-col">
+      <h5>Platform</h5>
+      <a href="index.html">Home</a>
+      <a href="map.html">Live Map</a>
+      <a href="flood.html">Flood Alerts</a>
+      <a href="education.html">Education</a>
+    </div>
+    <div class="f-col">
+      <h5>Resources</h5>
+      <a href="report.html">Report Issue</a>
+      <a href="contact.html">Contact Us</a>
+      <a href="#">EcoPoints Guide</a>
+    </div>
+    <div class="f-col">
+      <h5>Connect</h5>
+      <a href="#">WhatsApp</a>
+      <a href="#">Twitter / X</a>
+      <a href="#">Facebook</a>
+    </div>
+  </div>
+  <div style="text-align:center; padding-top:40px; margin-top:40px; border-top:1px solid rgba(255,255,255,0.1); font-size:0.8rem; color:rgba(255,255,255,0.3)">
+    &copy; 2026 EcoDamaturu. Built for Yobe State, Nigeria.
+  </div>
+</footer>
 
 <script>
-let currentGPS = null;
-let points = parseInt(localStorage.getItem('ecoPoints')) || 0;
+// Toggle Mobile Menu
+function toggleMenu() {
+  const drawer = document.getElementById('drawer');
+  drawer.style.display = (drawer.style.display === 'flex') ? 'none' : 'flex';
+}
 
-// Update Points on Load
+// Data & Points
+const healthData = [
+  {icon:'🦟', title:'Disease Prevention', desc:'Clean drains stop stagnant water, preventing Malaria outbreaks.'},
+  {icon:'🫁', title:'Clean Air', desc:'Preventing trash burning reduces toxic smoke and respiratory illness.'}
+];
+
+const newsData = [
+  {icon:'🌍', title:'Great Green Wall', desc:'The project is expanding to stop desertification in Northern Nigeria.'},
+  {icon:'♻️', title:'Sustainability', desc:'New global standards are emerging for plastic waste management.'}
+];
+
+let points = parseInt(localStorage.getItem('ecoPoints')) || 0;
 document.getElementById('pts-count').textContent = points;
 
-function showToast(msg) {
-  const t = document.createElement('div');
-  t.className = 'toast';
-  t.textContent = msg;
-  document.getElementById('toast-container').appendChild(t);
-  setTimeout(() => t.remove(), 3000);
-}
-
-function handleFiles(files) {
-  const area = document.getElementById('preview-area');
-  area.innerHTML = "";
-  Array.from(files).forEach(file => {
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      const img = document.createElement('img');
-      img.src = e.target.result;
-      img.className = "thumb";
-      area.appendChild(img);
-    };
-    reader.readAsDataURL(file);
-  });
-  runAISimulation();
-}
-
-function captureGPS() {
-  const btn = document.getElementById('gps-btn');
-  const status = document.getElementById('gps-status');
-  btn.textContent = "🛰️ Connecting to Satellites...";
-  
-  if(navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition((pos) => {
-      currentGPS = { lat: pos.coords.latitude, lng: pos.coords.longitude };
-      status.textContent = `📍 Location Verified: ${currentGPS.lat.toFixed(4)}, ${currentGPS.lng.toFixed(4)}`;
-      btn.textContent = "✅ Location Secured";
-      btn.style.background = "#22a060";
-      showToast("GPS Location Captured");
-    }, () => {
-      status.textContent = "📍 Fallback: Damaturu Central (11.747, 11.961)";
-      currentGPS = { lat: 11.747, lng: 11.961 };
-      btn.textContent = "✅ Location Set";
-    });
-  }
-}
-
-function runAISimulation() {
-  const type = document.getElementById('issue-type').value;
-  if(!type) return;
-
-  const box = document.getElementById('ai-box');
-  const rec = document.getElementById('ai-rec');
-  const chips = document.getElementById('ai-chips');
-
-  box.style.display = "block";
-  rec.textContent = "AI is scanning your report...";
-  chips.innerHTML = "";
-
-  setTimeout(() => {
-    const data = {
-      waste: { r: "Detected Illegal Waste Dump. Routing to YOSEPA clearance team.", u: "High", c: 98 },
-      flood: { r: "Active Waterlogging. Alerting NEMA/SEMA emergency units.", u: "Critical", c: 95 },
-      drain: { r: "Blocked infrastructure. Notifying Public Works Dept.", u: "Medium", c: 92 }
-    }[type];
-
-    rec.textContent = data.r;
-    chips.innerHTML = `
-      <span class="chip">⚡ Urgency: ${data.u}</span>
-      <span class="chip">🎯 Confidence: ${data.c}%</span>
-    `;
-  }, 1200);
-}
-
-function submitReport() {
-  const name = document.getElementById('user-name').value;
-  const type = document.getElementById('issue-type').value;
-
-  if(!name || !type || !currentGPS) {
-    showToast("⚠️ Please complete the form and GPS capture");
-    return;
-  }
-
-  const btn = document.getElementById('submit-btn');
+function claim(btn, id) {
+  if(localStorage.getItem('read-' + id)) return;
+  points += 10;
+  localStorage.setItem('ecoPoints', points);
+  localStorage.setItem('read-' + id, 'true');
+  document.getElementById('pts-count').textContent = points;
   btn.disabled = true;
-  btn.textContent = "Processing Security Handshake...";
-
-  setTimeout(() => {
-    points += 50;
-    localStorage.setItem('ecoPoints', points);
-    document.getElementById('pts-count').textContent = points;
-    
-    showToast("✅ Report Submitted! +50 Points");
-    btn.textContent = "Submit Another Report";
-    btn.disabled = false;
-    
-    // Simple History Add
-    const hist = document.getElementById('history-list');
-    const item = document.createElement('div');
-    item.style = "padding:10px 0; border-bottom:1px solid #eee";
-    item.innerHTML = `<strong>${type.toUpperCase()}</strong><br><small>Status: Pending Review</small>`;
-    hist.prepend(item);
-  }, 2000);
+  btn.textContent = "✓ Earned +10";
 }
+
+function render(data, targetId) {
+  const container = document.getElementById(targetId);
+  container.innerHTML = data.map((item, i) => {
+    const uniqueId = targetId + i;
+    const isDone = localStorage.getItem('read-' + uniqueId);
+    return `
+      <div class="card">
+        <div style="font-size:2rem">${item.icon}</div>
+        <div>
+          <h4 style="font-weight:800">${item.title}</h4>
+          <p style="font-size:0.85rem; color:var(--mu); margin-bottom:10px">${item.desc}</p>
+          <button class="claim-btn" onclick="claim(this, '${uniqueId}')" ${isDone ? 'disabled' : ''}>
+            ${isDone ? '✓ Completed' : 'Mark as Read (+10)'}
+          </button>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  render(healthData, 'health-grid');
+  render(newsData, 'news-grid');
+  document.getElementById('daily-tip').textContent = "Clear your gutters every Saturday to prevent urban flooding.";
+});
 </script>
+
 </body>
 </html>
