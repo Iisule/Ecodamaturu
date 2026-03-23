@@ -3,196 +3,165 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>EcoPoints — EcoDamaturu</title>
+<title>EcoPoints Dashboard — EcoDamaturu</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 
 <style>
-/* ── TOKENS ── */
+/* ── CORE TOKENS ── */
 :root{
-  --g:#1a7a4a;--g2:#22a060;--g3:#b6f0d3;--g4:#e8f7f0;
-  --navy:#0d1f2d;--earth:#c4813a;--earth2:#e8a04a;
-  --bg:#f7f9f4;--white:#fff;--tx:#1a2a1e;--mu:#6b7f72;
-  --sh:0 2px 16px rgba(26,122,74,.09);
-  --px:clamp(16px,5.5vw,88px);
+  --g:#1a7a4a; --g2:#22a060; --g3:#b6f0d3;
+  --navy:#0d1f2d; --earth:#c4813a;
+  --bg:#f7f9f4; --white:#ffffff; --tx:#1a2a1e; --mu:#6b7f72;
+  --gold:#f5a623;
+  --px: clamp(20px, 6vw, 100px);
 }
 
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:"DM Sans",sans-serif;background:var(--bg);color:var(--tx);overflow-x:hidden;min-height:100vh;display:flex;flex-direction:column}
+*{box-sizing:border-box; margin:0; padding:0}
+body{font-family:"DM Sans", sans-serif; background:var(--bg); color:var(--tx); line-height:1.5; overflow-x:hidden}
 
-/* ── FIXED NAVIGATION ── */
+/* ── NAVIGATION ── */
 nav{
-  position:fixed;top:0;left:0;right:0;z-index:9999; /* Higher z-index */
-  height:70px;padding:0 var(--px);
-  display:flex;align-items:center;justify-content:space-between;
-  background:rgba(247,249,244,.98);backdrop-filter:blur(18px);
-  border-bottom:1px solid rgba(26,122,74,.1);
+  position:fixed; top:0; left:0; right:0; z-index:1000;
+  height:75px; padding:0 var(--px);
+  display:flex; align-items:center; justify-content:space-between;
+  background:rgba(255,255,255,0.98); backdrop-filter:blur(10px);
+  border-bottom:1px solid rgba(0,0,0,0.05);
 }
-
-.logo{font-family:"Syne",sans-serif;font-size:1.32rem;font-weight:800;color:var(--g);text-decoration:none;display:flex;align-items:center;gap:7px}
-.logo-dot{width:8px;height:8px;border-radius:50%;background:var(--earth)}
+.logo{font-family:"Syne"; font-size:1.4rem; font-weight:800; color:var(--g); text-decoration:none; display:flex; align-items:center; gap:8px}
 .logo b{color:var(--earth)}
-
-/* Desktop Links - Visible on screens wider than 1024px */
-.nl{display:none;align-items:center;gap:5px}
+.nl{display:none; align-items:center; gap:10px}
 @media(min-width:1024px){ .nl{display:flex} }
+.nl a{font-size:.85rem; font-weight:700; color:var(--tx); text-decoration:none; padding:10px 15px; border-radius:10px; transition:0.3s}
+.nl a:hover{background:rgba(26,122,74,0.05); color:var(--g)}
+.nl a.cta{background:var(--g); color:#fff!important}
 
-.nl a{
-  font-size:.85rem;font-weight:600;color:var(--tx);text-decoration:none;
-  padding:8px 14px;border-radius:8px;transition:.2s;white-space:nowrap;
+/* ── HERO SECTION ── */
+.hero{
+  background:var(--navy); color:#fff;
+  padding:140px var(--px) 80px;
+  display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:40px;
 }
-.nl a:hover, .nl a.cur{color:var(--g);background:rgba(26,122,74,.07)}
-.nl a.cta{background:var(--g);color:#fff!important;border-radius:50px;margin-left:10px}
+.hero-text h1{font-family:"Syne"; font-size:clamp(2rem, 5vw, 3.5rem); margin-bottom:20px}
+.hero-text p{max-width:500px; opacity:0.8; font-size:1.1rem; margin-bottom:30px}
 
-/* Right Side (Points + Hamburger) */
-.nr{display:flex;align-items:center;gap:15px}
-.pts-pill{background:var(--g);color:#fff;padding:6px 14px;border-radius:50px;font-size:.85rem;font-weight:700}
-
-/* Hamburger Button */
-.hbg{display:flex;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:5px;z-index:10001}
-@media(min-width:1024px){ .hbg{display:none} } /* Hide on Desktop */
-.hbg span{display:block;width:24px;height:2px;background:var(--tx);transition:.3s}
-.hbg.o span:nth-child(1){transform:translateY(7px) rotate(45deg)}
-.hbg.o span:nth-child(2){opacity:0}
-.hbg.o span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
-
-/* Mobile Drawer Overlay */
-.drw{
-  position:fixed;top:0;right:-100%;width:80%;max-width:300px;bottom:0;
-  z-index:10000;background:var(--white);padding:100px 30px 40px;
-  display:flex;flex-direction:column;transition:0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow:-10px 0 30px rgba(0,0,0,0.1);
+/* ── BALANCE CARD ── */
+.bal-card{
+  background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.1);
+  padding:40px; border-radius:30px; text-align:center; min-width:280px;
+  backdrop-filter:blur(15px); box-shadow:0 20px 40px rgba(0,0,0,0.2);
 }
-.drw.o{right:0}
-.drw a{font-size:1.1rem;font-weight:700;color:var(--tx);text-decoration:none;padding:18px 0;border-bottom:1px solid #f0f0f0}
+.bal-card span{text-transform:uppercase; font-size:0.75rem; letter-spacing:2px; opacity:0.6}
+.bal-num{font-family:"Syne"; font-size:5rem; font-weight:800; color:var(--gold); display:block}
 
-/* ── HERO & CONTENT ── */
-.pts-hero{background:linear-gradient(135deg,#0d1f2d 0%,#0f2818 100%);padding:140px var(--px) 70px;color:#fff}
-.pts-hero-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr;gap:40px;align-items:center}
-@media(min-width:900px){.pts-hero-inner{grid-template-columns:1fr auto}}
-
-.bal-card{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,.1);border-radius:24px;padding:32px;text-align:center;backdrop-filter:blur(10px)}
-.bal-num{font-family:"Syne",sans-serif;font-size:4rem;font-weight:800;color:#f5a623;line-height:1}
+/* ── REWARDS GRID ── */
+.rewards{padding:80px var(--px)}
+.rewards h2{font-family:"Syne"; font-size:2rem; margin-bottom:40px; text-align:center}
+.grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:25px}
+.card{
+  background:#fff; padding:30px; border-radius:24px; 
+  box-shadow:0 10px 30px rgba(0,0,0,0.03); transition:0.3s;
+  border:1px solid #eee;
+}
+.card:hover{transform:translateY(-10px); border-color:var(--g)}
+.card-icon{font-size:2.5rem; margin-bottom:15px; display:block}
+.card h3{margin-bottom:10px; font-family:"Syne"}
+.card p{color:var(--mu); font-size:0.9rem; margin-bottom:20px}
+.price{font-family:"Syne"; color:var(--earth); font-weight:800; font-size:1.2rem}
 
 /* ── FOOTER ── */
-footer{background:var(--navy);color:#fff;padding:80px var(--px) 40px;margin-top:auto}
-.ffg{max-width:1150px;margin:0 auto;display:grid;grid-template-columns:1fr;gap:40px}
-@media(min-width:768px){ .ffg{grid-template-columns:2fr 1fr 1fr 1fr} }
-.fco h5{font-size:.85rem;color:var(--g3);text-transform:uppercase;letter-spacing:1px;margin-bottom:20px}
-.fco a{display:block;color:rgba(255,255,255,0.5);text-decoration:none;margin-bottom:12px;font-size:.9rem;transition:.3s}
-.fbt{max-width:1150px;margin:60px auto 0;padding-top:30px;border-top:1px solid rgba(255,255,255,0.1);display:flex;justify-content:space-between;font-size:.8rem;color:rgba(255,255,255,0.3)}
+footer{background:var(--navy); color:#fff; padding:60px var(--px); margin-top:100px}
+.ffg{display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:40px}
+.ffg h5{color:var(--g3); margin-bottom:20px; text-transform:uppercase}
+.ffg a{display:block; color:rgba(255,255,255,0.5); text-decoration:none; margin-bottom:10px}
+
+/* Hamburger */
+.hbg{display:block; background:none; border:none; cursor:pointer}
+@media(min-width:1024px){.hbg{display:none}}
+.hbg span{display:block; width:25px; height:2px; background:var(--tx); margin:5px 0}
 </style>
 </head>
 <body>
 
 <nav>
-  <a class="logo" href="index.html"><span class="logo-dot"></span>Eco<b>Damaturu</b></a>
-  
-  <div class="nl" id="desktop-links">
+  <a href="index.html" class="logo">Eco<b>Damaturu</b></a>
+  <div class="nl">
     <a href="index.html">Home</a>
-    <a href="features.html">Features</a>
     <a href="report.html">Report Issue</a>
     <a href="map.html">Live Map</a>
-    <a href="flood.html">Flood Alerts</a>
-    <a href="calendar.html">Calendar</a>
     <a href="education.html">Education</a>
-    <a href="contact.html">Contact</a>
-    <a href="ecopoints.html" class="cur cta">🏆 EcoPoints</a>
+    <a href="ecopoints.html" class="cta">🏆 EcoPoints</a>
   </div>
-
-  <div class="nr">
-    <div class="pts-pill">🌱 <span id="nav-pts">0</span></div>
-    <button class="hbg" id="hbg-trigger" onclick="toggleMenu()">
-      <span></span><span></span><span></span>
-    </button>
+  <div style="display:flex; align-items:center; gap:15px">
+    <div style="background:var(--g); color:#fff; padding:5px 12px; border-radius:20px; font-weight:700">🌱 <span id="nav-pts">0</span></div>
+    <button class="hbg"><span></span><span></span><span></span></button>
   </div>
 </nav>
 
-<div class="drw" id="mobile-drw">
-  <a href="index.html">🏠 Home</a>
-  <a href="features.html">⚡ Features</a>
-  <a href="report.html">📸 Report Issue</a>
-  <a href="map.html">📍 Live Map</a>
-  <a href="flood.html">🌊 Flood Alerts</a>
-  <a href="calendar.html">🗓️ Calendar</a>
-  <a href="education.html">📚 Education</a>
-  <a href="ecopoints.html">🏆 EcoPoints</a>
-  <a href="contact.html">📞 Contact</a>
-</div>
+<section class="hero">
+  <div class="hero-text">
+    <h1>Your Eco<span style="color:var(--g3)">Impact</span></h1>
+    <p>Every report you submit helps the Damaturu environment. Track your contributions and unlock local rewards below.</p>
+  </div>
+  <div class="bal-card">
+    <span>Balance</span>
+    <strong class="bal-num" id="hero-pts">0</strong>
+    <span>EcoPoints Earned</span>
+  </div>
+</section>
 
-<div class="pts-hero">
-  <div class="pts-hero-inner">
-    <div>
-      <h1 style="font-size: clamp(2rem, 5vw, 3.2rem); margin-bottom:15px">Earn Rewards for<br><span style="color:var(--g3)">Being Eco-Friendly.</span></h1>
-      <p style="opacity:0.7; font-size:1.1rem; margin-bottom:30px; max-width:500px">Every verified environmental report in Damaturu earns you points redeemable for local benefits.</p>
+<section class="rewards">
+  <h2>Available Rewards</h2>
+  <div class="grid">
+    <div class="card">
+      <span class="card-icon">⚡</span>
+      <h3>Data Top-up</h3>
+      <p>Redeem points for 1GB of mobile data (MTN/Airtel/Glo).</p>
+      <div class="price">500 Pts</div>
     </div>
-    <div class="bal-card">
-      <div style="font-size:.7rem; text-transform:uppercase; letter-spacing:1px; opacity:0.5; margin-bottom:10px">Current Balance</div>
-      <div class="bal-num" id="hero-pts-display">0</div>
-      <div style="font-size:.9rem; opacity:0.5; margin-top:5px">EcoPoints</div>
+    <div class="card">
+      <span class="card-icon">🛍️</span>
+      <h3>Market Voucher</h3>
+      <p>Get a discount at participating vendors in Damaturu Central Market.</p>
+      <div class="price">1,200 Pts</div>
+    </div>
+    <div class="card">
+      <span class="card-icon">📜</span>
+      <h3>Certificate</h3>
+      <p>Official 'Eco-Warrior' certificate from the Yobe State Environment Office.</p>
+      <div class="price">2,000 Pts</div>
     </div>
   </div>
-</div>
-
-<main style="padding: 100px var(--px); flex: 1; text-align: center; background: #fff;">
-    <h2 style="font-family: 'Syne'; font-size: 2rem;">Coming Soon</h2>
-    <p style="color:var(--mu); margin-top:15px">We are currently linking the reward system to your account.</p>
-</main>
+</section>
 
 <footer>
   <div class="ffg">
-    <div class="fb">
-      <div style="font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;color:#fff">Eco<span style="color:var(--earth)">Damaturu</span></div>
-      <p style="color:rgba(255,255,255,0.5); font-size: 0.9rem; margin-top: 10px;">Smart environmental monitoring for Yobe State.</p>
+    <div>
+      <h5>EcoDamaturu</h5>
+      <p style="opacity:0.5">Protecting Yobe State through Community Action.</p>
     </div>
-    <div class="fco">
-      <h5>Quick Links</h5>
-      <a href="index.html">Home</a>
-      <a href="report.html">Report Issue</a>
-      <a href="map.html">Live Map</a>
-    </div>
-    <div class="fco">
-      <h5>Support</h5>
+    <div>
+      <h5>Links</h5>
+      <a href="report.html">Report</a>
+      <a href="map.html">Map</a>
       <a href="education.html">Education</a>
-      <a href="contact.html">Contact Us</a>
-      <a href="flood.html">Flood Alerts</a>
     </div>
-    <div class="fco">
-      <h5>Social</h5>
+    <div>
+      <h5>Contact</h5>
       <a href="#">WhatsApp</a>
-      <a href="#">Twitter</a>
-      <a href="#">Facebook</a>
+      <a href="#">Email Support</a>
     </div>
-  </div>
-  <div class="fbt">
-    <span>© 2026 EcoDamaturu.</span>
-    <span>Damaturu, Nigeria 🇳🇬</span>
   </div>
 </footer>
 
 <script>
-function toggleMenu() {
-    const drw = document.getElementById('mobile-drw');
-    const hbg = document.getElementById('hbg-trigger');
-    drw.classList.toggle('o');
-    hbg.classList.toggle('o');
-}
-
 document.addEventListener('DOMContentLoaded', () => {
-    // Sync points
-    const savedPoints = localStorage.getItem('ecoPoints') || 0;
-    document.getElementById('nav-pts').textContent = savedPoints;
-    const heroDisplay = document.getElementById('hero-pts-display');
-    if(heroDisplay) heroDisplay.textContent = savedPoints;
-
-    // Close drawer when a link is clicked
-    document.querySelectorAll('.drw a').forEach(link => {
-        link.addEventListener('click', () => {
-            document.getElementById('mobile-drw').classList.remove('o');
-            document.getElementById('hbg-trigger').classList.remove('o');
-        });
-    });
+    // 1. Get points from localStorage
+    const points = localStorage.getItem('ecoPoints') || 0;
+    
+    // 2. Update the numbers on the screen
+    document.getElementById('nav-pts').innerText = points;
+    document.getElementById('hero-pts').innerText = points;
 });
 </script>
 
