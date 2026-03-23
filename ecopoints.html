@@ -1,4 +1,4 @@
-f<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -6,6 +6,7 @@ f<!DOCTYPE html>
 <title>EcoPoints — EcoDamaturu</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
 <style>
 /* ── TOKENS ─────────────────────────────────────────────────── */
 :root{
@@ -18,324 +19,72 @@ f<!DOCTYPE html>
   --r:18px;--rs:11px;
   --px:clamp(16px,5.5vw,88px);
 }
+
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:"DM Sans",sans-serif;background:var(--bg);color:var(--tx);overflow-x:hidden;min-width:320px}
+body{font-family:"DM Sans",sans-serif;background:var(--bg);color:var(--tx);overflow-x:hidden;min-width:320px;display:flex;flex-direction:column;min-height:100vh}
 h1,h2,h3,h4{font-family:"Syne",sans-serif;line-height:1.15}
 
-/* ── TOAST ── */
-#tw{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);z-index:9999;display:flex;flex-direction:column;align-items:center;gap:8px;pointer-events:none}
-.t{background:var(--navy);color:#fff;padding:10px 22px;border-radius:50px;font-size:.875rem;font-weight:500;opacity:0;transform:translateY(10px);transition:.3s;white-space:nowrap;max-width:calc(100vw - 32px)}
-.t.s{opacity:1;transform:none}.t.ok{background:var(--g)}.t.err{background:var(--red)}.t.i{background:var(--blue)}
+/* ── HEADER & NAVIGATION ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:70px;padding:0 var(--px);display:flex;align-items:center;justify-content:space-between;background:rgba(247,249,244,.96);backdrop-filter:blur(18px);border-bottom:1px solid rgba(26,122,74,.07)}
 
-/* ── NAV ── */
-nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:66px;padding:0 var(--px);display:flex;align-items:center;justify-content:space-between;gap:12px;background:rgba(247,249,244,.96);backdrop-filter:blur(18px);border-bottom:1px solid rgba(26,122,74,.07);transition:box-shadow .3s}
-nav.sc{box-shadow:0 2px 24px rgba(13,31,45,.10)}
-.logo{font-family:"Syne",sans-serif;font-size:1.32rem;font-weight:800;color:var(--g);text-decoration:none;flex-shrink:0;display:flex;align-items:center;gap:7px}
-.logo-dot{width:8px;height:8px;border-radius:50%;background:var(--earth);flex-shrink:0}
+.logo{font-family:"Syne",sans-serif;font-size:1.32rem;font-weight:800;color:var(--g);text-decoration:none;display:flex;align-items:center;gap:7px}
+.logo-dot{width:8px;height:8px;border-radius:50%;background:var(--earth)}
 .logo b{color:var(--earth)}
-.nl{display:none;align-items:center;gap:1px}
-@media(min-width:960px){.nl{display:flex}}
-.nl a{font-size:.81rem;font-weight:500;color:var(--tx);text-decoration:none;padding:7px 12px;border-radius:8px;transition:.18s;white-space:nowrap}
-.nl a:hover,.nl a.cur{color:var(--g);background:rgba(26,122,74,.07);font-weight:600}
-.nl a.cta{background:var(--g);color:#fff!important;border-radius:50px;padding:8px 18px;font-weight:600;margin-left:6px}
-.nl a.cta:hover{background:var(--g2)}
-.nr{display:flex;align-items:center;gap:8px;flex-shrink:0}
-.lbtn{background:none;border:1.5px solid var(--g);color:var(--g);border-radius:50px;padding:5px 13px;font-size:.75rem;font-weight:600;cursor:pointer;font-family:"DM Sans",sans-serif}
-.hbg{display:flex;flex-direction:column;justify-content:center;gap:5px;cursor:pointer;width:36px;height:36px;background:none;border:none;padding:5px;flex-shrink:0}
-@media(min-width:960px){.hbg{display:none}}
-.hbg span{display:block;width:22px;height:2px;background:var(--tx);border-radius:2px;transition:.3s;transform-origin:center}
+
+.nl{display:none;align-items:center;gap:2px}
+@media(min-width:1150px){.nl{display:flex}}
+.nl a{font-size:.81rem;font-weight:600;color:var(--tx);text-decoration:none;padding:8px 14px;border-radius:8px;transition:.2s}
+.nl a:hover, .nl a.cur{color:var(--g);background:rgba(26,122,74,.07)}
+.nl a.cta{background:var(--g);color:#fff!important;border-radius:50px;margin-left:10px}
+
+.nr{display:flex;align-items:center;gap:15px}
+.pts-pill{background:var(--g);color:#fff;padding:6px 14px;border-radius:50px;font-size:.85rem;font-weight:700;display:flex;align-items:center;gap:6px}
+
+/* Hamburger */
+.hbg{display:flex;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:5px}
+@media(min-width:1150px){.hbg{display:none}}
+.hbg span{display:block;width:24px;height:2px;background:var(--tx);transition:.3s}
 .hbg.o span:nth-child(1){transform:translateY(7px) rotate(45deg)}
 .hbg.o span:nth-child(2){opacity:0}
 .hbg.o span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
-.drw{display:none;position:fixed;top:66px;left:0;right:0;bottom:0;z-index:998;background:var(--white);flex-direction:column;overflow-y:auto;padding:4px 0 50px;box-shadow:0 4px 40px rgba(13,31,45,.14)}
-.drw.o{display:flex}
-.drw a{font-size:1rem;font-weight:600;color:var(--tx);text-decoration:none;padding:16px var(--px);border-bottom:1px solid #f0f4f2;display:block;transition:.15s}
-.drw a:hover{color:var(--g);background:rgba(26,122,74,.04)}
-.drw .dcta{margin:12px var(--px) 0;background:var(--g);color:#fff!important;border-radius:14px;text-align:center;padding:16px;border-bottom:none!important}
-#pb{position:fixed;top:0;left:0;height:3px;background:var(--g);z-index:9999;width:0;transition:width .12s}
 
-/* ── HERO BANNER ── */
-.pts-hero{
-  background:linear-gradient(135deg,#0d1f2d 0%,#0f2818 50%,#0d1f2d 100%);
-  padding:calc(66px + 52px) var(--px) 56px;
-  position:relative;overflow:hidden;
-}
-.pts-hero::before{
-  content:"";position:absolute;inset:0;
-  background:radial-gradient(ellipse at 70% 50%,rgba(26,122,74,.25) 0%,transparent 60%),
-             radial-gradient(ellipse at 20% 80%,rgba(196,129,58,.15) 0%,transparent 50%);
-}
-.pts-hero-inner{position:relative;z-index:1;max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr;gap:40px;align-items:center}
-@media(min-width:900px){.pts-hero-inner{grid-template-columns:1fr auto;gap:60px}}
-.pts-hero h1{font-size:clamp(2rem,5vw,3rem);font-weight:800;color:#fff;margin-bottom:12px;letter-spacing:-.02em}
-.pts-hero h1 em{font-style:normal;color:var(--g3)}
-.pts-hero p{font-size:1.02rem;color:rgba(255,255,255,.62);line-height:1.72;max-width:480px;margin-bottom:28px}
-.pts-hero-actions{display:flex;flex-wrap:wrap;gap:12px}
-.btn-earn{background:var(--g);color:#fff;border:none;border-radius:50px;padding:13px 28px;font-size:.92rem;font-weight:600;cursor:pointer;font-family:"DM Sans",sans-serif;transition:.2s;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+/* Mobile Drawer */
+.drw{position:fixed;top:70px;left:-100%;width:280px;bottom:0;z-index:999;background:var(--white);display:flex;flex-direction:column;padding:20px;transition:.4s ease;box-shadow:10px 0 30px rgba(0,0,0,0.05)}
+.drw.o{left:0}
+.drw a{font-size:1.05rem;font-weight:700;color:var(--tx);text-decoration:none;padding:15px 0;border-bottom:1px solid #f0f0f0}
+
+/* ── HERO ── */
+.pts-hero{background:linear-gradient(135deg,#0d1f2d 0%,#0f2818 100%);padding:calc(70px + 60px) var(--px) 60px;color:#fff}
+.pts-hero-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr;gap:40px;align-items:center}
+@media(min-width:900px){.pts-hero-inner{grid-template-columns:1fr auto}}
+
+.bal-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:24px;padding:32px;text-align:center;backdrop-filter:blur(10px)}
+.bal-num{font-family:"Syne",sans-serif;font-size:4rem;font-weight:800;color:var(--gold);line-height:1}
+
+/* ── FOOTER GRID ── */
+footer{background:var(--navy);color:#fff;padding:80px var(--px) 40px;margin-top:auto}
+.ffg{max-width:1150px;margin:0 auto;display:grid;grid-template-columns:1fr;gap:40px}
+@media(min-width:768px){.ffg{grid-template-columns:2fr 1fr 1fr 1fr}}
+
+.fb p{font-size:.9rem;color:rgba(255,255,255,0.5);margin-top:15px;line-height:1.6;max-width:300px}
+.fco h5{font-size:.85rem;color:var(--g3);text-transform:uppercase;letter-spacing:1px;margin-bottom:20px}
+.fco a{display:block;color:rgba(255,255,255,0.5);text-decoration:none;margin-bottom:12px;font-size:.9rem;transition:.3s}
+.fco a:hover{color:#fff;transform:translateX(5px)}
+
+.fbt{max-width:1150px;margin:60px auto 0;padding-top:30px;border-top:1px solid rgba(255,255,255,0.1);display:flex;justify-content:space-between;font-size:.8rem;color:rgba(255,255,255,0.3)}
+
+/* ── UTILS ── */
+.btn-earn{background:var(--g);color:#fff;padding:12px 25px;border-radius:50px;text-decoration:none;font-weight:600;display:inline-block;transition:.2s}
 .btn-earn:hover{background:var(--g2);transform:translateY(-2px)}
-.btn-redeem-h{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.35);border-radius:50px;padding:13px 28px;font-size:.92rem;font-weight:600;cursor:pointer;font-family:"DM Sans",sans-serif;transition:.2s}
-.btn-redeem-h:hover{border-color:#fff;background:rgba(255,255,255,.1)}
-/* Big balance card */
-.bal-card{
-  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);
-  border-radius:24px;padding:32px 36px;text-align:center;min-width:240px;
-  backdrop-filter:blur(12px);
-}
-.bal-label{font-size:.72rem;font-weight:700;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px}
-.bal-num{font-family:"Syne",sans-serif;font-size:4.5rem;font-weight:800;color:var(--gold);line-height:1;margin-bottom:4px}
-.bal-unit{font-size:.9rem;color:rgba(255,255,255,.5);font-weight:500}
-.bal-streak{margin-top:16px;display:inline-flex;align-items:center;gap:6px;background:rgba(245,166,35,.15);border:1px solid rgba(245,166,35,.25);border-radius:20px;padding:5px 12px;font-size:.76rem;font-weight:600;color:var(--gold)}
-
-/* ── PROGRESS SECTION ── */
-.progress-section{padding:56px var(--px);background:var(--white)}
-.progress-inner{max-width:1100px;margin:0 auto}
-.section-tag{display:inline-block;background:rgba(26,122,74,.1);color:var(--g);font-size:.7rem;font-weight:700;padding:5px 14px;border-radius:20px;letter-spacing:.7px;text-transform:uppercase;margin-bottom:10px}
-.section-title{font-size:clamp(1.5rem,3.5vw,2.2rem);font-weight:800;color:var(--navy);margin-bottom:6px}
-.section-sub{font-size:.97rem;color:var(--mu);max-width:520px;line-height:1.72}
-/* Tier progress track */
-.tier-track{margin-top:40px;position:relative}
-.tier-track-bar{height:8px;background:#e8f0ea;border-radius:4px;overflow:hidden;margin-bottom:0;position:relative}
-.tier-track-fill{height:100%;background:linear-gradient(90deg,var(--g),var(--g2));border-radius:4px;transition:width 1.4s cubic-bezier(.4,0,.2,1);width:0}
-.tier-dots{display:flex;justify-content:space-between;margin-top:-4px;position:relative}
-.tier-dot{width:16px;height:16px;border-radius:50%;border:3px solid var(--white);box-shadow:0 0 0 2px #dde8e2;background:var(--bg);transition:.4s;flex-shrink:0;position:relative}
-.tier-dot.reached{background:var(--g);box-shadow:0 0 0 2px var(--g)}
-.tier-dot.current{background:var(--g2);box-shadow:0 0 0 3px var(--g),0 0 0 5px rgba(26,122,74,.2);animation:pulseD 2s infinite}
-@keyframes pulseD{0%,100%{box-shadow:0 0 0 3px var(--g),0 0 0 5px rgba(26,122,74,.2)}50%{box-shadow:0 0 0 3px var(--g),0 0 0 8px rgba(26,122,74,.1)}}
-.tier-labels{display:flex;justify-content:space-between;margin-top:12px}
-.tier-lbl{font-size:.74rem;font-weight:600;color:var(--mu);text-align:center;flex:1}
-.tier-lbl.reached{color:var(--g)}
-.tier-lbl.current{color:var(--g);font-weight:700}
-/* Tier cards */
-.tier-cards{display:grid;grid-template-columns:1fr;gap:16px;margin-top:32px}
-@media(min-width:600px){.tier-cards{grid-template-columns:repeat(2,1fr)}}
-@media(min-width:900px){.tier-cards{grid-template-columns:repeat(4,1fr)}}
-.tier-card{background:var(--bg);border-radius:var(--r);padding:22px;border:2px solid transparent;transition:.28s;position:relative;overflow:hidden}
-.tier-card::before{content:"";position:absolute;inset:0;opacity:0;transition:.28s}
-.tier-card.unlocked{border-color:var(--g);background:var(--white)}
-.tier-card.unlocked::before{opacity:0}
-.tier-card.locked{opacity:.55}
-.tier-card.current-tier{border-color:var(--g);background:var(--white);box-shadow:var(--sh2)}
-.tc-icon{font-size:2rem;margin-bottom:12px;display:block}
-.tc-pts{font-family:"Syne",sans-serif;font-size:1.1rem;font-weight:800;color:var(--g);margin-bottom:3px}
-.tc-name{font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:4px}
-.tc-desc{font-size:.82rem;color:var(--mu);line-height:1.55}
-.tc-badge{position:absolute;top:14px;right:14px;font-size:.68rem;font-weight:700;padding:3px 8px;border-radius:20px}
-.tc-badge.unlocked-b{background:rgba(26,122,74,.12);color:var(--g)}
-.tc-badge.current-b{background:var(--g);color:#fff}
-.tc-badge.locked-b{background:#f0f4f2;color:var(--mu)}
-
-/* ── TABS ── */
-.tabs-section{padding:56px var(--px);background:var(--bg)}
-.tabs-inner{max-width:1100px;margin:0 auto}
-.tab-bar{display:flex;gap:6px;background:var(--white);border-radius:50px;padding:6px;width:fit-content;margin-bottom:32px;flex-wrap:wrap;box-shadow:var(--sh)}
-.tab-btn{padding:9px 20px;border-radius:50px;font-size:.83rem;font-weight:600;cursor:pointer;border:none;font-family:"DM Sans",sans-serif;background:transparent;color:var(--mu);transition:.2s;white-space:nowrap}
-.tab-btn.on{background:var(--g);color:#fff}
-.tab-btn:hover:not(.on){color:var(--g)}
-.tab-panel{display:none}.tab-panel.on{display:block}
-
-/* ── EARN WAYS ── */
-.earn-grid{display:grid;grid-template-columns:1fr;gap:14px}
-@media(min-width:600px){.earn-grid{grid-template-columns:repeat(2,1fr)}}
-@media(min-width:900px){.earn-grid{grid-template-columns:repeat(3,1fr)}}
-.earn-card{background:var(--white);border-radius:var(--r);padding:22px;box-shadow:var(--sh);display:flex;gap:16px;align-items:flex-start;border:1.5px solid transparent;transition:.25s}
-.earn-card:hover{border-color:rgba(26,122,74,.15);box-shadow:var(--sh2);transform:translateY(-2px)}
-.earn-icon{width:48px;height:48px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
-.ei-g{background:rgba(26,122,74,.1)}.ei-b{background:rgba(58,122,191,.1)}.ei-e{background:rgba(196,129,58,.1)}.ei-r{background:rgba(224,82,82,.1)}
-.earn-pts{font-family:"Syne",sans-serif;font-size:.9rem;font-weight:800;color:var(--g);margin-bottom:3px}
-.earn-name{font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:4px}
-.earn-desc{font-size:.83rem;color:var(--mu);line-height:1.55}
-
-/* ── REDEEM ── */
-.redeem-grid{display:grid;grid-template-columns:1fr;gap:16px}
-@media(min-width:600px){.redeem-grid{grid-template-columns:repeat(2,1fr)}}
-@media(min-width:900px){.redeem-grid{grid-template-columns:repeat(3,1fr)}}
-.redeem-card{background:var(--white);border-radius:var(--r);padding:0;box-shadow:var(--sh);overflow:hidden;transition:.28s;border:1.5px solid transparent}
-.redeem-card:hover{border-color:rgba(26,122,74,.15);box-shadow:var(--sh2);transform:translateY(-3px)}
-.rc-top{padding:20px 20px 16px;display:flex;gap:14px;align-items:center}
-.rc-img{width:52px;height:52px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:1.6rem;flex-shrink:0}
-.rc-pts-req{font-family:"Syne",sans-serif;font-size:.9rem;font-weight:800;color:var(--earth);margin-bottom:2px}
-.rc-name{font-size:.97rem;font-weight:700;color:var(--navy)}
-.rc-desc{font-size:.82rem;color:var(--mu);padding:0 20px 16px;line-height:1.55}
-.rc-foot{padding:12px 20px;background:var(--bg);border-top:1px solid #f0f4f2;display:flex;align-items:center;justify-content:space-between;gap:10px}
-.rc-avail{font-size:.76rem;color:var(--mu);font-weight:500}
-.rc-avail.can{color:var(--g);font-weight:600}
-.rc-avail.cant{color:var(--red)}
-.btn-redeem{background:var(--g);color:#fff;border:none;border-radius:50px;padding:7px 16px;font-size:.8rem;font-weight:600;cursor:pointer;font-family:"DM Sans",sans-serif;transition:.2s}
-.btn-redeem:hover{background:var(--g2)}
-.btn-redeem:disabled{background:#dde8e2;color:var(--mu);cursor:not-allowed}
-
-/* ── HISTORY TABLE ── */
-.history-wrap{background:var(--white);border-radius:var(--r);box-shadow:var(--sh);overflow:hidden}
-.hist-header{display:flex;align-items:center;justify-content:space-between;padding:18px 20px;border-bottom:1px solid #f0f4f2;flex-wrap:wrap;gap:10px}
-.hist-header h4{font-size:.97rem;font-weight:800;color:var(--navy)}
-.hist-filter{display:flex;gap:6px}
-.hf-btn{background:var(--bg);border:1.5px solid #e8f0ea;border-radius:20px;padding:5px 12px;font-size:.76rem;font-weight:600;cursor:pointer;font-family:"DM Sans",sans-serif;transition:.18s;color:var(--mu)}
-.hf-btn.on,.hf-btn:hover{background:var(--g);border-color:var(--g);color:#fff}
-.hist-list{max-height:480px;overflow-y:auto}
-.hist-item{display:flex;align-items:center;gap:14px;padding:14px 20px;border-bottom:1px solid #f9fbf9;transition:.15s}
-.hist-item:last-child{border-bottom:none}
-.hist-item:hover{background:#fafcfb}
-.hist-ico{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0}
-.hi-earn{background:rgba(26,122,74,.1)}.hi-spend{background:rgba(224,82,82,.1)}.hi-bonus{background:rgba(245,166,35,.1)}
-.hist-desc{flex:1;min-width:0}
-.hd-title{font-size:.88rem;font-weight:600;color:var(--navy)}
-.hd-date{font-size:.74rem;color:var(--mu);margin-top:2px}
-.hist-pts{font-family:"Syne",sans-serif;font-size:1rem;font-weight:800;white-space:nowrap}
-.hist-pts.earn{color:var(--g)}.hist-pts.spend{color:var(--red)}
-.hist-empty{text-align:center;padding:48px 20px;color:var(--mu)}
-
-/* ── LEADERBOARD ── */
-.leaderboard{background:var(--white);border-radius:var(--r);box-shadow:var(--sh);overflow:hidden}
-.lb-header{display:flex;align-items:center;justify-content:space-between;padding:18px 20px;border-bottom:1px solid #f0f4f2;flex-wrap:wrap;gap:10px}
-.lb-header h4{font-size:.97rem;font-weight:800;color:var(--navy)}
-.lb-filter-ward{padding:7px 12px;border:1.5px solid #dde8e2;border-radius:50px;font-size:.82rem;outline:none;background:var(--white);cursor:pointer;font-family:"DM Sans",sans-serif}
-.lb-list{padding:0}
-.lb-row{display:flex;align-items:center;gap:14px;padding:13px 20px;border-bottom:1px solid #f9fbf9;transition:.15s}
-.lb-row:last-child{border-bottom:none}
-.lb-row:hover{background:#fafcfb}
-.lb-row.you{background:rgba(26,122,74,.04);border-left:3px solid var(--g)}
-.lb-rank{font-family:"Syne",sans-serif;font-size:1.1rem;font-weight:800;width:32px;text-align:center;flex-shrink:0}
-.lb-rank.gold{color:var(--gold)}.lb-rank.silver{color:#9ba3af}.lb-rank.bronze{color:#c4813a}
-.lb-avatar{width:38px;height:38px;border-radius:50%;background:var(--g3);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--g);font-size:.95rem;flex-shrink:0;font-family:"Syne",sans-serif}
-.lb-info{flex:1;min-width:0}
-.lb-name{font-size:.88rem;font-weight:700;color:var(--navy)}
-.lb-ward{font-size:.74rem;color:var(--mu);margin-top:1px}
-.lb-you-tag{font-size:.65rem;font-weight:700;background:var(--g);color:#fff;padding:2px 6px;border-radius:10px;margin-left:6px}
-.lb-score{font-family:"Syne",sans-serif;font-size:1rem;font-weight:800;color:var(--g);white-space:nowrap}
-.lb-reports{font-size:.72rem;color:var(--mu);text-align:right;margin-top:1px}
-
-/* ── BADGES ── */
-.badges-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px}
-.badge-card{background:var(--white);border-radius:var(--r);padding:22px 16px;text-align:center;box-shadow:var(--sh);border:2px solid transparent;transition:.28s;position:relative}
-.badge-card.earned{border-color:var(--g)}
-.badge-card.locked-b{opacity:.45;filter:grayscale(.6)}
-.badge-icon{font-size:2.6rem;margin-bottom:10px;display:block;position:relative}
-.badge-glow{position:absolute;inset:-4px;border-radius:50%;background:radial-gradient(circle,rgba(26,122,74,.3),transparent 70%);opacity:0;transition:.3s}
-.badge-card.earned .badge-glow{opacity:1;animation:glow 3s ease-in-out infinite}
-@keyframes glow{0%,100%{opacity:.6}50%{opacity:1}}
-.badge-name{font-size:.83rem;font-weight:700;color:var(--navy);margin-bottom:3px}
-.badge-cond{font-size:.72rem;color:var(--mu);line-height:1.45}
-.badge-status{position:absolute;top:10px;right:10px;font-size:.66rem;font-weight:700;padding:2px 7px;border-radius:20px}
-.bs-earned{background:rgba(26,122,74,.12);color:var(--g)}
-.bs-locked{background:#f0f4f2;color:var(--mu)}
-
-/* ── REDEEM MODAL ── */
-.ov{position:fixed;inset:0;background:rgba(13,31,45,.55);z-index:2000;display:none;align-items:center;justify-content:center;padding:16px;backdrop-filter:blur(4px)}
-.ov.open{display:flex}
-.modal{background:var(--white);border-radius:24px;padding:32px;width:100%;max-width:440px;animation:mIn .28s ease;text-align:center}
-@keyframes mIn{from{opacity:0;transform:scale(.95) translateY(8px)}to{opacity:1;transform:none}}
-.modal-icon{font-size:3.5rem;margin-bottom:14px;display:block}
-.modal h3{font-size:1.3rem;font-weight:800;color:var(--navy);margin-bottom:8px}
-.modal p{font-size:.92rem;color:var(--mu);line-height:1.65;margin-bottom:24px}
-.modal-confirm-pts{font-family:"Syne",sans-serif;font-size:2rem;font-weight:800;color:var(--earth);margin-bottom:4px}
-.modal-confirm-label{font-size:.82rem;color:var(--mu);margin-bottom:24px}
-.modal-actions{display:flex;gap:10px;justify-content:center}
-.btn-confirm{background:var(--g);color:#fff;border:none;border-radius:50px;padding:12px 28px;font-size:.92rem;font-weight:600;cursor:pointer;font-family:"DM Sans",sans-serif;transition:.2s}
-.btn-confirm:hover{background:var(--g2)}
-.btn-cancel{background:var(--bg);color:var(--mu);border:none;border-radius:50px;padding:12px 22px;font-size:.92rem;font-weight:600;cursor:pointer;font-family:"DM Sans",sans-serif;transition:.2s}
-.btn-cancel:hover{background:#e8f0ea;color:var(--tx)}
-/* success state */
-.modal.success-modal .modal-icon{animation:bounce .5s ease}
-@keyframes bounce{0%,100%{transform:scale(1)}40%{transform:scale(1.3)}70%{transform:scale(.9)}}
-.confetti{position:absolute;pointer-events:none}
-
-
-/* ── REDEEM INLINE FORM ──────────────────────────────────────── */
-.rc-form{display:none;padding:0 16px 16px;border-top:1px solid #f0f4f2;animation:slideDown .25s ease}
-.rc-form.open{display:block}
-@keyframes slideDown{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
-.rc-form-tabs{display:flex;gap:6px;margin:14px 0 12px}
-.rft{flex:1;padding:8px 6px;border-radius:10px;font-size:.76rem;font-weight:700;cursor:pointer;border:2px solid #e8f0ea;background:var(--bg);color:var(--mu);transition:.18s;font-family:"DM Sans",sans-serif;text-align:center}
-.rft.on{background:var(--g);border-color:var(--g);color:#fff}
-.rft:hover:not(.on){border-color:var(--g);color:var(--g)}
-.rc-form-body{display:none}.rc-form-body.on{display:block}
-.rf-label{font-size:.74rem;font-weight:700;color:var(--mu);text-transform:uppercase;letter-spacing:.4px;margin-bottom:5px;display:block}
-.rf-input{width:100%;padding:10px 13px;border:1.5px solid #dde8e2;border-radius:10px;font-size:.88rem;font-family:"DM Sans",sans-serif;outline:none;transition:.18s;background:#fff;color:var(--tx);margin-bottom:10px}
-.rf-input:focus{border-color:var(--g);background:#fff}
-.rf-input.err{border-color:var(--red)}
-.rf-input.ok{border-color:var(--g)}
-.rf-select{width:100%;padding:10px 13px;border:1.5px solid #dde8e2;border-radius:10px;font-size:.88rem;font-family:"DM Sans",sans-serif;outline:none;background:#fff;cursor:pointer;margin-bottom:10px;color:var(--tx);transition:.18s}
-.rf-select:focus{border-color:var(--g)}
-.isp-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:12px}
-.isp-btn{border:2px solid #e8f0ea;border-radius:10px;padding:9px 4px;cursor:pointer;background:#fff;text-align:center;transition:.18s;font-family:"DM Sans",sans-serif}
-.isp-btn:hover{border-color:var(--g)}
-.isp-btn.on{border-color:var(--g);background:rgba(26,122,74,.06)}
-.isp-logo{font-size:1.2rem;display:block;margin-bottom:3px}
-.isp-name{font-size:.65rem;font-weight:700;color:var(--mu)}
-.isp-btn.on .isp-name{color:var(--g)}
-/* Cash minimum note */
-.cash-note{background:rgba(196,129,58,.09);border:1px solid rgba(196,129,58,.22);border-radius:9px;padding:9px 12px;font-size:.78rem;color:#8a5a1a;margin-bottom:12px;line-height:1.5}
-.cash-note strong{color:var(--earth)}
-/* OTP row */
-.otp-row{display:flex;gap:8px;margin-bottom:10px}
-.otp-row .rf-input{margin-bottom:0;flex:1;letter-spacing:.18em;font-size:1.1rem;font-weight:700;text-align:center}
-.otp-send{background:var(--navy);color:#fff;border:none;border-radius:10px;padding:10px 13px;font-size:.78rem;font-weight:600;cursor:pointer;font-family:"DM Sans",sans-serif;white-space:nowrap;transition:.18s;flex-shrink:0}
-.otp-send:hover{background:#1a3040}
-.otp-send:disabled{background:#dde8e2;color:var(--mu);cursor:not-allowed}
-/* Verify badge */
-.verify-badge{display:inline-flex;align-items:center;gap:5px;font-size:.74rem;font-weight:700;padding:4px 10px;border-radius:20px;margin-bottom:10px}
-.vb-pending{background:rgba(196,129,58,.1);color:var(--earth)}
-.vb-done{background:rgba(26,122,74,.1);color:var(--g)}
-/* Submit row */
-.rc-submit-row{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:4px;flex-wrap:wrap}
-.rc-pts-cost{font-size:.78rem;color:var(--mu)}
-.rc-pts-cost strong{color:var(--earth);font-family:"Syne",sans-serif;font-size:.9rem}
-.btn-submit-redeem{background:var(--g);color:#fff;border:none;border-radius:50px;padding:9px 20px;font-size:.82rem;font-weight:700;cursor:pointer;font-family:"DM Sans",sans-serif;transition:.2s}
-.btn-submit-redeem:hover{background:var(--g2)}
-.btn-submit-redeem:disabled{background:#dde8e2;color:var(--mu);cursor:not-allowed}
-/* Success flash */
-.redeem-success-flash{display:none;text-align:center;padding:20px 12px}
-.redeem-success-flash.show{display:block}
-.rsf-icon{font-size:2.8rem;margin-bottom:8px;animation:bounce .5s ease}
-@keyframes bounce{0%,100%{transform:scale(1)}40%{transform:scale(1.3)}70%{transform:scale(.9)}}
-.rsf-title{font-family:"Syne",sans-serif;font-size:1rem;font-weight:800;color:var(--g);margin-bottom:4px}
-.rsf-sub{font-size:.82rem;color:var(--mu);line-height:1.55}
-/* Toggle redeem button */
-.btn-redeem-toggle{background:var(--g);color:#fff;border:none;border-radius:50px;padding:7px 16px;font-size:.8rem;font-weight:600;cursor:pointer;font-family:"DM Sans",sans-serif;transition:.2s;display:flex;align-items:center;gap:5px}
-.btn-redeem-toggle:hover{background:var(--g2)}
-.btn-redeem-toggle:disabled{background:#dde8e2;color:var(--mu);cursor:not-allowed}
-.btn-redeem-toggle.open{background:var(--navy)}
-.btn-redeem-toggle .arr{transition:transform .25s}
-.btn-redeem-toggle.open .arr{transform:rotate(180deg)}
-/* Error msg */
-.field-err{font-size:.73rem;color:var(--red);margin-top:-7px;margin-bottom:8px;display:none}
-.field-err.show{display:block}
-/* OTP timer */
-.otp-timer{font-size:.72rem;color:var(--mu);margin-bottom:10px}
-
-/* ── FOOTER ── */
-footer{background:var(--navy);color:#fff;padding:48px var(--px) 24px}
-.ffg{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-bottom:36px}
-@media(min-width:700px){.ffg{grid-template-columns:2fr 1fr 1fr 1fr}}
-.fb p{font-size:.84rem;color:rgba(255,255,255,.42);line-height:1.7;margin-top:8px;max-width:230px}
-.fco h5{font-size:.84rem;font-weight:700;margin-bottom:12px;color:rgba(255,255,255,.78)}
-.fco a{display:block;font-size:.82rem;color:rgba(255,255,255,.4);text-decoration:none;margin-bottom:7px;cursor:pointer;transition:.18s}
-.fco a:hover{color:var(--g3)}
-.fbt{border-top:1px solid rgba(255,255,255,.08);padding-top:18px;display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;font-size:.77rem;color:rgba(255,255,255,.28)}
-/* admin link */
-.admin-link{font-size:.65rem;color:rgba(255,255,255,.08)!important;transition:color .3s;text-decoration:none!important}
-.admin-link:hover{color:rgba(255,255,255,.38)!important}
-
-/* ── WA FAB ── */
-#wafab{position:fixed;bottom:24px;right:22px;z-index:901}
-.wabtn{width:54px;height:54px;border-radius:50%;background:#25D366;color:#fff;border:none;font-size:1.5rem;cursor:pointer;box-shadow:0 4px 20px rgba(37,211,102,.44);transition:.22s;display:flex;align-items:center;justify-content:center}
-.wabtn:hover{transform:scale(1.08)}
-
-/* ── REVEAL ── */
-.rv{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
-.rv.in{opacity:1;transform:none}
-.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}
 </style>
 </head>
 <body>
-<div id="pb"></div>
-<div id="tw"></div>
 
-<!-- NAV -->
-<nav id="nav">
-  <a class="logo" href="index.html"><span class="logo-dot"></span>EcoDamaturu</b></a>
-  <div class="nl" id="nl">
+<nav>
+  <a class="logo" href="index.html"><span class="logo-dot"></span>Eco<b>Damaturu</b></a>
+  
+  <div class="nl">
     <a href="index.html">Home</a>
     <a href="features.html">Features</a>
     <a href="report.html">Report Issue</a>
@@ -344,804 +93,116 @@ footer{background:var(--navy);color:#fff;padding:48px var(--px) 24px}
     <a href="calendar.html">Calendar</a>
     <a href="education.html">Education</a>
     <a href="contact.html">Contact</a>
-    <a href="ecopoints.html" class="cur">EcoPoints</a>
-      </div>
+    <a href="ecopoints.html" class="cur cta">🏆 EcoPoints</a>
+  </div>
+
   <div class="nr">
-    <button class="lbtn" onclick="openLang()">🌍 EN</button>
-    <button class="hbg" id="hbg" onclick="toggleDrw()"><span></span><span></span><span></span></button>
+    <div class="pts-pill">🌱 <span id="nav-pts">0</span></div>
+    <button class="hbg" id="hbg-trigger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
-<div class="drw" id="drw">
+
+<div class="drw" id="mobile-drw">
   <a href="index.html">🏠 Home</a>
   <a href="features.html">⚡ Features</a>
-  <a href="report.html">📸 Report an Issue</a>
-  <a href="map.html">🗺️ Live Map</a>
+  <a href="report.html">📸 Report Issue</a>
+  <a href="map.html">📍 Live Map</a>
   <a href="flood.html">🌊 Flood Alerts</a>
-  <a href="calendar.html">📅 Calendar</a>
+  <a href="calendar.html">🗓️ Calendar</a>
   <a href="education.html">📚 Education</a>
   <a href="ecopoints.html">🏆 EcoPoints</a>
   <a href="contact.html">📞 Contact</a>
-  <a href="report.html" class="dcta">📸 Report an Issue Now</a>
 </div>
 
-<!-- HERO -->
 <div class="pts-hero">
   <div class="pts-hero-inner">
-    <div class="rv">
-      <div class="section-tag" style="background:rgba(182,240,211,.14);color:var(--g3)">Rewards Programme</div>
-      <h1 style="margin-top:8px">Earn. Redeem.<br><em>Make a Difference.</em></h1>
-      <p>Every environmental issue you report earns EcoPoints — redeemable for real rewards at any LGA office in Damaturu. The more you report, the more you earn.</p>
-      <div class="pts-hero-actions">
-        <a href="report.html" class="btn-earn">📸 Earn Points Now</a>
-        <button class="btn-redeem-h" onclick="document.querySelector('[data-tab=redeem]').click();document.getElementById('tabs-section').scrollIntoView({behavior:'smooth'})">🎁 Redeem Points</button>
-      </div>
+    <div>
+      <h1 style="font-size:3rem; margin-bottom:15px">Earn. Redeem.<br><span style="color:var(--g3)">Make a Difference.</span></h1>
+      <p style="opacity:0.7; font-size:1.1rem; margin-bottom:30px; max-width:500px">Every report helps keep Damaturu clean. Accumulate points and redeem them for community rewards.</p>
+      <a href="report.html" class="btn-earn">📸 Start Reporting</a>
     </div>
-    <div class="rv d2">
-      <div class="bal-card">
-        <div class="bal-label">Your Balance</div>
-        <div class="bal-num" id="hero-pts">0</div>
-        <div class="bal-unit">EcoPoints</div>
-        <div class="bal-streak" id="hero-streak">🔥 0-day streak</div>
-      </div>
+    <div class="bal-card">
+      <div style="font-size:.7rem; text-transform:uppercase; letter-spacing:1px; opacity:0.5; margin-bottom:10px">Your Total Balance</div>
+      <div class="bal-num" id="hero-pts-display">0</div>
+      <div style="font-size:.9rem; opacity:0.5; margin-top:5px">EcoPoints Earned</div>
     </div>
   </div>
 </div>
 
-<!-- PROGRESS / TIER -->
-<section class="progress-section">
-  <div class="progress-inner">
-    <div class="rv"><div class="section-tag">Your Progress</div></div>
-    <h2 class="section-title rv d1" id="tier-headline">Loading your tier...</h2>
-    <p class="section-sub rv d2" id="tier-subhead">Keep reporting to unlock the next reward tier.</p>
-    <!-- Track -->
-    <div class="tier-track rv">
-      <div class="tier-track-bar"><div class="tier-track-fill" id="tier-fill"></div></div>
-      <div class="tier-dots" id="tier-dots"></div>
-      <div class="tier-labels" id="tier-labels"></div>
-    </div>
-    <!-- Tier cards -->
-    <div class="tier-cards" id="tier-cards"></div>
-  </div>
-</section>
+<main style="padding: 60px var(--px); flex: 1; text-align: center;">
+    <h2>Dashboard Features Coming Soon</h2>
+    <p style="color:var(--mu); margin-top:10px">Your history, badges, and leaderboard are being synchronized.</p>
+</main>
 
-<!-- TABS -->
-<section class="tabs-section" id="tabs-section">
-  <div class="tabs-inner">
-    <div class="tab-bar">
-      <button class="tab-btn on" data-tab="earn" onclick="switchTab('earn',this)">How to Earn</button>
-      <button class="tab-btn" data-tab="redeem" onclick="switchTab('redeem',this)">Redeem Rewards</button>
-      <button class="tab-btn" data-tab="history" onclick="switchTab('history',this)">My History</button>
-      <button class="tab-btn" data-tab="leaderboard" onclick="switchTab('leaderboard',this)">Leaderboard</button>
-      <button class="tab-btn" data-tab="badges" onclick="switchTab('badges',this)">My Badges</button>
-    </div>
-
-    <!-- EARN -->
-    <div class="tab-panel on" id="tab-earn">
-      <div class="earn-grid" id="earn-grid"></div>
-    </div>
-
-    <!-- REDEEM -->
-    <div class="tab-panel" id="tab-redeem">
-      <div class="redeem-grid" id="redeem-grid"></div>
-    </div>
-
-    <!-- HISTORY -->
-    <div class="tab-panel" id="tab-history">
-      <div class="history-wrap">
-        <div class="hist-header">
-          <h4>Transaction History</h4>
-          <div class="hist-filter">
-            <button class="hf-btn on" data-hf="all" onclick="filterHist('all',this)">All</button>
-            <button class="hf-btn" data-hf="earn" onclick="filterHist('earn',this)">Earned</button>
-            <button class="hf-btn" data-hf="spend" onclick="filterHist('spend',this)">Redeemed</button>
-          </div>
-        </div>
-        <div class="hist-list" id="hist-list"></div>
-      </div>
-    </div>
-
-    <!-- LEADERBOARD -->
-    <div class="tab-panel" id="tab-leaderboard">
-      <div class="leaderboard">
-        <div class="lb-header">
-          <h4>🏅 Community Leaderboard — Damaturu</h4>
-          <select class="lb-filter-ward" id="lb-ward" onchange="renderLeaderboard()">
-            <option value="">All Wards</option>
-            <option value="Hausari">Hausari</option>
-            <option value="Gujba Road">Gujba Road</option>
-            <option value="Pompomari">Pompomari</option>
-            <option value="Gwange">Gwange</option>
-            <option value="Bolori">Bolori</option>
-            <option value="Fari">Fari</option>
-            <option value="Sabon Gari">Sabon Gari</option>
-            <option value="Shehuri North">Shehuri North</option>
-          </select>
-        </div>
-        <div class="lb-list" id="lb-list"></div>
-      </div>
-    </div>
-
-    <!-- BADGES -->
-    <div class="tab-panel" id="tab-badges">
-      <div class="badges-grid" id="badges-grid"></div>
-    </div>
-
-  </div>
-</section>
-
-<!-- FOOTER -->
 <footer>
   <div class="ffg">
-    <div class="fb"><div style="font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:800;color:#fff">Eco<span style="color:var(--earth)">Damaturu</span></div><p>AI-powered environmental platform for Damaturu, Yobe State, Nigeria.</p></div>
-    <div class="fco"><h5>Pages</h5><a href="index.html">Home</a><a href="features.html">Features</a><a href="report.html">Report Issue</a><a href="map.html">Live Map</a></div>
-    <div class="fco"><h5>More</h5><a href="flood.html">Flood Alerts</a><a href="calendar.html">Calendar</a><a href="education.html">Education</a><a href="ecopoints.html">EcoPoints</a></div>
-    <div class="fco"><h5>Connect</h5><a onclick="window.open('https://wa.me/2349034567890','_blank')">WhatsApp</a><a>Twitter / X</a><a>Facebook</a><a href="contact.html">Contact Us</a></div>
+    <div class="fb">
+      <div style="font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;color:#fff">
+        Eco<span style="color:var(--earth)">Damaturu</span>
+      </div>
+      <p>AI-powered environmental platform for Damaturu, Yobe State, Nigeria.</p>
+    </div>
+    
+    <div class="fco">
+      <h5>Platform</h5>
+      <a href="index.html">Home</a>
+      <a href="features.html">Features</a>
+      <a href="report.html">Report Issue</a>
+      <a href="map.html">Live Map</a>
+    </div>
+
+    <div class="fco">
+      <h5>Resources</h5>
+      <a href="flood.html">Flood Alerts</a>
+      <a href="calendar.html">Calendar</a>
+      <a href="education.html">Education</a>
+      <a href="ecopoints.html">EcoPoints</a>
+    </div>
+
+    <div class="fco">
+      <h5>Connect</h5>
+      <a onclick="window.open('https://wa.me/2349034567890','_blank')" style="cursor:pointer">WhatsApp</a>
+      <a href="#">Twitter / X</a>
+      <a href="#">Facebook</a>
+      <a href="contact.html">Contact Us</a>
+    </div>
   </div>
+
   <div class="fbt">
     <span>© 2026 EcoDamaturu. Protecting Damaturu with Technology.</span>
     <span>Built for Yobe State, Nigeria 🇳🇬</span>
-    <a href="admin/index.html" class="admin-link" title="System">⚙</a>
   </div>
 </footer>
 
-<div id="wafab"><button class="wabtn" onclick="window.open('https://wa.me/2349034567890','_blank')">💬</button></div>
-
-
-<!-- REDEMPTION OVERLAY (success only, forms are inline on cards) -->
-<div class="ov" id="success-ov">
-  <div style="background:var(--white);border-radius:24px;padding:36px 32px;width:100%;max-width:400px;text-align:center;animation:mIn .28s ease">
-    <div style="font-size:3.5rem;margin-bottom:14px" id="sov-icon">🎉</div>
-    <h3 style="font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;color:var(--navy);margin-bottom:8px" id="sov-title">Redemption Successful!</h3>
-    <p style="font-size:.88rem;color:var(--mu);line-height:1.65;margin-bottom:22px" id="sov-body"></p>
-    <div style="font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--g);margin-bottom:4px" id="sov-pts"></div>
-    <div style="font-size:.8rem;color:var(--mu);margin-bottom:24px">remaining balance</div>
-    <button onclick="document.getElementById('success-ov').classList.remove('open')" style="background:var(--g);color:#fff;border:none;border-radius:50px;padding:12px 28px;font-size:.92rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif">Done</button>
-  </div>
-</div>
-
 <script>
-// ── DATA KEYS ────────────────────────────────────────────────
-var DB = "ecodamaturu_v4";
-var PK = "ecodamaturu_points_v4";
-var HK = "ecodamaturu_history_v1";
-var BK = "ecodamaturu_badges_v1";
-var SK = "ecodamaturu_streak_v1";
-
-function getR()   { try { return JSON.parse(localStorage.getItem(DB)  || "[]"); } catch(e) { return []; } }
-function getP()   { return parseInt(localStorage.getItem(PK) || "0"); }
-function saveP(n) { localStorage.setItem(PK, String(n)); }
-function getH()   { try { return JSON.parse(localStorage.getItem(HK) || "[]"); } catch(e) { return []; } }
-function saveH(h) { localStorage.setItem(HK, JSON.stringify(h)); }
-function getB()   { try { return JSON.parse(localStorage.getItem(BK) || "[]"); } catch(e) { return []; } }
-function saveB(b) { localStorage.setItem(BK, JSON.stringify(b)); }
-
-// ── TIERS ────────────────────────────────────────────────────
-var TIERS = [
-  { pts:0,    icon:"🌱", name:"EcoSeed",     desc:"Welcome to EcoDamaturu! Start earning by submitting your first report." },
-  { pts:100,  icon:"🌿", name:"EcoSprout",   desc:"You've made your first impact. Keep reporting to grow your points!" },
-  { pts:300,  icon:"🌳", name:"EcoGuardian", desc:"Damaturu notices your dedication. Unlock airtime voucher rewards." },
-  { pts:600,  icon:"🦁", name:"EcoChampion", desc:"You are a top environmental defender. Market vouchers unlocked!" },
-  { pts:1000, icon:"🥇", name:"EcoLegend",   desc:"The highest honour. Ward recognition, certificate, and exclusive benefits." }
-];
-function getCurrentTier(pts) {
-  var t = TIERS[0];
-  for (var i = 0; i < TIERS.length; i++) { if (pts >= TIERS[i].pts) t = TIERS[i]; }
-  return t;
-}
-function getNextTier(pts) {
-  for (var i = 0; i < TIERS.length; i++) { if (pts < TIERS[i].pts) return TIERS[i]; }
-  return null;
+// Logic to handle Navigation and EcoPoints Sync
+function toggleMenu() {
+    const drw = document.getElementById('mobile-drw');
+    const hbg = document.getElementById('hbg-trigger');
+    drw.classList.toggle('o');
+    hbg.classList.toggle('o');
 }
 
-// ── EARN WAYS ────────────────────────────────────────────────
-var EARN_WAYS = [
-  { icon:"📸", pts:"+50 pts",    name:"Submit a Verified Report",    desc:"Upload a photo, capture GPS, and submit. Earn 50 EcoPoints for every report accepted by authorities.", cls:"ei-g", link:"report.html" },
-  { icon:"🌟", pts:"+100 pts",   name:"First Report Bonus",          desc:"Submit your very first report and earn a one-time bonus of 100 points on top of your regular 50.", cls:"ei-b", link:"report.html" },
-  { icon:"🔥", pts:"+25 pts/day",name:"Daily Streak Bonus",          desc:"Report every day for 7 days in a row and earn 25 bonus points per day.", cls:"ei-e", link:"report.html" },
-  { icon:"🌊", pts:"+75 pts",    name:"Flood Issue Report",          desc:"Flooding is urgent. Flood and drainage reports earn an extra 25 points on top of the standard 50.", cls:"ei-r", link:"report.html" },
-  { icon:"👥", pts:"+30 pts",    name:"Refer a Neighbour",           desc:"When a neighbour submits their first verified report, you both earn 30 bonus points.", cls:"ei-g", link:"contact.html" },
-  { icon:"📅", pts:"+20 pts",    name:"Attend a Community Event",    desc:"Show up to an EcoDamaturu clean-up or workshop and earn 20 points per attendance.", cls:"ei-b", link:"calendar.html" }
-];
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. Fetch Points from LocalStorage
+    const savedPoints = localStorage.getItem('ecoPoints') || 0;
+    
+    // 2. Update UI Displays
+    document.getElementById('nav-pts').textContent = savedPoints;
+    const heroDisplay = document.getElementById('hero-pts-display');
+    if(heroDisplay) heroDisplay.textContent = savedPoints;
 
-// ── REWARDS ──────────────────────────────────────────────────
-// type: 'airtime' | 'voucher' | 'cash' | 'physical'
-var REWARDS = [
-  { icon:"📱", cost:200,  name:"Airtime ₦200",                type:"airtime",  nairaValue:200,  desc:"Instant airtime topup to any Nigerian network.", bg:"rgba(58,122,191,.1)" },
-  { icon:"📱", cost:500,  name:"Airtime ₦500",                type:"airtime",  nairaValue:500,  desc:"₦500 airtime — enough for a week of data on most networks.", bg:"rgba(58,122,191,.1)" },
-  { icon:"💵", cost:1000, name:"Cash Withdrawal ₦500",        type:"cash",     nairaValue:500,  desc:"Withdraw ₦500 cash to your bank account or mobile wallet.", bg:"rgba(26,122,74,.1)" },
-  { icon:"💵", cost:2000, name:"Cash Withdrawal ₦1,000",      type:"cash",     nairaValue:1000, desc:"Withdraw ₦1,000 cash to your bank account or mobile wallet.", bg:"rgba(26,122,74,.1)" },
-  { icon:"🛒", cost:500,  name:"Market Voucher ₦500",         type:"voucher",  nairaValue:500,  desc:"Valid at Damaturu Central Market. Collect at LGA Secretariat between 8am–4pm.", bg:"rgba(196,129,58,.1)" },
-  { icon:"🥇", cost:1000, name:"Community Champion Certificate",type:"physical",nairaValue:0,   desc:"Official certificate from the LGA Chairman — for your ward's top environmental defender.", bg:"rgba(245,166,35,.1)" }
-];
-
-// ── ISPs ──────────────────────────────────────────────────────
-var ISPS = [
-  { id:"mtn",    name:"MTN",     logo:"🟡", color:"#FFCC00" },
-  { id:"airtel", name:"Airtel",  logo:"🔴", color:"#FF0000" },
-  { id:"9mobile",name:"9mobile", logo:"🟢", color:"#00A650" },
-  { id:"glo",    name:"Glo",     logo:"🟩", color:"#00B140" }
-];
-
-// ── BANKS ─────────────────────────────────────────────────────
-var BANKS = [
-  "Access Bank","First Bank","GTBank","Zenith Bank","UBA",
-  "Stanbic IBTC","Fidelity Bank","Sterling Bank","Union Bank",
-  "Wema Bank","Keystone Bank","Polaris Bank","Jaiz Bank",
-  "OPay","Moniepoint","PalmPay","Kuda Bank","Carbon","VFD MFB",
-  "Rubies Bank","Sparkle","Fairmoney","Branch MFB"
-];
-
-// ── LEADERBOARD ───────────────────────────────────────────────
-var LEADERBOARD = [
-  { name:"Musa Ibrahim",    ward:"Hausari",       pts:650, reports:13, initials:"MI" },
-  { name:"Fatima Bello",    ward:"Gujba Road",    pts:520, reports:10, initials:"FB" },
-  { name:"Ibrahim Maina",   ward:"Pompomari",     pts:480, reports:9,  initials:"IM" },
-  { name:"Aisha Garba",     ward:"Gwange",        pts:390, reports:7,  initials:"AG" },
-  { name:"Yusuf Adamu",     ward:"Bolori",        pts:350, reports:7,  initials:"YA" },
-  { name:"Zainab Mustapha", ward:"Hausari",       pts:300, reports:6,  initials:"ZM" },
-  { name:"Bulama Kaka",     ward:"Fari",          pts:250, reports:5,  initials:"BK" },
-  { name:"Halima Lawan",    ward:"Sabon Gari",    pts:200, reports:4,  initials:"HL" },
-  { name:"Usman Geidam",    ward:"Shehuri North", pts:150, reports:3,  initials:"UG" },
-  { name:"Maryam Buni",     ward:"Pompomari",     pts:100, reports:2,  initials:"MB" }
-];
-
-// ── BADGES ────────────────────────────────────────────────────
-var BADGES_DEF = [
-  { id:"first_report",  icon:"🌱", name:"First Reporter",    cond:"Submit your first report",         check:function(rs,h){return rs.length>=1;} },
-  { id:"five_reports",  icon:"📸", name:"Prolific Reporter", cond:"Submit 5 reports",                 check:function(rs,h){return rs.length>=5;} },
-  { id:"ten_reports",   icon:"🏅", name:"Super Reporter",    cond:"Submit 10 reports",                check:function(rs,h){return rs.length>=10;} },
-  { id:"flood_fighter", icon:"🌊", name:"Flood Fighter",     cond:"Report 3 flooding issues",         check:function(rs,h){return rs.filter(function(r){return r.type==="flooding";}).length>=3;} },
-  { id:"waste_warrior", icon:"🗑️", name:"Waste Warrior",     cond:"Report 3 waste issues",            check:function(rs,h){return rs.filter(function(r){return r.type==="waste";}).length>=3;} },
-  { id:"drain_defender",icon:"🏗️", name:"Drain Defender",    cond:"Report 3 drainage issues",         check:function(rs,h){return rs.filter(function(r){return r.type==="drainage";}).length>=3;} },
-  { id:"pts_100",       icon:"💯", name:"Century Club",      cond:"Earn 100 EcoPoints",               check:function(rs,h){return getP()>=100;} },
-  { id:"pts_500",       icon:"🌟", name:"Star Earner",       cond:"Earn 500 EcoPoints",               check:function(rs,h){return getP()>=500;} },
-  { id:"pts_1000",      icon:"🥇", name:"EcoLegend",         cond:"Earn 1,000 EcoPoints",             check:function(rs,h){return getP()>=1000;} },
-  { id:"redeemer",      icon:"🎁", name:"First Redemption",  cond:"Redeem a reward for the first time",check:function(rs,h){return h.some(function(x){return x.type==="spend";});} },
-  { id:"photo_pro",     icon:"📷", name:"Photo Pro",         cond:"Submit a report with a photo",     check:function(rs,h){return rs.some(function(r){return (r.imageURLs||[]).some(Boolean);});} },
-  { id:"resolved_hero", icon:"✅", name:"Resolved Hero",     cond:"Have 3 of your reports resolved",  check:function(rs,h){return rs.filter(function(r){return r.status==="resolved";}).length>=3;} }
-];
-
-// ── NAV ───────────────────────────────────────────────────────
-function toggleDrw() {
-  var d=document.getElementById("drw"),b=document.getElementById("hbg");
-  var o=d.classList.contains("o"); d.classList.toggle("o",!o); b.classList.toggle("o",!o);
-}
-document.addEventListener("click",function(e){
-  var d=document.getElementById("drw"),b=document.getElementById("hbg");
-  if(d.classList.contains("o")&&!d.contains(e.target)&&!b.contains(e.target)){d.classList.remove("o");b.classList.remove("o");}
-});
-window.addEventListener("scroll",function(){
-  document.getElementById("nav").classList.toggle("sc",window.scrollY>60);
-  var pct=window.scrollY/(document.body.scrollHeight-window.innerHeight)*100;
-  document.getElementById("pb").style.width=pct+"%";
-  document.querySelectorAll(".rv:not(.in)").forEach(function(el){if(el.getBoundingClientRect().top<window.innerHeight-60)el.classList.add("in");});
-});
-
-// ── TOAST ─────────────────────────────────────────────────────
-function toast(msg,type){
-  var el=document.createElement("div"); el.className="t "+(type||"i"); el.textContent=msg;
-  document.getElementById("tw").appendChild(el);
-  requestAnimationFrame(function(){requestAnimationFrame(function(){el.classList.add("s");});});
-  setTimeout(function(){el.classList.remove("s");setTimeout(function(){if(el.parentNode)el.parentNode.removeChild(el);},400);},3200);
-}
-
-// ── STREAK ────────────────────────────────────────────────────
-function getStreak(){
-  try{var s=JSON.parse(localStorage.getItem(SK)||"{}");var last=s.last||0,count=s.count||0;
-  var today=new Date().toDateString(),yest=new Date(Date.now()-86400000).toDateString();
-  if(new Date(last).toDateString()===today)return count;
-  if(new Date(last).toDateString()===yest)return count; return 0;}catch(e){return 0;}
-}
-function updateStreak(){
-  try{var s=JSON.parse(localStorage.getItem(SK)||"{}");var today=new Date().toDateString(),yest=new Date(Date.now()-86400000).toDateString();
-  var last=s.last||0,count=s.count||0;
-  if(new Date(last).toDateString()===today)return count;
-  if(new Date(last).toDateString()===yest)count++; else count=1;
-  localStorage.setItem(SK,JSON.stringify({last:Date.now(),count:count}));return count;}catch(e){return 0;}
-}
-
-// ── TABS ──────────────────────────────────────────────────────
-function switchTab(name,btn){
-  document.querySelectorAll(".tab-btn").forEach(function(b){b.classList.remove("on");});
-  document.querySelectorAll(".tab-panel").forEach(function(p){p.classList.remove("on");});
-  if(btn)btn.classList.add("on");
-  var panel=document.getElementById("tab-"+name); if(panel)panel.classList.add("on");
-  if(name==="history")    renderHistory("all");
-  if(name==="leaderboard")renderLeaderboard();
-  if(name==="badges")     renderBadges();
-}
-
-// ── HERO / TIER ───────────────────────────────────────────────
-function renderHero(){
-  var pts=getP(),streak=getStreak();
-  document.getElementById("hero-pts").textContent=pts.toLocaleString();
-  document.getElementById("hero-streak").textContent="🔥 "+streak+"-day streak";
-  var cur=getCurrentTier(pts),next=getNextTier(pts);
-  if(next){
-    document.getElementById("tier-headline").textContent="You are a "+cur.name+" "+cur.icon;
-    document.getElementById("tier-subhead").textContent=(next.pts-pts)+" more EcoPoints to reach "+next.name+" "+next.icon;
-    var pct=Math.min(Math.round((pts-cur.pts)/(next.pts-cur.pts)*100),100);
-    setTimeout(function(){document.getElementById("tier-fill").style.width=pct+"%";},300);
-  }else{
-    document.getElementById("tier-headline").textContent="You are an "+cur.name+" "+cur.icon+" — Top Tier!";
-    document.getElementById("tier-subhead").textContent="You have reached the highest tier. Thank you for protecting Damaturu!";
-    setTimeout(function(){document.getElementById("tier-fill").style.width="100%";},300);
-  }
-  var dots="",labels="";
-  TIERS.forEach(function(t,i){
-    var cls=pts>=t.pts?(getCurrentTier(pts).pts===t.pts&&next?"current":"reached"):"";
-    if(!next&&i===TIERS.length-1)cls="current";
-    dots+="<div class=\"tier-dot "+cls+"\"></div>";
-    labels+="<div class=\"tier-lbl "+cls+"\">"+t.pts+"<br>"+t.name+"</div>";
-  });
-  document.getElementById("tier-dots").innerHTML=dots;
-  document.getElementById("tier-labels").innerHTML=labels;
-  var ch="";
-  TIERS.forEach(function(t){
-    var state=pts>=t.pts?(getCurrentTier(pts).pts===t.pts&&next?"current-tier":"unlocked"):"locked";
-    var bt=state==="current-tier"?"Current":pts>=t.pts?"Unlocked ✓":"Locked 🔒";
-    var bc=state==="current-tier"?"current-b":pts>=t.pts?"unlocked-b":"locked-b";
-    ch+="<div class=\"tier-card rv "+state+"\"><span class=\"tc-badge "+bc+"\">"+bt+"</span><span class=\"tc-icon\">"+t.icon+"</span><div class=\"tc-pts\">"+t.pts.toLocaleString()+" pts</div><div class=\"tc-name\">"+t.name+"</div><div class=\"tc-desc\">"+t.desc+"</div></div>";
-  });
-  document.getElementById("tier-cards").innerHTML=ch;
-}
-
-// ── EARN GRID ─────────────────────────────────────────────────
-function renderEarn(){
-  document.getElementById("earn-grid").innerHTML=EARN_WAYS.map(function(e){
-    return "<div class=\"earn-card rv\"><div class=\"earn-icon "+e.cls+"\">"+e.icon+"</div><div><div class=\"earn-pts\">"+e.pts+"</div><div class=\"earn-name\">"+e.name+"</div><div class=\"earn-desc\">"+e.desc+"</div><a href=\""+e.link+"\" style=\"display:inline-flex;align-items:center;gap:5px;margin-top:12px;font-size:.82rem;font-weight:700;color:var(--g);text-decoration:none\">Go →</a></div></div>";
-  }).join("");
-}
-
-// ── OTP SYSTEM ────────────────────────────────────────────────
-var otpStore = {};  // cardId -> { code, phone, expires, verified }
-
-function generateOTP() {
-  return String(Math.floor(100000 + Math.random() * 900000));
-}
-
-function sendOTP(cardId) {
-  var phoneInput = document.getElementById("cash-phone-" + cardId);
-  var acctInput  = document.getElementById("cash-acct-"  + cardId);
-  var nameInput  = document.getElementById("cash-name-"  + cardId);
-  var bankInput  = document.getElementById("cash-bank-"  + cardId);
-  var timerEl    = document.getElementById("otp-timer-"  + cardId);
-  var sendBtn    = document.getElementById("otp-send-"   + cardId);
-  var verifyRow  = document.getElementById("otp-verify-row-" + cardId);
-  var badge      = document.getElementById("otp-badge-"  + cardId);
-
-  // Validate fields first
-  var phone = (phoneInput && phoneInput.value.trim()) || "";
-  var acct  = (acctInput  && acctInput.value.trim())  || "";
-  var name  = (nameInput  && nameInput.value.trim())  || "";
-  var bank  = (bankInput  && bankInput.value)         || "";
-
-  var valid = true;
-  if(!phone || phone.replace(/\D/g,"").length < 10) {
-    showFieldErr(cardId,"err-phone-"+cardId,"Enter a valid 11-digit Nigerian phone number"); valid=false;
-  } else { hideFieldErr("err-phone-"+cardId); }
-  if(!acct || acct.replace(/\D/g,"").length !== 10) {
-    showFieldErr(cardId,"err-acct-"+cardId,"Enter a valid 10-digit account number"); valid=false;
-  } else { hideFieldErr("err-acct-"+cardId); }
-  if(!name || name.length < 3) {
-    showFieldErr(cardId,"err-name-"+cardId,"Enter the account holder name"); valid=false;
-  } else { hideFieldErr("err-name-"+cardId); }
-  if(!bank) {
-    showFieldErr(cardId,"err-bank-"+cardId,"Please select a bank"); valid=false;
-  } else { hideFieldErr("err-bank-"+cardId); }
-  if(!valid) return;
-
-  var code = generateOTP();
-  var expires = Date.now() + 5 * 60 * 1000; // 5 mins
-  otpStore[cardId] = { code:code, phone:phone, acct:acct, name:name, bank:bank, expires:expires, verified:false };
-
-  // Show the OTP in a toast (simulating SMS — in production this would be API call)
-  toast("📱 OTP sent to " + phone.slice(0,4) + "****" + phone.slice(-3) + " — Demo code: " + code, "i");
-
-  // Show verify row, start countdown
-  if(verifyRow) verifyRow.style.display = "flex";
-  if(badge) { badge.className="verify-badge vb-pending"; badge.textContent="⏳ OTP Sent — Verify below"; badge.style.display="inline-flex"; }
-  if(sendBtn) { sendBtn.disabled = true; sendBtn.textContent = "Sent"; }
-
-  var secs = 300;
-  var iv = setInterval(function(){
-    secs--;
-    if(timerEl) timerEl.textContent = "OTP expires in " + Math.floor(secs/60) + ":" + ("0"+secs%60).slice(-2);
-    if(secs <= 0) {
-      clearInterval(iv);
-      if(timerEl) timerEl.textContent = "OTP expired. Click Resend to try again.";
-      if(sendBtn) { sendBtn.disabled=false; sendBtn.textContent="Resend OTP"; }
-      if(otpStore[cardId]) otpStore[cardId].expired = true;
-    }
-  }, 1000);
-}
-
-function verifyOTP(cardId) {
-  var otpInput = document.getElementById("otp-input-" + cardId);
-  var badge    = document.getElementById("otp-badge-"  + cardId);
-  var submitBtn= document.getElementById("cash-submit-"+ cardId);
-  var code = otpInput ? otpInput.value.trim() : "";
-
-  if(!otpStore[cardId]) { toast("Please send OTP first","err"); return; }
-  if(otpStore[cardId].expired) { toast("OTP has expired. Please request a new one.","err"); return; }
-  if(code !== otpStore[cardId].code) {
-    showFieldErr(cardId,"err-otp-"+cardId,"Incorrect OTP. Please check the code sent to your phone.");
-    otpInput.classList.add("err"); return;
-  }
-  // Verified!
-  otpStore[cardId].verified = true;
-  hideFieldErr("err-otp-"+cardId);
-  otpInput.classList.remove("err"); otpInput.classList.add("ok");
-  if(badge) { badge.className="verify-badge vb-done"; badge.textContent="✓ Account Verified"; }
-  if(submitBtn) submitBtn.disabled = false;
-  toast("✅ Account verified successfully!","ok");
-}
-
-function showFieldErr(cardId, errId, msg) {
-  var el = document.getElementById(errId);
-  if(el) { el.textContent=msg; el.classList.add("show"); }
-}
-function hideFieldErr(errId) {
-  var el = document.getElementById(errId);
-  if(el) el.classList.remove("show");
-}
-
-// ── REDEEM GRID ───────────────────────────────────────────────
-function renderRedeem() {
-  var pts = getP();
-  var html = "";
-  REWARDS.forEach(function(r, i) {
-    var canAfford = pts >= r.cost;
-    var cardId = "rc" + i;
-
-    // Top section (icon + name + desc + availability)
-    html += "<div class=\"redeem-card\" id=\"card-"+cardId+"\">";
-    html += "<div class=\"rc-top\"><div class=\"rc-img\" style=\"background:"+r.bg+"\">"+r.icon+"</div>";
-    html += "<div><div class=\"rc-pts-req\">"+r.cost.toLocaleString()+" pts</div><div class=\"rc-name\">"+r.name+"</div></div></div>";
-    html += "<div class=\"rc-desc\">"+r.desc+"</div>";
-
-    // Foot: availability + toggle button
-    html += "<div class=\"rc-foot\">";
-    html += "<div class=\"rc-avail "+(canAfford?"can":"cant")+"\">"+(canAfford?"✓ You can redeem this":"Need "+(r.cost-pts)+" more points")+"</div>";
-    if(canAfford) {
-      html += "<button class=\"btn-redeem-toggle\" id=\"toggle-"+cardId+"\" onclick=\"toggleForm('"+cardId+"')\">Redeem <span class=\"arr\">▼</span></button>";
-    } else {
-      html += "<button class=\"btn-redeem-toggle\" disabled>Redeem</button>";
-    }
-    html += "</div>";
-
-    // Inline form (hidden until toggled)
-    html += "<div class=\"rc-form\" id=\"form-"+cardId+"\">";
-
-    if(r.type === "airtime") {
-      // ── AIRTIME FORM ──
-      html += "<div style=\"padding-top:4px\">";
-      html += "<label class=\"rf-label\">📞 Phone Number to Top Up</label>";
-      html += "<input class=\"rf-input\" id=\"at-phone-"+cardId+"\" type=\"tel\" placeholder=\"e.g. 08012345678\" maxlength=\"11\">";
-      html += "<div class=\"field-err\" id=\"err-at-phone-"+cardId+"\"></div>";
-      html += "<label class=\"rf-label\">📶 Select Network</label>";
-      html += "<div class=\"isp-grid\" id=\"isp-"+cardId+"\">";
-      ISPS.forEach(function(isp) {
-        html += "<button class=\"isp-btn\" data-isp=\""+isp.id+"\" data-card=\""+cardId+"\" onclick=\"selectISP('"+cardId+"','"+isp.id+"',this)\">";
-        html += "<span class=\"isp-logo\">"+isp.logo+"</span><span class=\"isp-name\">"+isp.name+"</span></button>";
-      });
-      html += "</div>";
-      html += "<div class=\"field-err\" id=\"err-isp-"+cardId+"\"></div>";
-      html += "<div class=\"rc-submit-row\">";
-      html += "<div class=\"rc-pts-cost\">Cost: <strong>"+r.cost.toLocaleString()+" pts</strong></div>";
-      html += "<button class=\"btn-submit-redeem\" onclick=\"submitAirtime('"+cardId+"',"+i+")\" id=\"at-submit-"+cardId+"\">✓ Confirm Topup</button>";
-      html += "</div></div>";
-
-    } else if(r.type === "cash") {
-      // ── CASH FORM ──
-      html += "<div style=\"padding-top:4px\">";
-      html += "<div class=\"cash-note\">💡 Minimum cash withdrawal is <strong>₦1,000</strong>. Your account name and number must be verified with an OTP before withdrawal is processed.</div>";
-
-      // Tab switcher: Bank Transfer vs Mobile Wallet
-      html += "<div class=\"rc-form-tabs\">";
-      html += "<button class=\"rft on\" onclick=\"switchCashTab('"+cardId+"','bank',this)\">🏦 Bank Transfer</button>";
-      html += "<button class=\"rft\" onclick=\"switchCashTab('"+cardId+"','wallet',this)\">📱 Mobile Wallet</button>";
-      html += "</div>";
-
-      // Bank transfer body
-      html += "<div class=\"rc-form-body on\" id=\"cash-bank-body-"+cardId+"\">";
-      html += "<label class=\"rf-label\">👤 Account Name</label>";
-      html += "<input class=\"rf-input\" id=\"cash-name-"+cardId+"\" type=\"text\" placeholder=\"Full name as on bank account\">";
-      html += "<div class=\"field-err\" id=\"err-name-"+cardId+"\"></div>";
-      html += "<label class=\"rf-label\">🔢 Account Number</label>";
-      html += "<input class=\"rf-input\" id=\"cash-acct-"+cardId+"\" type=\"text\" placeholder=\"10-digit account number\" maxlength=\"10\">";
-      html += "<div class=\"field-err\" id=\"err-acct-"+cardId+"\"></div>";
-      html += "<label class=\"rf-label\">📞 Phone Number on Account</label>";
-      html += "<input class=\"rf-input\" id=\"cash-phone-"+cardId+"\" type=\"tel\" placeholder=\"e.g. 08012345678\" maxlength=\"11\">";
-      html += "<div class=\"field-err\" id=\"err-phone-"+cardId+"\"></div>";
-      html += "<label class=\"rf-label\">🏦 Select Bank</label>";
-      html += "<select class=\"rf-select\" id=\"cash-bank-"+cardId+"\"><option value=\"\">-- Choose your bank --</option>";
-      BANKS.forEach(function(b){ html += "<option value=\""+b+"\">"+b+"</option>"; });
-      html += "</select>";
-      html += "<div class=\"field-err\" id=\"err-bank-"+cardId+"\"></div>";
-      // OTP section
-      html += "<label class=\"rf-label\">🔐 Verify Account with OTP</label>";
-      html += "<div id=\"otp-badge-"+cardId+"\" class=\"verify-badge vb-pending\" style=\"display:none\"></div>";
-      html += "<div style=\"display:flex;gap:8px;margin-bottom:10px\">";
-      html += "<button class=\"otp-send\" id=\"otp-send-"+cardId+"\" onclick=\"sendOTP('"+cardId+"')\">Send OTP</button>";
-      html += "<div style=\"font-size:.76rem;color:var(--mu);padding-top:12px\">An OTP will be sent to your phone number</div></div>";
-      html += "<div id=\"otp-verify-row-"+cardId+"\" style=\"display:none\">";
-      html += "<label class=\"rf-label\">Enter OTP</label>";
-      html += "<div class=\"otp-row\">";
-      html += "<input class=\"rf-input\" id=\"otp-input-"+cardId+"\" type=\"text\" placeholder=\"6-digit code\" maxlength=\"6\" style=\"letter-spacing:.2em;font-size:1.1rem;font-weight:700;text-align:center\">";
-      html += "<button class=\"otp-send\" onclick=\"verifyOTP('"+cardId+"')\">Verify</button>";
-      html += "</div>";
-      html += "<div class=\"field-err\" id=\"err-otp-"+cardId+"\"></div>";
-      html += "<div class=\"otp-timer\" id=\"otp-timer-"+cardId+"\"></div>";
-      html += "</div>";
-      html += "</div>"; // end bank body
-
-      // Mobile wallet body
-      html += "<div class=\"rc-form-body\" id=\"cash-wallet-body-"+cardId+"\">";
-      html += "<label class=\"rf-label\">📱 Wallet Phone Number</label>";
-      html += "<input class=\"rf-input\" id=\"wallet-phone-"+cardId+"\" type=\"tel\" placeholder=\"e.g. 08012345678\" maxlength=\"11\">";
-      html += "<div class=\"field-err\" id=\"err-wphone-"+cardId+"\"></div>";
-      html += "<label class=\"rf-label\">💳 Wallet Provider</label>";
-      html += "<select class=\"rf-select\" id=\"wallet-provider-"+cardId+"\"><option value=\"\">-- Select wallet --</option>";
-      ["OPay","Moniepoint","PalmPay","Kuda","Carbon"].forEach(function(w){ html += "<option value=\""+w+"\">"+w+"</option>"; });
-      html += "</select>";
-      html += "<div class=\"field-err\" id=\"err-wprov-"+cardId+"\"></div>";
-      html += "</div>"; // end wallet body
-
-      // Submit (disabled until OTP verified for bank, or wallet filled)
-      html += "<div class=\"rc-submit-row\" style=\"margin-top:14px\">";
-      html += "<div class=\"rc-pts-cost\">Cost: <strong>"+r.cost.toLocaleString()+" pts</strong><br><span style=\"font-size:.7rem\">You receive ₦"+r.nairaValue.toLocaleString()+"</span></div>";
-      html += "<button class=\"btn-submit-redeem\" id=\"cash-submit-"+cardId+"\" disabled onclick=\"submitCash('"+cardId+"',"+i+")\">✓ Withdraw</button>";
-      html += "</div></div>"; // end cash form
-
-    } else if(r.type === "voucher" || r.type === "physical") {
-      // ── SIMPLE CONFIRM FORM ──
-      html += "<div style=\"padding:4px 0 8px\">";
-      html += "<div style=\"background:rgba(26,122,74,.07);border-radius:10px;padding:13px 15px;font-size:.85rem;color:var(--tx);line-height:1.65;margin-bottom:14px\">";
-      html += "<strong style=\"color:var(--g)\">Collection Details:</strong> Visit the LGA Secretariat, Damaturu, between 8am–4pm, Monday–Friday. Bring this phone as proof of redemption. Processing takes 1–2 working days.";
-      html += "</div>";
-      html += "<div class=\"rc-submit-row\">";
-      html += "<div class=\"rc-pts-cost\">Cost: <strong>"+r.cost.toLocaleString()+" pts</strong></div>";
-      html += "<button class=\"btn-submit-redeem\" onclick=\"submitSimple('"+cardId+"',"+i+",'"+r.type+"')\" id=\"simple-submit-"+cardId+"\">✓ Confirm Redemption</button>";
-      html += "</div></div>";
-    }
-
-    html += "</div>"; // end rc-form
-    html += "</div>"; // end redeem-card
-  });
-
-  document.getElementById("redeem-grid").innerHTML = html;
-
-  // Enable cash-submit for wallet tab by default when wallet fields are filled
-  REWARDS.forEach(function(r, i) {
-    if(r.type !== "cash") return;
-    var cardId = "rc" + i;
-    var wPhone = document.getElementById("wallet-phone-" + cardId);
-    var wProv  = document.getElementById("wallet-provider-" + cardId);
-    var submitBtn = document.getElementById("cash-submit-" + cardId);
-    if(wPhone) wPhone.addEventListener("input", function(){ checkWalletReady(cardId); });
-    if(wProv)  wProv.addEventListener("change", function(){ checkWalletReady(cardId); });
-    // cash-bank tab: OTP must be verified — submit starts disabled
-    // wallet tab: submit enabled when both fields filled
-  });
-}
-
-function checkWalletReady(cardId) {
-  var body    = document.getElementById("cash-wallet-body-" + cardId);
-  if(!body || !body.classList.contains("on")) return;
-  var phone   = (document.getElementById("wallet-phone-"    + cardId)||{}).value||"";
-  var prov    = (document.getElementById("wallet-provider-" + cardId)||{}).value||"";
-  var btn     = document.getElementById("cash-submit-" + cardId);
-  if(btn) btn.disabled = !(phone.replace(/\D/g,"").length >= 10 && prov);
-}
-
-function toggleForm(cardId) {
-  var form   = document.getElementById("form-"   + cardId);
-  var btn    = document.getElementById("toggle-" + cardId);
-  if(!form) return;
-  var isOpen = form.classList.contains("open");
-  // Close all other open forms first
-  document.querySelectorAll(".rc-form.open").forEach(function(f) {
-    f.classList.remove("open");
-  });
-  document.querySelectorAll(".btn-redeem-toggle.open").forEach(function(b) {
-    b.classList.remove("open");
-    b.innerHTML = "Redeem <span class=\"arr\">▼</span>";
-  });
-  if(!isOpen) {
-    form.classList.add("open");
-    btn.classList.add("open");
-    btn.innerHTML = "Close <span class=\"arr\">▲</span>";
-  }
-}
-
-function selectISP(cardId, ispId, btn) {
-  document.querySelectorAll("#isp-" + cardId + " .isp-btn").forEach(function(b){ b.classList.remove("on"); });
-  btn.classList.add("on");
-}
-
-function switchCashTab(cardId, tab, btn) {
-  // Toggle tab buttons
-  var formEl = document.getElementById("form-" + cardId);
-  formEl.querySelectorAll(".rft").forEach(function(b){ b.classList.remove("on"); });
-  btn.classList.add("on");
-  // Toggle bodies
-  var bankBody   = document.getElementById("cash-bank-body-"   + cardId);
-  var walletBody = document.getElementById("cash-wallet-body-" + cardId);
-  var submitBtn  = document.getElementById("cash-submit-" + cardId);
-  if(tab === "bank") {
-    if(bankBody)   bankBody.classList.add("on");
-    if(walletBody) walletBody.classList.remove("on");
-    // Submit only enabled if OTP verified
-    if(submitBtn) submitBtn.disabled = !(otpStore[cardId] && otpStore[cardId].verified);
-  } else {
-    if(bankBody)   bankBody.classList.remove("on");
-    if(walletBody) walletBody.classList.add("on");
-    checkWalletReady(cardId);
-  }
-}
-
-// ── SUBMIT HANDLERS ───────────────────────────────────────────
-function submitAirtime(cardId, rewardIdx) {
-  var phone  = (document.getElementById("at-phone-" + cardId)||{}).value||"";
-  var ispBtn = document.querySelector("#isp-" + cardId + " .isp-btn.on");
-  var ispId  = ispBtn ? ispBtn.dataset.isp : "";
-  var valid  = true;
-
-  if(!phone || phone.replace(/\D/g,"").length < 10) {
-    showFieldErr(cardId, "err-at-phone-" + cardId, "Enter a valid 11-digit Nigerian phone number"); valid=false;
-  } else hideFieldErr("err-at-phone-" + cardId);
-
-  if(!ispId) {
-    showFieldErr(cardId, "err-isp-" + cardId, "Please select a network"); valid=false;
-  } else hideFieldErr("err-isp-" + cardId);
-
-  if(!valid) return;
-
-  var r = REWARDS[rewardIdx];
-  if(getP() < r.cost) { toast("Not enough EcoPoints!","err"); return; }
-
-  var ispName = ISPS.find(function(x){return x.id===ispId;}) || {name:ispId};
-  processRedemption(rewardIdx, "Airtime topup: ₦" + r.nairaValue + " to " + phone + " (" + ispName.name + ")");
-  showSuccessOverlay(r, "📱 Airtime Topup Request Received!", "₦" + r.nairaValue + " airtime will be sent to " + phone + " (" + ispName.name + ") within 5 minutes. Your reference number has been logged.");
-  toggleForm(cardId); // close form
-}
-
-function submitCash(cardId, rewardIdx) {
-  var r = REWARDS[rewardIdx];
-  var walletBody = document.getElementById("cash-wallet-body-" + cardId);
-  var isWallet   = walletBody && walletBody.classList.contains("on");
-
-  if(getP() < r.cost) { toast("Not enough EcoPoints!","err"); return; }
-
-  if(!isWallet) {
-    // Bank transfer
-    if(!otpStore[cardId] || !otpStore[cardId].verified) { toast("Please verify your account with OTP first","err"); return; }
-    var d = otpStore[cardId];
-    processRedemption(rewardIdx, "Cash withdrawal: ₦" + r.nairaValue + " to " + d.bank + " (" + d.acct + ")");
-    showSuccessOverlay(r, "💵 Withdrawal Request Received!", "₦" + r.nairaValue.toLocaleString() + " will be sent to your " + d.bank + " account (" + d.name + " — " + d.acct + ") within 1–2 business days.");
-  } else {
-    var phone = (document.getElementById("wallet-phone-"+cardId)||{}).value||"";
-    var prov  = (document.getElementById("wallet-provider-"+cardId)||{}).value||"";
-    if(!phone || !prov) { toast("Please fill in wallet details","err"); return; }
-    processRedemption(rewardIdx, "Cash withdrawal: ₦" + r.nairaValue + " to " + prov + " (" + phone + ")");
-    showSuccessOverlay(r, "💵 Withdrawal Request Received!", "₦" + r.nairaValue.toLocaleString() + " will be sent to your " + prov + " wallet (" + phone + ") within 30 minutes.");
-  }
-  toggleForm(cardId);
-  delete otpStore[cardId];
-}
-
-function submitSimple(cardId, rewardIdx, type) {
-  var r = REWARDS[rewardIdx];
-  if(getP() < r.cost) { toast("Not enough EcoPoints!","err"); return; }
-  processRedemption(rewardIdx, "Redeemed: " + r.name);
-  var body = type === "voucher"
-    ? "Your voucher has been registered. Visit the LGA Secretariat, Damaturu, between 8am–4pm to collect. Bring your phone as proof."
-    : "Your certificate request has been logged. It will be ready for collection at the LGA Chairman's office within 5 working days.";
-  showSuccessOverlay(r, "🎉 Redemption Successful!", body);
-  toggleForm(cardId);
-}
-
-function processRedemption(rewardIdx, desc) {
-  var r = REWARDS[rewardIdx];
-  var newPts = getP() - r.cost;
-  saveP(newPts);
-  var hist = getH();
-  hist.push({ type:"spend", pts:r.cost, desc:desc, ts:Date.now() });
-  saveH(hist);
-  checkBadges();
-}
-
-function showSuccessOverlay(r, title, body) {
-  document.getElementById("sov-icon").textContent  = r.icon;
-  document.getElementById("sov-title").textContent = title;
-  document.getElementById("sov-body").textContent  = body;
-  document.getElementById("sov-pts").textContent   = getP().toLocaleString() + " pts";
-  document.getElementById("success-ov").classList.add("open");
-  renderHero();
-  renderRedeem();
-  toast("✅ " + r.name + " redeemed successfully!", "ok");
-}
-
-document.getElementById("success-ov").addEventListener("click", function(e) {
-  if(e.target === this) this.classList.remove("open");
-});
-
-// ── HISTORY ───────────────────────────────────────────────────
-var histFilter = "all";
-function filterHist(f,btn){
-  histFilter=f;
-  document.querySelectorAll(".hf-btn").forEach(function(b){b.classList.remove("on");});
-  if(btn)btn.classList.add("on"); renderHistory(f);
-}
-function renderHistory(f){
-  var hist=getH().slice().reverse();
-  if(f!=="all")hist=hist.filter(function(x){return x.type===f;});
-  var el=document.getElementById("hist-list");
-  if(!hist.length){el.innerHTML="<div class=\"hist-empty\"><div style=\"font-size:2.5rem;margin-bottom:12px\">📋</div><p style=\"font-size:.9rem\">No transactions yet.<br>Submit a report to start earning!</p></div>";return;}
-  var tico={earn:"🌿",spend:"🎁",bonus:"⭐"};
-  el.innerHTML=hist.map(function(h){
-    var ico=h.type==="earn"?"hi-earn":h.type==="bonus"?"hi-bonus":"hi-spend";
-    var pcls=h.type==="spend"?"spend":"earn";
-    var pstr=(h.type==="spend"?"−":"+")+h.pts+" pts";
-    return "<div class=\"hist-item\"><div class=\"hist-ico "+ico+"\">"+( tico[h.type]||"🌿")+"</div><div class=\"hist-desc\"><div class=\"hd-title\">"+h.desc+"</div><div class=\"hd-date\">"+new Date(h.ts).toLocaleString()+"</div></div><div class=\"hist-pts "+pcls+"\">"+pstr+"</div></div>";
-  }).join("");
-}
-
-// ── LEADERBOARD ───────────────────────────────────────────────
-function renderLeaderboard(){
-  var ward=document.getElementById("lb-ward").value;
-  var list=LEADERBOARD.slice();
-  list.push({name:"You",ward:"Your Ward",pts:getP(),reports:getR().length,initials:"ME",isYou:true});
-  list.sort(function(a,b){return b.pts-a.pts;});
-  if(ward)list=list.filter(function(x){return x.isYou||x.ward===ward;});
-  var rc=["gold","silver","bronze"];
-  document.getElementById("lb-list").innerHTML=list.map(function(p,i){
-    var rs=i===0?"🥇":i===1?"🥈":i===2?"🥉":(i+1);
-    return "<div class=\"lb-row "+(p.isYou?"you":"")+"\">" +
-      "<div class=\"lb-rank "+(rc[i]||"")+"\">"+rs+"</div>" +
-      "<div class=\"lb-avatar\">"+(p.isYou?"ME":p.initials)+"</div>" +
-      "<div class=\"lb-info\"><div class=\"lb-name\">"+p.name+(p.isYou?"<span class=\"lb-you-tag\">You</span>":"")+  "</div><div class=\"lb-ward\">"+p.ward+"</div></div>" +
-      "<div style=\"text-align:right\"><div class=\"lb-score\">"+p.pts.toLocaleString()+" pts</div><div class=\"lb-reports\">"+p.reports+" report"+(p.reports!==1?"s":"")+"</div></div></div>";
-  }).join("");
-}
-
-// ── BADGES ────────────────────────────────────────────────────
-function checkBadges(){
-  var rs=getR(),hist=getH(),earned=getB(),newOnes=[];
-  BADGES_DEF.forEach(function(b){if(earned.indexOf(b.id)<0&&b.check(rs,hist)){earned.push(b.id);newOnes.push(b);}});
-  if(newOnes.length){saveB(earned);newOnes.forEach(function(b){setTimeout(function(){toast("🏅 Badge unlocked: "+b.name+"!","ok");},500);});}
-  return earned;
-}
-function renderBadges(){
-  var earned=checkBadges();
-  document.getElementById("badges-grid").innerHTML=BADGES_DEF.map(function(b){
-    var ie=earned.indexOf(b.id)>=0;
-    return "<div class=\"badge-card "+(ie?"earned":"locked-b")+"\"><span class=\"badge-status "+(ie?"bs-earned":"bs-locked")+"\">"+(ie?"✓ Earned":"🔒 Locked")+"</span><div style=\"position:relative;display:inline-block\"><span class=\"badge-icon\">"+b.icon+"</span>"+(ie?"<div class=\"badge-glow\"></div>":"")+"</div><div class=\"badge-name\">"+b.name+"</div><div class=\"badge-cond\">"+b.cond+"</div></div>";
-  }).join("");
-}
-
-// ── SEED ──────────────────────────────────────────────────────
-function seedHistory(){
-  var rs=getR(),hist=getH();
-  if(hist.length>0||rs.length===0)return;
-  rs.forEach(function(r){hist.push({type:"earn",pts:50,desc:"Report submitted: "+r.type+" issue (#"+r.id+")",ts:r.timestamp+1000});});
-  if(rs.length>0)hist.push({type:"bonus",pts:100,desc:"First report bonus!",ts:rs[0].timestamp});
-  saveH(hist); if(getP()===0)saveP(rs.length*50);
-}
-
-// ── LANG ──────────────────────────────────────────────────────
-function openLang(){toast("Language settings available on the Homepage.","i");}
-
-// ── RENDER ALL ────────────────────────────────────────────────
-function renderAll(){
-  renderHero(); renderEarn(); renderRedeem(); checkBadges();
-  setTimeout(function(){document.querySelectorAll(".rv").forEach(function(el){if(el.getBoundingClientRect().top<window.innerHeight)el.classList.add("in");});},100);
-}
-
-document.addEventListener("DOMContentLoaded",function(){
-  seedHistory(); updateStreak(); renderAll();
+    // 3. Highlight Current Page
+    const path = window.location.pathname.split("/").pop() || "index.html";
+    document.querySelectorAll('.nl a, .drw a').forEach(link => {
+        if(link.getAttribute('href') === path) {
+            link.classList.add('cur');
+        }
+    });
 });
 </script>
+
 </body>
 </html>
