@@ -190,17 +190,83 @@ window.addEventListener('scroll',()=>{
   if(pb)pb.style.width=(window.scrollY/(document.body.scrollHeight-window.innerHeight)*100)+'%';
   document.querySelectorAll('.rv:not(.in)').forEach(el=>{if(el.getBoundingClientRect().top<window.innerHeight-60)el.classList.add('in')})
 });
-const footerHTML = `
-<footer>
-  <div class="ffg">
-    <div class="fb2">...logo & description...</div>
-    <div class="fco"><h5>Pages</h5>...links...</div>
-    <div class="fco"><h5>More</h5>...links...</div>
-    <div class="fco"><h5>Connect</h5>...links...</div>
-  </div>
-  <div class="fbt">...copyright info...</div>
-</footer>
-`;
+c/**
+ * EcoDamaturu Footer Loader
+ * Structures the footer into a clean, professional grid.
+ */
+
+function loadFooter() {
+    const footerHTML = `
+    <footer>
+      <div class="ffg">
+        <div class="fb2">
+          <div style="font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;color:#fff;margin-bottom:15px">
+            Eco<span style="color:#c4813a">Damaturu</span>
+          </div>
+          <p style="color:rgba(255,255,255,0.6); font-size:0.9rem; line-height:1.6; max-width:280px;">
+            AI-powered environmental platform for Damaturu, Yobe State. 
+            Protecting our community through technology and citizen action.
+          </p>
+          <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" 
+                  style="margin-top:20px; background:rgba(255,255,255,0.1); border:none; color:#fff; padding:8px 15px; border-radius:5px; cursor:pointer; font-size:0.8rem;">
+            ↑ Back to Top
+          </button>
+        </div>
+
+        <div class="fco">
+          <h5>Pages</h5>
+          <a href="index.html">Home</a>
+          <a href="features.html">Features</a>
+          <a href="report.html">Report Issue</a>
+          <a href="map.html">Live Map</a>
+        </div>
+
+        <div class="fco">
+          <h5>More</h5>
+          <a href="flood.html">Flood Alerts</a>
+          <a href="calendar.html">Calendar</a>
+          <a href="education.html">Education</a>
+          <a href="contact.html">Contact Us</a>
+        </div>
+
+        <div class="fco">
+          <h5>Connect</h5>
+          <a onclick="wa()" style="cursor:pointer; color:#25D366; font-weight:600;">WhatsApp</a>
+          <a href="#">Twitter / X</a>
+          <a href="#">Facebook</a>
+          <a href="#">Instagram</a>
+        </div>
+      </div>
+
+      <div class="fbt">
+        <div class="fbt-left">
+          <span>© 2026 EcoDamaturu. Protecting Damaturu with Technology.</span>
+        </div>
+        <div class="fbt-right">
+          <span>Built for Yobe State, Nigeria 🇳🇬</span>
+        </div>
+      </div>
+    </footer>
+    `;
+
+    const placeholder = document.getElementById('footer-placeholder');
+    if (placeholder) {
+        placeholder.innerHTML = footerHTML;
+    }
+}
+
+/**
+ * WhatsApp Redirect Logic
+ */
+function wa() {
+    // Replace with your actual office or support number
+    const phoneNumber = "2348000000000"; 
+    const message = encodeURIComponent("Hello EcoDamaturu, I would like to make an inquiry.");
+    window.open(`https://wa.me/${phoneNumber}?text=${message}`, "_blank");
+}
+
+// Initialize footer on page load
+document.addEventListener('DOMContentLoaded', loadFooter);
 // --- Data Arrays ---
 const tips = [
   "Clear your gutters every Saturday to prevent urban flooding.",
