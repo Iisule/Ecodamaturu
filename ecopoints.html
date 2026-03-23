@@ -1,208 +1,243 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EcoPoints Dashboard — EcoDamaturu</title>
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-    <style>
-        /* --- RESET & BASE --- */
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { 
-            font-family: "DM Sans", sans-serif; 
-            background-color: #f7f9f4; 
-            color: #1a2a1e; 
-            line-height: 1.6;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Report Issue — EcoDamaturu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 
-        /* --- NAVIGATION --- */
-        nav {
-            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-            height: 75px; padding: 0 5%;
-            display: flex; align-items: center; justify-content: space-between;
-            background: #ffffff;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-        .logo { 
-            font-family: "Syne", sans-serif; font-size: 1.4rem; font-weight: 800; 
-            color: #1a7a4a; text-decoration: none; 
-        }
-        .logo span { color: #c4813a; }
-        
-        .nav-links { display: none; gap: 20px; }
-        @media(min-width: 1024px) { .nav-links { display: flex; } }
-        
-        .nav-links a { 
-            text-decoration: none; color: #1a2a1e; font-weight: 700; font-size: 0.9rem; 
-            padding: 8px 12px; border-radius: 8px; transition: 0.3s;
-        }
-        .nav-links a:hover { background: #e8f7f0; color: #1a7a4a; }
-        .nav-links a.active { background: #1a7a4a; color: #fff; }
+<style>
+:root{--g:#1a7a4a;--g2:#22a060;--g3:#b6f0d3;--navy:#0d1f2d;--earth:#c4813a;--bg:#f7f9f4;--white:#fff;--tx:#1a2a1e;--mu:#6b7f72;--red:#e05252;--sh:0 2px 16px rgba(26,122,74,.09);--r:16px;--px:clamp(16px,5vw,80px)}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--tx);line-height:1.6}
+h1,h2,h3,h4{font-family:'Syne',sans-serif}
 
-        .points-pill {
-            background: #1a7a4a; color: #fff; padding: 6px 16px; 
-            border-radius: 50px; font-weight: 700; font-size: 0.9rem;
-        }
+/* Navigation */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:64px;padding:0 var(--px);display:flex;align-items:center;justify-content:space-between;background:rgba(247,249,244,.97);backdrop-filter:blur(12px);border-bottom:1px solid rgba(0,0,0,.05)}
+.logo{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;color:var(--g);text-decoration:none}
+.logo b{color:var(--earth)}
+.nav-links{display:none;gap:15px}@media(min-width:900px){.nav-links{display:flex}}
+.nav-links a{text-decoration:none;color:var(--tx);font-size:0.85rem;font-weight:600}
 
-        /* --- HERO SECTION --- */
-        .hero {
-            background-color: #0d1f2d; color: #ffffff;
-            padding: 140px 5% 80px 5%; /* Top padding ensures content isn't under nav */
-            display: flex; flex-wrap: wrap; align-items: center; 
-            justify-content: space-between; gap: 40px;
-        }
-        .hero-content { flex: 1; min-width: 300px; }
-        .hero-content h1 { font-family: "Syne"; font-size: clamp(2.2rem, 5vw, 3.5rem); margin-bottom: 20px; }
-        .hero-content p { font-size: 1.1rem; opacity: 0.8; max-width: 500px; margin-bottom: 30px; }
+/* Layout */
+.ph{padding:calc(64px + 50px) var(--px) 40px; background:linear-gradient(135deg, #eef7f2, var(--bg))}
+.main-content{max-width:1100px; margin:0 auto; padding:40px var(--px); display:grid; grid-template-columns:1fr; gap:30px}
+@media(min-width:900px){.main-content{grid-template-columns:1.6fr 1fr}}
 
-        .balance-card {
-            background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
-            padding: 40px; border-radius: 24px; text-align: center;
-            backdrop-filter: blur(10px); min-width: 280px;
-        }
-        .balance-card span { text-transform: uppercase; font-size: 0.7rem; letter-spacing: 2px; opacity: 0.6; }
-        .balance-val { font-family: "Syne"; font-size: 4.5rem; font-weight: 800; color: #f5a623; display: block; }
+/* Components */
+.card{background:var(--white); border-radius:var(--r); padding:30px; box-shadow:var(--sh)}
+.input-group{margin-bottom:20px}
+label{display:block; font-size:0.85rem; font-weight:700; margin-bottom:8px}
+input, select, textarea{width:100%; padding:12px; border:1.5px solid #dce4e0; border-radius:10px; background:var(--bg); outline:none; font-family:inherit}
+input:focus{border-color:var(--g)}
 
-        /* --- REWARDS SECTION --- */
-        .rewards { padding: 80px 5%; max-width: 1200px; margin: 0 auto; width: 100%; }
-        .rewards h2 { font-family: "Syne"; font-size: 2.2rem; text-align: center; margin-bottom: 50px; }
-        
-        .reward-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;
-        }
-        .reward-card {
-            background: #fff; padding: 35px; border-radius: 20px; 
-            border: 1px solid #eee; transition: 0.3s ease;
-        }
-        .reward-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.05); }
-        .reward-icon { font-size: 2.5rem; margin-bottom: 20px; display: block; }
-        .reward-card h3 { font-family: "Syne"; margin-bottom: 12px; }
-        .reward-card p { color: #6b7f72; font-size: 0.95rem; margin-bottom: 25px; }
-        
-        .btn-claim {
-            background: #1a7a4a; color: #fff; border: none; padding: 12px 20px; 
-            border-radius: 10px; font-weight: 700; cursor: pointer; width: 100%; transition: 0.2s;
-        }
-        .btn-claim:hover { background: #22a060; }
-        .btn-claim:disabled { background: #ccc; cursor: not-allowed; }
+.upload-zone{border:2px dashed #b6f0d3; padding:30px; text-align:center; border-radius:12px; cursor:pointer; transition:0.2s}
+.upload-zone:hover{background:#f0faf5; border-color:var(--g)}
+.preview-grid{display:flex; gap:10px; margin-top:15px}
+.thumb{width:60px; height:60px; border-radius:8px; object-fit:cover; border:2px solid var(--g3)}
 
-        /* --- FOOTER --- */
-        footer { background: #0d1f2d; color: #fff; padding: 60px 5% 30px 5%; margin-top: auto; }
-        .footer-grid { 
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
-            gap: 40px; max-width: 1200px; margin: 0 auto; 
-        }
-        .footer-col h4 { color: #b6f0d3; margin-bottom: 20px; text-transform: uppercase; font-size: 0.8rem; }
-        .footer-col a { display: block; color: rgba(255,255,255,0.6); text-decoration: none; margin-bottom: 12px; font-size: 0.9rem; }
-        .footer-col a:hover { color: #fff; }
-    </style>
+.btn-primary{width:100%; padding:15px; background:var(--g); color:white; border:none; border-radius:50px; font-weight:700; cursor:pointer; transition:0.3s}
+.btn-primary:disabled{opacity:0.6; cursor:not-allowed}
+
+/* AI Result Box */
+#ai-box{display:none; background:#f0f8ff; border:1px solid #cce5ff; padding:20px; border-radius:12px; margin-top:20px}
+.chip{display:inline-block; padding:4px 12px; border-radius:20px; font-size:0.75rem; font-weight:700; margin-right:5px; background:var(--g3); color:var(--g)}
+
+/* Toast Notification */
+#toast-container{position:fixed; bottom:20px; left:50%; transform:translateX(-50%); z-index:9999}
+.toast{background:var(--navy); color:white; padding:12px 25px; border-radius:50px; margin-top:10px; font-size:0.9rem; animation:slideUp 0.4s ease forwards}
+@keyframes slideUp{from{transform:translateY(20px); opacity:0} to{transform:translateY(0); opacity:1}}
+</style>
 </head>
 <body>
 
-    <nav>
-        <a href="index.html" class="logo">Eco<span>Damaturu</span></a>
-        <div class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="report.html">Report Issue</a>
-            <a href="map.html">Live Map</a>
-            <a href="education.html">Education</a>
-            <a href="ecopoints.html" class="active">🏆 EcoPoints</a>
-        </div>
-        <div class="points-pill">🌱 <span id="nav-pts">0</span></div>
-    </nav>
+<nav>
+  <a href="index.html" class="logo">Eco<b>Damaturu</b></a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="education.html">Education</a>
+    <a href="report.html" style="color:var(--g)">Report Issue</a>
+  </div>
+  <div id="pts-badge" style="background:var(--g); color:white; padding:5px 15px; border-radius:50px; font-size:0.8rem; font-weight:700">
+    🌱 <span id="pts-count">0</span> EcoPoints
+  </div>
+</nav>
 
-    <header class="hero">
-        <div class="hero-content">
-            <h1>EcoPoints<br><span style="color: #b6f0d3;">Dashboard</span></h1>
-            <p>Every environmental report you submit contributes to a cleaner Damaturu. Accumulate points and redeem them for local benefits.</p>
-        </div>
-        <div class="balance-card">
-            <span>Total Balance</span>
-            <strong class="balance-val" id="hero-pts">0</strong>
-            <span>Points Available</span>
-        </div>
-    </header>
+<div class="ph">
+  <h1 style="font-size:2.5rem; margin-bottom:10px">Report an Issue</h1>
+  <p style="color:var(--mu); max-width:500px">Your report helps keep Damaturu clean. Upload a photo and let our AI route it to the right department.</p>
+</div>
 
-    <section class="rewards">
-        <h2>Redeem Your Rewards</h2>
-        <div class="reward-grid">
-            <div class="reward-card">
-                <span class="reward-icon">📱</span>
-                <h3>1GB Data Bundle</h3>
-                <p>Instant mobile data top-up for MTN, Airtel, or Glo networks.</p>
-                <div style="font-weight: 800; color: #c4813a; margin-bottom: 15px;">500 EcoPoints</div>
-                <button class="btn-claim" onclick="claimReward(500, '1GB Data Bundle')">Redeem Now</button>
-            </div>
-            <div class="reward-card">
-                <span class="reward-icon">🛒</span>
-                <h3>Market Voucher</h3>
-                <p>N1,000 discount voucher for participating shops in Damaturu Market.</p>
-                <div style="font-weight: 800; color: #c4813a; margin-bottom: 15px;">1,200 EcoPoints</div>
-                <button class="btn-claim" onclick="claimReward(1200, 'Market Voucher')">Redeem Now</button>
-            </div>
-            <div class="reward-card">
-                <span class="reward-icon">🎖️</span>
-                <h3>Eco-Warrior Badge</h3>
-                <p>Official digital certificate and social media badge of honor.</p>
-                <div style="font-weight: 800; color: #c4813a; margin-bottom: 15px;">2,000 EcoPoints</div>
-                <button class="btn-claim" onclick="claimReward(2000, 'Eco-Warrior Badge')">Redeem Now</button>
-            </div>
-        </div>
-    </section>
+<div class="main-content">
+  <div class="card">
+    <div class="input-group">
+      <label>Full Name</label>
+      <input type="text" id="user-name" placeholder="Ibrahim Sule">
+    </div>
+    
+    <div class="input-group">
+      <label>Issue Category</label>
+      <select id="issue-type" onchange="runAISimulation()">
+        <option value="">Select Category</option>
+        <option value="waste">🗑️ Illegal Dumping</option>
+        <option value="flood">🌊 Active Flooding</option>
+        <option value="drain">🏗️ Blocked Drainage</option>
+      </select>
+    </div>
 
-    <footer>
-        <div class="footer-grid">
-            <div class="footer-col">
-                <div class="logo" style="color:#fff; margin-bottom: 15px;">Eco<span>Damaturu</span></div>
-                <p style="color:rgba(255,255,255,0.4); font-size: 0.85rem;">Protecting our environment with smart technology.</p>
-            </div>
-            <div class="footer-col">
-                <h4>Platform</h4>
-                <a href="report.html">Report Issue</a>
-                <a href="map.html">Live Map</a>
-                <a href="education.html">Education</a>
-            </div>
-            <div class="footer-col">
-                <h4>Support</h4>
-                <a href="contact.html">Contact Us</a>
-                <a href="#">Privacy Policy</a>
-                <a href="#">LGA Portal</a>
-            </div>
-        </div>
-    </footer>
+    <div class="input-group">
+      <label>Description</label>
+      <textarea id="issue-desc" placeholder="Describe the location and severity..."></textarea>
+    </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Load current points from localStorage
-            const points = parseInt(localStorage.getItem('ecoPoints')) || 0;
-            
-            // Update UI
-            document.getElementById('nav-pts').innerText = points;
-            document.getElementById('hero-pts').innerText = points;
+    <div class="input-group">
+      <label>Upload Proof</label>
+      <div class="upload-zone" onclick="document.getElementById('file-input').click()">
+        <input type="file" id="file-input" hidden onchange="handleFiles(this.files)">
+        <span style="font-size:1.5rem">📷</span><br>Click to Upload Photo
+      </div>
+      <div id="preview-area" class="preview-grid"></div>
+    </div>
 
-            // Check which buttons should be disabled
-            const buttons = document.querySelectorAll('.btn-claim');
-            buttons.forEach(btn => {
-                // If this is a real app, you'd check points here
-                // For now, they stay active for testing
-            });
-        });
+    <div class="input-group">
+      <button class="btn-primary" id="gps-btn" onclick="captureGPS()">📍 Capture GPS Location</button>
+      <p id="gps-status" style="font-size:0.75rem; color:var(--mu); margin-top:5px">Location not captured</p>
+    </div>
 
-        function claimReward(cost, name) {
-            let currentPoints = parseInt(localStorage.getItem('ecoPoints')) || 0;
-            
-            if (currentPoints >= cost) {
-                currentPoints -= cost;
-                localStorage.setItem('ecoPoints', currentPoints);
-                alert(`Success! You have redeemed the ${name}. Check your email/SMS for details.`);
-                location.reload(); // Refresh to update points
-            } else {
-                alert(`Insufficient Points! You need ${cost - currentPoints} more points to claim this.`);
-            }
-        }
-    </script>
+    <div id="ai-box">
+      <div style="font-weight:800; color:var(--g); font-size:0.8rem; margin-bottom:10px">🤖 AI ANALYSIS READY</div>
+      <p id="ai-rec" style="font-size:0.85rem; margin-bottom:10px">Identifying issue...</p>
+      <div id="ai-chips"></div>
+    </div>
+
+    <button class="btn-primary" style="margin-top:20px" id="submit-btn" onclick="submitReport()">Submit Report & Earn 50 Points</button>
+  </div>
+
+  <div>
+    <div class="card" style="margin-bottom:20px; background:var(--navy); color:white">
+      <h4>How it works</h4>
+      <p style="font-size:0.85rem; opacity:0.8; margin-top:10px">Your report is automatically verified using GPS and AI. Verified reports earn EcoPoints which can be redeemed for community benefits.</p>
+    </div>
+    
+    <div class="card">
+      <h4 style="margin-bottom:15px">Recent Activity</h4>
+      <div id="history-list" style="font-size:0.85rem">
+        <p style="color:var(--mu)">No recent reports found.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="toast-container"></div>
+
+<script>
+let currentGPS = null;
+let points = parseInt(localStorage.getItem('ecoPoints')) || 0;
+
+// Update Points on Load
+document.getElementById('pts-count').textContent = points;
+
+function showToast(msg) {
+  const t = document.createElement('div');
+  t.className = 'toast';
+  t.textContent = msg;
+  document.getElementById('toast-container').appendChild(t);
+  setTimeout(() => t.remove(), 3000);
+}
+
+function handleFiles(files) {
+  const area = document.getElementById('preview-area');
+  area.innerHTML = "";
+  Array.from(files).forEach(file => {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const img = document.createElement('img');
+      img.src = e.target.result;
+      img.className = "thumb";
+      area.appendChild(img);
+    };
+    reader.readAsDataURL(file);
+  });
+  runAISimulation();
+}
+
+function captureGPS() {
+  const btn = document.getElementById('gps-btn');
+  const status = document.getElementById('gps-status');
+  btn.textContent = "🛰️ Connecting to Satellites...";
+  
+  if(navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition((pos) => {
+      currentGPS = { lat: pos.coords.latitude, lng: pos.coords.longitude };
+      status.textContent = `📍 Location Verified: ${currentGPS.lat.toFixed(4)}, ${currentGPS.lng.toFixed(4)}`;
+      btn.textContent = "✅ Location Secured";
+      btn.style.background = "#22a060";
+      showToast("GPS Location Captured");
+    }, () => {
+      status.textContent = "📍 Fallback: Damaturu Central (11.747, 11.961)";
+      currentGPS = { lat: 11.747, lng: 11.961 };
+      btn.textContent = "✅ Location Set";
+    });
+  }
+}
+
+function runAISimulation() {
+  const type = document.getElementById('issue-type').value;
+  if(!type) return;
+
+  const box = document.getElementById('ai-box');
+  const rec = document.getElementById('ai-rec');
+  const chips = document.getElementById('ai-chips');
+
+  box.style.display = "block";
+  rec.textContent = "AI is scanning your report...";
+  chips.innerHTML = "";
+
+  setTimeout(() => {
+    const data = {
+      waste: { r: "Detected Illegal Waste Dump. Routing to YOSEPA clearance team.", u: "High", c: 98 },
+      flood: { r: "Active Waterlogging. Alerting NEMA/SEMA emergency units.", u: "Critical", c: 95 },
+      drain: { r: "Blocked infrastructure. Notifying Public Works Dept.", u: "Medium", c: 92 }
+    }[type];
+
+    rec.textContent = data.r;
+    chips.innerHTML = `
+      <span class="chip">⚡ Urgency: ${data.u}</span>
+      <span class="chip">🎯 Confidence: ${data.c}%</span>
+    `;
+  }, 1200);
+}
+
+function submitReport() {
+  const name = document.getElementById('user-name').value;
+  const type = document.getElementById('issue-type').value;
+
+  if(!name || !type || !currentGPS) {
+    showToast("⚠️ Please complete the form and GPS capture");
+    return;
+  }
+
+  const btn = document.getElementById('submit-btn');
+  btn.disabled = true;
+  btn.textContent = "Processing Security Handshake...";
+
+  setTimeout(() => {
+    points += 50;
+    localStorage.setItem('ecoPoints', points);
+    document.getElementById('pts-count').textContent = points;
+    
+    showToast("✅ Report Submitted! +50 Points");
+    btn.textContent = "Submit Another Report";
+    btn.disabled = false;
+    
+    // Simple History Add
+    const hist = document.getElementById('history-list');
+    const item = document.createElement('div');
+    item.style = "padding:10px 0; border-bottom:1px solid #eee";
+    item.innerHTML = `<strong>${type.toUpperCase()}</strong><br><small>Status: Pending Review</small>`;
+    hist.prepend(item);
+  }, 2000);
+}
+</script>
 </body>
 </html>
