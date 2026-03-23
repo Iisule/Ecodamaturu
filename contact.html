@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Contact — EcoDamaturu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root{--g:#1a7a4a;--g2:#22a060;--g3:#b6f0d3;--navy:#0d1f2d;--earth:#c4813a;--bg:#f7f9f4;--white:#fff;--tx:#1a2a1e;--mu:#6b7f72;--red:#e05252;--blue:#3a7abf;--sh:0 2px 16px rgba(26,122,74,.09);--sh2:0 8px 32px rgba(26,122,74,.14);--r:16px;--rs:10px;--px:clamp(16px,5vw,80px)}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--tx);overflow-x:hidden;min-width:320px}
+h1,h2,h3,h4{font-family:'Syne',sans-serif;line-height:1.15}
+img{max-width:100%;display:block}
+#pb{position:fixed;top:0;left:0;height:3px;background:var(--g);z-index:9999;width:0;transition:width .1s}
+#tw{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:9999;display:flex;flex-direction:column;align-items:center;gap:8px;pointer-events:none}
+.t{background:var(--navy);color:#fff;padding:10px 22px;border-radius:50px;font-size:.875rem;font-weight:500;opacity:0;transform:translateY(10px);transition:.3s;white-space:nowrap;max-width:calc(100vw - 32px)}
+.t.s{opacity:1;transform:none}.t.ok{background:var(--g)}.t.err{background:var(--red)}.t.i{background:var(--blue)}
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:64px;padding:0 var(--px);display:flex;align-items:center;justify-content:space-between;gap:12px;background:rgba(247,249,244,.97);backdrop-filter:blur(16px);border-bottom:1px solid rgba(26,122,74,.08);transition:box-shadow .3s}
+nav.sc{box-shadow:0 2px 20px rgba(13,31,45,.10)}
+.logo{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;color:var(--g);text-decoration:none;flex-shrink:0}
+.logo b{color:var(--earth);font-weight:800}
+.nl{display:none;align-items:center;gap:2px}
+@media(min-width:900px){.nl{display:flex}}
+.nl a{font-size:.82rem;font-weight:500;color:var(--tx);text-decoration:none;padding:7px 11px;border-radius:8px;transition:.18s;white-space:nowrap}
+.nl a:hover,.nl a.cur{color:var(--g);background:rgba(26,122,74,.07);font-weight:600}
+.nl a.cta{background:var(--g);color:#fff!important;border-radius:50px;padding:7px 16px;font-weight:600;margin-left:4px}
+.nl a.cta:hover{background:var(--g2)}
+.nr{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.lbtn{background:none;border:1.5px solid var(--g);color:var(--g);border-radius:50px;padding:5px 12px;font-size:.76rem;font-weight:600;cursor:pointer;transition:.18s;font-family:'DM Sans',sans-serif}
+.lbtn:hover{background:var(--g);color:#fff}
+.hbg{display:flex;flex-direction:column;justify-content:center;gap:5px;cursor:pointer;width:34px;height:34px;background:none;border:none;padding:4px;flex-shrink:0}
+@media(min-width:900px){.hbg{display:none}}
+.hbg span{display:block;width:22px;height:2px;background:var(--tx);border-radius:2px;transition:.3s;transform-origin:center}
+.hbg.o span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hbg.o span:nth-child(2){opacity:0}
+.hbg.o span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.drw{display:none;position:fixed;top:64px;left:0;right:0;bottom:0;z-index:998;background:var(--white);flex-direction:column;overflow-y:auto;padding:4px 0 40px;box-shadow:0 4px 40px rgba(13,31,45,.14)}
+.drw.o{display:flex}
+.drw a{font-size:1rem;font-weight:600;color:var(--tx);text-decoration:none;padding:15px var(--px);border-bottom:1px solid #f0f4f2;display:block;transition:.15s;-webkit-tap-highlight-color:transparent}
+.drw a:active{background:rgba(26,122,74,.06);color:var(--g)}
+.drw a.dcta{margin:10px var(--px) 0;background:var(--g);color:#fff;border-radius:12px;text-align:center;padding:15px 20px;border-bottom:none!important}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 26px;border-radius:50px;font-size:.92rem;font-weight:600;cursor:pointer;border:none;transition:.22s;text-decoration:none;font-family:'DM Sans',sans-serif;white-space:nowrap}
+.btng{background:var(--g);color:#fff}.btng:hover{background:var(--g2);transform:translateY(-2px);box-shadow:0 6px 20px rgba(26,122,74,.28)}
+.btno{background:transparent;color:var(--g);border:2px solid var(--g)}.btno:hover{background:var(--g);color:#fff;transform:translateY(-2px)}
+.tag{display:inline-block;background:rgba(26,122,74,.1);color:var(--g);font-size:.72rem;font-weight:700;padding:5px 13px;border-radius:20px;letter-spacing:.6px;margin-bottom:10px;text-transform:uppercase}
+.ph{background:linear-gradient(135deg,#ecf7f1,#f7f9f4);padding:calc(64px + 40px) var(--px) 48px}
+.ph-i{max-width:1100px;margin:0 auto}
+.ph h1{font-size:clamp(1.7rem,4vw,2.5rem);font-weight:800;color:var(--navy);margin-bottom:10px}
+.ph p{font-size:.97rem;color:var(--mu);max-width:540px;line-height:1.72}
+section{padding:64px var(--px)}
+.inner{max-width:1100px;margin:0 auto}
+.sec-t{font-size:clamp(1.4rem,3vw,2rem);font-weight:800;color:var(--navy);margin-bottom:12px}
+footer{background:var(--navy);color:#fff;padding:48px var(--px) 24px}
+.ffg{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-bottom:36px}
+@media(min-width:700px){.ffg{grid-template-columns:2fr 1fr 1fr 1fr}}
+.fb2 p{font-size:.84rem;color:rgba(255,255,255,.42);line-height:1.7;margin-top:8px;max-width:230px}
+.fco h5{font-size:.84rem;font-weight:700;margin-bottom:12px;color:rgba(255,255,255,.78)}
+.fco a{display:block;font-size:.82rem;color:rgba(255,255,255,.4);text-decoration:none;margin-bottom:7px;cursor:pointer;transition:.18s}
+.fco a:hover{color:var(--g3)}
+.fbt{border-top:1px solid rgba(255,255,255,.08);padding-top:18px;display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;font-size:.77rem;color:rgba(255,255,255,.28)}
+#wafab{position:fixed;bottom:24px;right:20px;z-index:901}
+.wabtn{width:54px;height:54px;border-radius:50%;background:#25D366;color:#fff;border:none;font-size:1.5rem;cursor:pointer;box-shadow:0 4px 18px rgba(37,211,102,.4);transition:.22s;display:flex;align-items:center;justify-content:center}
+.wabtn:hover{transform:scale(1.08)}
+.rv{opacity:0;transform:translateY(20px);transition:.55s ease}
+.rv.in{opacity:1;transform:none}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}
+@media(min-width:860px){#cg{grid-template-columns:1fr 1.2fr!important}}</style>
+</head>
+<body>
+<div id="pb"></div>
+<div id="tw"></div>
+<nav id="nav">
+  <a class="logo" href="index.html">Eco<b>Damaturu</b></a>
+  <div class="nl" id="nl">
+    <a href="index.html">Home</a>
+    <a href="features.html">Features</a>
+    <a href="report.html">Report Issue</a>
+    <a href="map.html">Live Map</a>
+    <a href="flood.html">Flood Alerts</a>
+    <a href="calendar.html">Calendar</a>
+    <a href="education.html">Education</a>
+    <a href="contact.html" class="cur">Contact</a>
+    <a href="ecopoints.html" class="cur">EcoPoints</a>
+  </div>
+  <div class="nr">
+    <button class="lbtn">🌍 EN</button>
+    <button class="hbg" id="hbg" onclick="toggleDrw()"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="drw" id="drw">
+  <a href="index.html">🏠 Home</a>
+  <a href="features.html">⚡ Features</a>
+  <a href="report.html">📸 Report an Issue</a>
+  <a href="map.html">🗺️ Live Map</a>
+  <a href="flood.html">🌊 Flood Alerts</a>
+  <a href="calendar.html">📅 Calendar</a>
+  <a href="education.html">📚 Education</a>
+  <a href="contact.html" class="cur">📞 Contact</a>
+  <a href="report.html" class="dcta">📸 Report an Issue Now</a>
+</div>
+
+<div class="ph"><div class="ph-i rv"><div class="tag">Get in Touch</div><h1>Contact & Support</h1><p>We're here to help Damaturu residents and city officials. Reach us through any of the channels below — we respond fast.</p></div></div>
+<section style="background:var(--white)">
+  <div class="inner">
+    <div style="display:grid;grid-template-columns:1fr;gap:28px;max-width:1000px;margin:0 auto" id="cg">
+      <div style="display:grid;grid-template-columns:1fr;gap:14px" id="channels"></div>
+      <div style="background:var(--bg);border-radius:var(--r);padding:28px;box-shadow:var(--sh)">
+        <h3 style="font-size:1.2rem;font-weight:800;color:var(--navy);margin-bottom:20px">✉️ Send a Message</h3>
+        <div style="margin-bottom:14px"><label style="display:block;font-size:.83rem;font-weight:600;margin-bottom:5px">Name</label><input id="cn" type="text" placeholder="Your full name" style="width:100%;padding:10px 14px;border:1.5px solid #dde8e2;border-radius:var(--rs);font-size:.9rem;outline:none;font-family:'DM Sans',sans-serif;transition:.2s;background:var(--bg)" onfocus="this.style.borderColor='var(--g)'" onblur="this.style.borderColor='#dde8e2'"></div>
+        <div style="margin-bottom:14px"><label style="display:block;font-size:.83rem;font-weight:600;margin-bottom:5px">Email or Phone</label><input id="ce" type="text" placeholder="your@email.com or +234..." style="width:100%;padding:10px 14px;border:1.5px solid #dde8e2;border-radius:var(--rs);font-size:.9rem;outline:none;font-family:'DM Sans',sans-serif;transition:.2s;background:var(--bg)" onfocus="this.style.borderColor='var(--g)'" onblur="this.style.borderColor='#dde8e2'"></div>
+        <div style="margin-bottom:14px"><label style="display:block;font-size:.83rem;font-weight:600;margin-bottom:5px">Subject</label><select id="cs" style="width:100%;padding:10px 14px;border:1.5px solid #dde8e2;border-radius:var(--rs);font-size:.9rem;outline:none;font-family:'DM Sans',sans-serif;background:var(--bg)"><option>General Enquiry</option><option>Report a Problem</option><option>EcoPoints Help</option><option>Flood Alert Issue</option><option>Partnership / NGO</option><option>Media / Press</option></select></div>
+        <div style="margin-bottom:18px"><label style="display:block;font-size:.83rem;font-weight:600;margin-bottom:5px">Message</label><textarea id="cm" placeholder="How can we help you?" style="width:100%;padding:10px 14px;border:1.5px solid #dde8e2;border-radius:var(--rs);font-size:.9rem;outline:none;font-family:'DM Sans',sans-serif;resize:vertical;min-height:100px;transition:.2s;background:var(--bg)" onfocus="this.style.borderColor='var(--g)'" onblur="this.style.borderColor='#dde8e2'"></textarea></div>
+        <button onclick="sendMsg()" style="width:100%;padding:13px;background:var(--g);color:#fff;border:none;border-radius:50px;font-size:.95rem;font-weight:700;cursor:pointer;transition:.2s;font-family:'DM Sans',sans-serif" onmouseover="this.style.background='var(--g2)'" onmouseout="this.style.background='var(--g)'">Send Message</button>
+      </div>
+    </div>
+  </div>
+</section>
+<section style="background:var(--bg)">
+  <div class="inner" style="text-align:center">
+    <div class="tag rv">Emergency Contacts</div>
+    <h2 class="rv d1" style="font-size:clamp(1.3rem,3vw,1.8rem);font-weight:800;color:var(--navy);margin-bottom:24px">Important Numbers</h2>
+    <div style="display:grid;grid-template-columns:1fr;gap:14px;max-width:700px;margin:0 auto" id="emg"></div>
+  </div>
+</section>
+<footer>
+  <div class="ffg">
+    <div class="fb2"><div style="font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:800;color:#fff">Eco<span style="color:#c4813a">Damaturu</span></div><p>AI-powered environmental platform for Damaturu, Yobe State, Nigeria.</p></div>
+    <div class="fco"><h5>Pages</h5><a href="index.html">Home</a><a href="features.html">Features</a><a href="report.html">Report Issue</a><a href="map.html">Live Map</a></div>
+    <div class="fco"><h5>More</h5><a href="flood.html">Flood Alerts</a><a href="calendar.html">Calendar</a><a href="education.html">Education</a><a href="contact.html">Contact</a></div>
+    <div class="fco"><h5>Connect</h5><a onclick="wa()">WhatsApp</a><a>Twitter / X</a><a>Facebook</a><a>Instagram</a></div>
+  </div>
+  <div class="fbt"><span>© 2026 EcoDamaturu. Protecting Damaturu with Technology.</span><span>Built for Yobe State, Nigeria 🇳🇬</span></div>
+</footer>
+<div id="wafab"><button class="wabtn" onclick="wa()">💬</button></div>
+<script>
+function toggleDrw(){const d=document.getElementById('drw'),b=document.getElementById('hbg');const o=d.classList.contains('o');d.classList.toggle('o',!o);b.classList.toggle('o',!o)}
+document.addEventListener('click',e=>{const d=document.getElementById('drw'),b=document.getElementById('hbg');if(d&&d.classList.contains('o')&&!d.contains(e.target)&&b&&!b.contains(e.target)){d.classList.remove('o');b.classList.remove('o')}});
+window.addEventListener('scroll',()=>{document.getElementById('nav').classList.toggle('sc',window.scrollY>60);const p=document.getElementById('pb');if(p)p.style.width=(window.scrollY/(document.body.scrollHeight-window.innerHeight)*100)+'%';document.querySelectorAll('.rv:not(.in)').forEach(el=>{if(el.getBoundingClientRect().top<window.innerHeight-60)el.classList.add('in')})});
+function toast(m,t='i'){const el=document.createElement('div');el.className='t '+t;el.textContent=m;const w=document.getElementById('tw');if(w){w.appendChild(el);requestAnimationFrame(()=>requestAnimationFrame(()=>el.classList.add('s')));setTimeout(()=>{el.classList.remove('s');setTimeout(()=>el.remove(),400)},3000)}}
+function wa(){window.open('https://wa.me/2349034567890?text='+encodeURIComponent('Hi EcoDamaturu! I need help.'),'_blank')}
+function initRv(){setTimeout(()=>document.querySelectorAll('.rv').forEach(el=>{if(el.getBoundingClientRect().top<window.innerHeight)el.classList.add('in')}),100)}
+
+const channels=[
+  {icon:'💬',bg:'#25D366',title:'WhatsApp Support',sub:'+234 903 456 7890',note:'Usually replies within 5 minutes',fn:"wa()"},
+  {icon:'✉️',bg:'#3a7abf',title:'Email',sub:'info@ecodamaturu.ng',note:'24-hour response time',fn:"window.location.href='mailto:info@ecodamaturu.ng'"},
+  {icon:'🤖',bg:'#1a7a4a',title:'EcoBot AI Chat',sub:'Available 24/7 in 6 languages',note:'Get instant answers to common questions',fn:"window.location.href='index.html'"},
+  {icon:'📞',bg:'#c4813a',title:'Hotline',sub:'0800-ECO-DAMA',note:'Monday–Saturday 7am–7pm',fn:""}
+];
+const emg=[
+  {name:'NEMA Emergency Line',num:'0800-CALLNEMA',desc:'National Emergency Management Agency'},
+  {name:'Yobe State SEMA',num:'07060870000',desc:'State Emergency Management Agency'},
+  {name:'Damaturu LGA',num:'+234 74 522 100',desc:'Local Government Authority'},
+  {name:'Nigeria Fire Service',num:'01-7944936',desc:'Fire and rescue emergencies'}
+];
+document.addEventListener('DOMContentLoaded',()=>{
+  initRv();
+  document.getElementById('channels').innerHTML=channels.map((c,i)=>`
+    <div class="rv d${(i%3)+1}" onclick="${c.fn}" style="display:flex;align-items:center;gap:14px;background:var(--bg);border-radius:var(--rs);padding:16px 18px;cursor:${c.fn?'pointer':'default'};transition:.18s" onmouseover="this.style.background='#e8f4ee'" onmouseout="this.style.background='var(--bg)'">
+      <div style="width:46px;height:46px;border-radius:12px;background:${c.bg};color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0">${c.icon}</div>
+      <div><div style="font-weight:700;font-size:.92rem;color:var(--navy)">${c.title}</div><div style="font-size:.82rem;color:var(--tx);margin-top:1px">${c.sub}</div><div style="font-size:.76rem;color:var(--mu);margin-top:2px">${c.note}</div></div>
+    </div>`).join('');
+  document.getElementById('emg').innerHTML=emg.map(e=>`
+    <div style="background:var(--white);border-radius:var(--rs);padding:16px 20px;box-shadow:var(--sh);display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap" class="rv">
+      <div><div style="font-weight:700;color:var(--navy)">${e.name}</div><div style="font-size:.8rem;color:var(--mu)">${e.desc}</div></div>
+      <a href="tel:${e.num.replace(/[^\d+]/g,'')}" style="font-family:'Syne',sans-serif;font-weight:800;color:var(--g);font-size:1rem;text-decoration:none">${e.num}</a>
+    </div>`).join('');
+});
+function sendMsg(){
+  const n=document.getElementById('cn').value.trim();
+  const e=document.getElementById('ce').value.trim();
+  const m=document.getElementById('cm').value.trim();
+  if(!n||!e||!m){toast('Please fill in all required fields','err');return}
+  toast('✅ Message sent! We\'ll reply within 24 hours.','ok');
+  document.getElementById('cn').value='';document.getElementById('ce').value='';document.getElementById('cm').value='';
+}
+
+document.addEventListener('DOMContentLoaded',initRv);
+</script>
+</body>
+</html>

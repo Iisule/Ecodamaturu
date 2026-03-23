@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Report an Issue — EcoDamaturu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root{--g:#1a7a4a;--g2:#22a060;--g3:#b6f0d3;--navy:#0d1f2d;--earth:#c4813a;--bg:#f7f9f4;--white:#fff;--tx:#1a2a1e;--mu:#6b7f72;--red:#e05252;--blue:#3a7abf;--sh:0 2px 16px rgba(26,122,74,.09);--sh2:0 8px 32px rgba(26,122,74,.14);--r:16px;--rs:10px;--px:clamp(16px,5vw,80px)}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--tx);overflow-x:hidden;min-width:320px}
+h1,h2,h3,h4{font-family:'Syne',sans-serif;line-height:1.15}
+img{max-width:100%;display:block}
+#pb{position:fixed;top:0;left:0;height:3px;background:var(--g);z-index:9999;width:0;transition:width .1s}
+#tw{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:9999;display:flex;flex-direction:column;align-items:center;gap:8px;pointer-events:none}
+.t{background:var(--navy);color:#fff;padding:10px 22px;border-radius:50px;font-size:.875rem;font-weight:500;opacity:0;transform:translateY(10px);transition:.3s;white-space:nowrap;max-width:calc(100vw - 32px)}
+.t.s{opacity:1;transform:none}.t.ok{background:var(--g)}.t.err{background:var(--red)}.t.i{background:var(--blue)}
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:64px;padding:0 var(--px);display:flex;align-items:center;justify-content:space-between;gap:12px;background:rgba(247,249,244,.97);backdrop-filter:blur(16px);border-bottom:1px solid rgba(26,122,74,.08);transition:box-shadow .3s}
+nav.sc{box-shadow:0 2px 20px rgba(13,31,45,.10)}
+.logo{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;color:var(--g);text-decoration:none;flex-shrink:0}
+.logo b{color:var(--earth);font-weight:800}
+.nl{display:none;align-items:center;gap:2px}
+@media(min-width:900px){.nl{display:flex}}
+.nl a{font-size:.82rem;font-weight:500;color:var(--tx);text-decoration:none;padding:7px 11px;border-radius:8px;transition:.18s;white-space:nowrap}
+.nl a:hover,.nl a.cur{color:var(--g);background:rgba(26,122,74,.07);font-weight:600}
+.nl a.cta{background:var(--g);color:#fff!important;border-radius:50px;padding:7px 16px;font-weight:600;margin-left:4px}
+.nl a.cta:hover{background:var(--g2)}
+.nr{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.lbtn{background:none;border:1.5px solid var(--g);color:var(--g);border-radius:50px;padding:5px 12px;font-size:.76rem;font-weight:600;cursor:pointer;transition:.18s;font-family:'DM Sans',sans-serif}
+.lbtn:hover{background:var(--g);color:#fff}
+.hbg{display:flex;flex-direction:column;justify-content:center;gap:5px;cursor:pointer;width:34px;height:34px;background:none;border:none;padding:4px;flex-shrink:0}
+@media(min-width:900px){.hbg{display:none}}
+.hbg span{display:block;width:22px;height:2px;background:var(--tx);border-radius:2px;transition:.3s;transform-origin:center}
+.hbg.o span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hbg.o span:nth-child(2){opacity:0}
+.hbg.o span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.drw{display:none;position:fixed;top:64px;left:0;right:0;bottom:0;z-index:998;background:var(--white);flex-direction:column;overflow-y:auto;padding:4px 0 40px;box-shadow:0 4px 40px rgba(13,31,45,.14)}
+.drw.o{display:flex}
+.drw a{font-size:1rem;font-weight:600;color:var(--tx);text-decoration:none;padding:15px var(--px);border-bottom:1px solid #f0f4f2;display:block;transition:.15s;-webkit-tap-highlight-color:transparent}
+.drw a:active{background:rgba(26,122,74,.06);color:var(--g)}
+.drw a.dcta{margin:10px var(--px) 0;background:var(--g);color:#fff;border-radius:12px;text-align:center;padding:15px 20px;border-bottom:none!important}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 26px;border-radius:50px;font-size:.92rem;font-weight:600;cursor:pointer;border:none;transition:.22s;text-decoration:none;font-family:'DM Sans',sans-serif;white-space:nowrap}
+.btng{background:var(--g);color:#fff}.btng:hover{background:var(--g2);transform:translateY(-2px);box-shadow:0 6px 20px rgba(26,122,74,.28)}
+.btno{background:transparent;color:var(--g);border:2px solid var(--g)}.btno:hover{background:var(--g);color:#fff;transform:translateY(-2px)}
+.tag{display:inline-block;background:rgba(26,122,74,.1);color:var(--g);font-size:.72rem;font-weight:700;padding:5px 13px;border-radius:20px;letter-spacing:.6px;margin-bottom:10px;text-transform:uppercase}
+.ph{background:linear-gradient(135deg,#ecf7f1,#f7f9f4);padding:calc(64px + 40px) var(--px) 48px}
+.ph-i{max-width:1100px;margin:0 auto}
+.ph h1{font-size:clamp(1.7rem,4vw,2.5rem);font-weight:800;color:var(--navy);margin-bottom:10px}
+.ph p{font-size:.97rem;color:var(--mu);max-width:540px;line-height:1.72}
+section{padding:64px var(--px)}
+.inner{max-width:1100px;margin:0 auto}
+.sec-t{font-size:clamp(1.4rem,3vw,2rem);font-weight:800;color:var(--navy);margin-bottom:12px}
+footer{background:var(--navy);color:#fff;padding:48px var(--px) 24px}
+.ffg{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-bottom:36px}
+@media(min-width:700px){.ffg{grid-template-columns:2fr 1fr 1fr 1fr}}
+.fb2 p{font-size:.84rem;color:rgba(255,255,255,.42);line-height:1.7;margin-top:8px;max-width:230px}
+.fco h5{font-size:.84rem;font-weight:700;margin-bottom:12px;color:rgba(255,255,255,.78)}
+.fco a{display:block;font-size:.82rem;color:rgba(255,255,255,.4);text-decoration:none;margin-bottom:7px;cursor:pointer;transition:.18s}
+.fco a:hover{color:var(--g3)}
+.fbt{border-top:1px solid rgba(255,255,255,.08);padding-top:18px;display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;font-size:.77rem;color:rgba(255,255,255,.28)}
+#wafab{position:fixed;bottom:24px;right:20px;z-index:901}
+.wabtn{width:54px;height:54px;border-radius:50%;background:#25D366;color:#fff;border:none;font-size:1.5rem;cursor:pointer;box-shadow:0 4px 18px rgba(37,211,102,.4);transition:.22s;display:flex;align-items:center;justify-content:center}
+.wabtn:hover{transform:scale(1.08)}
+.rv{opacity:0;transform:translateY(20px);transition:.55s ease}
+.rv.in{opacity:1;transform:none}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}
+
+.rf{background:var(--white);border-radius:var(--r);padding:28px;box-shadow:var(--sh)}
+.rf h3{font-size:1.25rem;font-weight:800;color:var(--navy);margin-bottom:20px}
+.fg2{margin-bottom:15px}
+.fl{display:block;font-size:.83rem;font-weight:600;color:var(--tx);margin-bottom:5px}
+.fi2,.fs,.ft{width:100%;padding:10px 14px;border:1.5px solid #dde8e2;border-radius:var(--rs);font-size:.9rem;color:var(--tx);background:var(--bg);outline:none;transition:.2s;font-family:'DM Sans',sans-serif}
+.fi2:focus,.fs:focus,.ft:focus{border-color:var(--g);background:#fff}
+.ft{resize:vertical;min-height:88px}
+.uz{border:2px dashed #bdd8c8;border-radius:var(--rs);padding:24px 16px;text-align:center;cursor:pointer;transition:.2s;background:#fafcfb}
+.uz:hover,.uz.drag{border-color:var(--g);background:rgba(26,122,74,.04)}
+.uz input{display:none}
+.prevs{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.thumb{width:68px;height:68px;border-radius:9px;object-fit:cover;border:2px solid var(--g3)}
+.gps-row{display:flex;gap:8px;align-items:stretch}
+.gv{flex:1;min-width:0;font-size:.8rem;color:var(--mu);background:var(--bg);border:1.5px solid #dde8e2;border-radius:var(--rs);padding:9px 12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.gps-btn{flex-shrink:0;padding:9px 14px;font-size:.82rem;background:transparent;color:var(--g);border:2px solid var(--g);border-radius:50px;cursor:pointer;font-weight:600;transition:.2s;white-space:nowrap;font-family:'DM Sans',sans-serif}
+.gps-btn:hover{background:var(--g);color:#fff}
+.aib{background:linear-gradient(135deg,#eef8f2,#f0f8ff);border:1.5px solid var(--g3);border-radius:var(--rs);padding:14px;margin-top:14px;display:none}
+.aib.on{display:block}
+.ait{font-size:.8rem;font-weight:700;color:var(--g);margin-bottom:7px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:7px}
+.chip{padding:4px 11px;border-radius:20px;font-size:.76rem;font-weight:600}
+.ct2{background:rgba(26,122,74,.12);color:var(--g)}.ch2{background:rgba(224,82,82,.12);color:var(--red)}.cm2{background:rgba(196,129,58,.12);color:var(--earth)}.cl2{background:rgba(58,122,191,.12);color:var(--blue)}
+.sub-btn{width:100%;margin-top:8px;padding:13px;background:var(--g);color:#fff;border:none;border-radius:50px;font-size:.95rem;font-weight:700;cursor:pointer;transition:.2s;font-family:'DM Sans',sans-serif;display:flex;align-items:center;justify-content:center;gap:8px}
+.sub-btn:hover{background:var(--g2)}
+.spin{display:inline-block;width:17px;height:17px;border:2px solid rgba(255,255,255,.35);border-top-color:#fff;border-radius:50%;animation:spin .6s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.rc{background:var(--white);border-radius:var(--r);padding:20px;box-shadow:var(--sh)}
+.ri{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid #f0f4f2}
+.ri:last-child{border-bottom:none}
+</style>
+</head>
+<body>
+<div id="pb"></div>
+<div id="tw"></div>
+<nav id="nav">
+  <a class="logo" href="index.html">Eco<b>Damaturu</b></a>
+  <div class="nl" id="nl">
+    <a href="index.html">Home</a>
+    <a href="features.html">Features</a>
+    <a href="report.html" class="cur">Report Issue</a>
+    <a href="map.html">Live Map</a>
+    <a href="flood.html">Flood Alerts</a>
+    <a href="calendar.html">Calendar</a>
+    <a href="education.html">Education</a>
+    <a href="contact.html">Contact</a>
+    <a href="ecopoints.html" class="cur">EcoPoints</a>
+      </div>
+  <div class="nr">
+    <button class="lbtn">🌍 EN</button>
+    <button class="hbg" id="hbg" onclick="toggleDrw()"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="drw" id="drw">
+  <a href="index.html">🏠 Home</a>
+  <a href="features.html">⚡ Features</a>
+  <a href="report.html" class="cur">📸 Report an Issue</a>
+  <a href="map.html">🗺️ Live Map</a>
+  <a href="flood.html">🌊 Flood Alerts</a>
+  <a href="calendar.html">📅 Calendar</a>
+  <a href="education.html">📚 Education</a>
+  <a href="contact.html">📞 Contact</a>
+  <a href="report.html" class="dcta">📸 Report an Issue Now</a>
+</div>
+
+<div class="ph"><div class="ph-i rv"><div class="tag">Submit a Report</div><h1>Report an Environmental Issue</h1><p>Take a photo, describe the problem, and let AI do the rest. Your report is routed directly to the right authorities — and you earn EcoPoints.</p></div></div>
+<section style="padding:36px var(--px) 72px">
+  <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr;gap:28px" id="main-grid">
+    <!-- FORM -->
+    <div class="rf rv">
+      <h3>📍 New Issue Report</h3>
+      <div class="fg2"><label class="fl">Your Name</label><input class="fi2" id="rn" type="text" placeholder="Enter your full name"></div>
+      <div class="fg2"><label class="fl">Phone Number</label><input class="fi2" id="rp" type="tel" placeholder="+234 ..."></div>
+      <div class="fg2"><label class="fl">Issue Type</label>
+        <select class="fs" id="rt"><option value="">Select issue type</option><option value="waste">🗑️ Illegal Waste Dumping</option><option value="flooding">🌊 Flooding / Waterlogging</option><option value="drainage">🏗️ Blocked Drainage</option><option value="other">⚠️ Other Environmental Issue</option></select>
+      </div>
+      <div class="fg2"><label class="fl">Description</label><textarea class="ft" id="rd" placeholder="Describe the issue in detail — location, severity, how long it's been there..."></textarea></div>
+      <div class="fg2">
+        <label class="fl">Upload Photos (up to 3)</label>
+        <div class="uz" id="uz" onclick="document.getElementById('ri2').click()" ondragover="dov(event)" ondrop="ddrop(event)" ondragleave="dlv(event)">
+          <input type="file" id="ri2" accept="image/*" multiple onchange="himg(event)">
+          <div style="font-size:1.8rem;margin-bottom:6px">📷</div>
+          <div style="font-size:.85rem;color:var(--mu);line-height:1.5">Tap to upload or drag & drop<br><small style="opacity:.6">JPG, PNG, WEBP — Max 3 images</small></div>
+        </div>
+        <div class="prevs" id="prevs"></div>
+      </div>
+      <div class="fg2">
+        <label class="fl">GPS Location</label>
+        <div class="gps-row"><div class="gv" id="gv">Location not captured yet</div><button class="gps-btn" id="gbtn" onclick="capGPS()">📍 Capture GPS</button></div>
+      </div>
+      <div class="aib" id="aib"><div class="ait">🤖 AI Analysis Result</div><div id="aic" style="font-size:.85rem;color:var(--tx);line-height:1.5"></div><div class="chips" id="aichips"></div></div>
+      <button class="sub-btn" id="sbtn" onclick="submit()"><span id="stxt">Submit Report</span></button>
+    </div>
+    <!-- SIDEBAR -->
+    <div style="display:flex;flex-direction:column;gap:20px">
+      <div class="rc"><h4 style="font-size:1rem;font-weight:800;color:var(--navy);margin-bottom:14px">📊 Recent Reports</h4><div id="rlist2">Loading...</div></div>
+      <div class="rc"><h4 style="font-size:1rem;font-weight:800;color:var(--navy);margin-bottom:14px">🏆 Your EcoPoints</h4>
+        <div style="display:flex;align-items:center;gap:14px"><div style="font-family:'Syne',sans-serif;font-size:2.8rem;font-weight:800;color:var(--g)" id="pts">0</div><div><div style="font-size:.88rem;font-weight:600;color:var(--navy)">EcoPoints Earned</div><div style="font-size:.78rem;color:var(--mu)">+50 per verified report</div></div></div>
+        <div style="margin-top:12px;background:var(--bg);border-radius:var(--rs);padding:10px 14px;font-size:.82rem;color:var(--mu)">Redeem for airtime, market vouchers, and community badges at any LGA office.</div>
+      </div>
+      <div class="rc" style="background:linear-gradient(135deg,#0d1f2d,#1a3a28)">
+        <h4 style="color:#fff;margin-bottom:12px">📋 How It Works</h4>
+        <div style="display:flex;flex-direction:column;gap:9px">
+          <div style="display:flex;gap:9px"><span>1️⃣</span><span style="font-size:.85rem;color:rgba(255,255,255,.72)">Fill in your name, phone and issue type</span></div>
+          <div style="display:flex;gap:9px"><span>2️⃣</span><span style="font-size:.85rem;color:rgba(255,255,255,.72)">Upload a clear photo of the issue</span></div>
+          <div style="display:flex;gap:9px"><span>3️⃣</span><span style="font-size:.85rem;color:rgba(255,255,255,.72)">Capture your GPS location</span></div>
+          <div style="display:flex;gap:9px"><span>4️⃣</span><span style="font-size:.85rem;color:rgba(255,255,255,.72)">AI analyzes and routes to the right authority</span></div>
+          <div style="display:flex;gap:9px"><span>5️⃣</span><span style="font-size:.85rem;color:rgba(255,255,255,.72)">Earn 50 EcoPoints instantly!</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<footer>
+  <div class="ffg">
+    <div class="fb2"><div style="font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:800;color:#fff">Eco<span style="color:#c4813a">Damaturu</span></div><p>AI-powered environmental platform for Damaturu, Yobe State, Nigeria.</p></div>
+    <div class="fco"><h5>Pages</h5><a href="index.html">Home</a><a href="features.html">Features</a><a href="report.html">Report Issue</a><a href="map.html">Live Map</a></div>
+    <div class="fco"><h5>More</h5><a href="flood.html">Flood Alerts</a><a href="calendar.html">Calendar</a><a href="education.html">Education</a><a href="contact.html">Contact</a></div>
+    <div class="fco"><h5>Connect</h5><a onclick="wa()">WhatsApp</a><a>Twitter / X</a><a>Facebook</a><a>Instagram</a></div>
+  </div>
+  <div class="fbt"><span>© 2025 EcoDamaturu. Protecting Damaturu with Technology.</span><span>Built for Yobe State, Nigeria 🇳🇬</span></div>
+</footer>
+<div id="wafab"><button class="wabtn" onclick="wa()">💬</button></div>
+<script>
+function toggleDrw(){const d=document.getElementById('drw'),b=document.getElementById('hbg');const o=d.classList.contains('o');d.classList.toggle('o',!o);b.classList.toggle('o',!o)}
+document.addEventListener('click',e=>{const d=document.getElementById('drw'),b=document.getElementById('hbg');if(d&&d.classList.contains('o')&&!d.contains(e.target)&&b&&!b.contains(e.target)){d.classList.remove('o');b.classList.remove('o')}});
+window.addEventListener('scroll',()=>{document.getElementById('nav').classList.toggle('sc',window.scrollY>60);const p=document.getElementById('pb');if(p)p.style.width=(window.scrollY/(document.body.scrollHeight-window.innerHeight)*100)+'%';document.querySelectorAll('.rv:not(.in)').forEach(el=>{if(el.getBoundingClientRect().top<window.innerHeight-60)el.classList.add('in')})});
+function toast(m,t='i'){const el=document.createElement('div');el.className='t '+t;el.textContent=m;const w=document.getElementById('tw');if(w){w.appendChild(el);requestAnimationFrame(()=>requestAnimationFrame(()=>el.classList.add('s')));setTimeout(()=>{el.classList.remove('s');setTimeout(()=>el.remove(),400)},3000)}}
+function wa(){window.open('https://wa.me/2349034567890?text='+encodeURIComponent('Hi EcoDamaturu! I need help.'),'_blank')}
+function initRv(){setTimeout(()=>document.querySelectorAll('.rv').forEach(el=>{if(el.getBoundingClientRect().top<window.innerHeight)el.classList.add('in')}),100)}
+
+const DB='ecodamaturu_v4',PK='ecodamaturu_points_v4';
+function getR(){try{return JSON.parse(localStorage.getItem(DB)||'[]')}catch{return[]}}
+function saveR(r){localStorage.setItem(DB,JSON.stringify(r))}
+function getP(){return parseInt(localStorage.getItem(PK)||'0')}
+function saveP(p){localStorage.setItem(PK,String(p))}
+function seed(){if(getR().length>0)return;saveR([{id:'RPT001',name:'Musa Ibrahim',type:'waste',desc:'Illegal dump near Hausari market.',gps:{lat:11.748,lng:11.9607},aiResult:{issueType:'Waste Dump',urgency:'High',confidence:96,recommendation:'Alert YOSEPA.'},status:'pending',timestamp:Date.now()-86400000*3},{id:'RPT002',name:'Fatima Bello',type:'flooding',desc:'Road flooded near Gujba junction.',gps:{lat:11.7412,lng:11.958},aiResult:{issueType:'Active Flooding',urgency:'Critical',confidence:99,recommendation:'Alert NEMA.'},status:'progress',timestamp:Date.now()-86400000*2},{id:'RPT003',name:'Yusuf Adamu',type:'drainage',desc:'Drainage blocked near Pompomari.',gps:{lat:11.752,lng:11.964},aiResult:{issueType:'Blocked Drainage',urgency:'Medium',confidence:92,recommendation:'Schedule clearance.'},status:'resolved',timestamp:Date.now()-86400000},{id:'RPT004',name:'Aisha Garba',type:'waste',desc:'Plastic waste on Maiduguri Road.',gps:{lat:11.745,lng:11.962},aiResult:{issueType:'Plastic Waste',urgency:'Low',confidence:88,recommendation:'Community clean-up.'},status:'pending',timestamp:Date.now()-43200000}])}
+seed();
+// GRID on desktop
+document.addEventListener('DOMContentLoaded',()=>{
+  if(window.innerWidth>=900)document.getElementById('main-grid').style.gridTemplateColumns='1fr 1fr';
+  document.getElementById('pts').textContent=getP();
+  renderRecent();
+});
+window.addEventListener('resize',()=>{const g=document.getElementById('main-grid');if(g)g.style.gridTemplateColumns=window.innerWidth>=900?'1fr 1fr':'1fr'});
+const ta=(ts)=>{const d=Date.now()-ts,m=Math.floor(d/60000),h=Math.floor(d/3600000),dy=Math.floor(d/86400000);return dy>0?dy+'d ago':h>0?h+'h ago':m>0?m+'m ago':'Just now'};
+const te={waste:'🗑️',flooding:'🌊',drainage:'🏗️',other:'⚠️'};
+const ub={'Critical':'ch2','High':'ch2','Medium':'cm2','Low':'cl2'};
+function renderRecent(){
+  const rs=getR().slice(-4).reverse();const el=document.getElementById('rlist2');
+  if(!rs.length){el.innerHTML='<p style="font-size:.84rem;color:var(--mu)">No reports yet. Be the first!</p>';return}
+  el.innerHTML=rs.map(r=>`<div class="ri"><div style="font-size:1.2rem;flex-shrink:0;margin-top:2px">${te[r.type]||'⚠️'}</div><div><div style="font-size:.86rem;font-weight:700;color:var(--navy)">${r.name}</div><div style="font-size:.78rem;color:var(--mu);margin-top:1px">${r.desc.substring(0,50)}...</div><span class="chip ${ub[r.aiResult?.urgency]||'cl2'}" style="margin-top:4px;display:inline-block">${r.aiResult?.urgency||'Pending'} · ${ta(r.timestamp)}</span></div></div>`).join('');
+}
+// GPS
+let gps=null;
+function capGPS(){
+  const btn=document.getElementById('gbtn'),val=document.getElementById('gv');
+  btn.textContent='Locating...';btn.disabled=true;
+  if(navigator.geolocation){
+    navigator.geolocation.getCurrentPosition(p=>{gps={lat:p.coords.latitude,lng:p.coords.longitude};val.textContent=`📍 ${gps.lat.toFixed(5)}, ${gps.lng.toFixed(5)} (±${Math.round(p.coords.accuracy)}m)`;btn.textContent='✓ Captured';toast('Location captured!','ok')},
+    ()=>{gps={lat:11.748+Math.random()*.02-.01,lng:11.9607+Math.random()*.02-.01};val.textContent=`📍 ${gps.lat.toFixed(5)}, ${gps.lng.toFixed(5)} (estimated)`;btn.textContent='✓ Ready';toast('Using estimated location','i')});
+  } else {gps={lat:11.748,lng:11.9607};val.textContent='📍 11.74800, 11.96070';btn.textContent='✓ Ready'}
+}
+// IMAGES
+let imgs=[];
+function himg(e){addF(e.target.files)}
+function dov(e){e.preventDefault();e.currentTarget.classList.add('drag')}
+function dlv(e){e.currentTarget.classList.remove('drag')}
+function ddrop(e){e.preventDefault();e.currentTarget.classList.remove('drag');addF(e.dataTransfer.files)}
+function addF(files){Array.from(files).slice(0,3-imgs.length).forEach(f=>{if(imgs.length>=3)return;const u=URL.createObjectURL(f);imgs.push({file:f,url:u});const img=document.createElement('img');img.src=u;img.className='thumb';document.getElementById('prevs').appendChild(img)});if(imgs.length>0)analyze()}
+// AI
+async function analyze(){
+  const box=document.getElementById('aib'),cont=document.getElementById('aic'),chips=document.getElementById('aichips');
+  box.classList.add('on');cont.textContent='🤖 Analyzing with AI...';chips.innerHTML='';
+  const type=document.getElementById('rt').value||'environmental issue',desc=document.getElementById('rd').value||'';
+  try{
+    const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,system:'Environmental analyst for EcoDamaturu, Damaturu Nigeria. Return ONLY valid JSON: {issueType,urgency(Critical|High|Medium|Low),confidence(70-99),recommendation}. No markdown.',messages:[{role:'user',content:`Type:${type}\nDesc:${desc}\nLocation:Damaturu,Yobe,Nigeria`}]})});
+    const d=await res.json();const ai=JSON.parse((d.content||[]).map(b=>b.text||'').join('').replace(/```json|```/g,'').trim());
+    showAI(ai,cont,chips);
+  }catch{showAI({issueType:type||'Environmental Issue',urgency:'Medium',confidence:85,recommendation:'Issue logged. A field officer will be dispatched within 48 hours.'},cont,chips)}
+}
+function showAI(ai,cont,chips){
+  cont.textContent=ai.recommendation;
+  const uc=ai.urgency==='Critical'||ai.urgency==='High'?'ch2':ai.urgency==='Medium'?'cm2':'cl2';
+  chips.innerHTML=`<span class="chip ct2">🏷️ ${ai.issueType}</span><span class="chip ${uc}">⚡ ${ai.urgency}</span><span class="chip cl2">🎯 ${ai.confidence}%</span>`;
+}
+// SUBMIT
+async function submit(){
+  const n=document.getElementById('rn').value.trim(),p=document.getElementById('rp').value.trim(),t=document.getElementById('rt').value,d=document.getElementById('rd').value.trim();
+  if(!n){toast('Please enter your name','err');return}
+  if(!t){toast('Please select an issue type','err');return}
+  if(!d){toast('Please describe the issue','err');return}
+  if(!gps){toast('Please capture your GPS location','err');return}
+  const btn=document.getElementById('sbtn'),txt=document.getElementById('stxt');
+  btn.disabled=true;txt.innerHTML='<span class="spin"></span> Submitting...';
+  let ai={issueType:t,urgency:'Medium',confidence:85,recommendation:'Issue received and will be reviewed.'};
+  try{const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,system:'Return ONLY JSON: {issueType,urgency,confidence,recommendation}.',messages:[{role:'user',content:`Type:${t}\nDesc:${d}`}]})});const data=await res.json();ai=JSON.parse((data.content||[]).map(b=>b.text||'').join('').replace(/```json|```/g,'').trim())}catch{}
+  const rs=getR();const id='RPT'+String(rs.length+1).padStart(3,'0');
+  rs.push({id,name:n,phone:p,type:t,desc:d,gps,imageURLs:imgs.map(i=>i.url),aiResult:ai,status:'pending',timestamp:Date.now()});
+  saveR(rs);const pts=getP()+50;saveP(pts);
+  document.getElementById('pts').textContent=pts;
+  toast('✅ Report submitted! +50 EcoPoints earned','ok');
+  btn.disabled=false;txt.textContent='Submit Another Report';
+  document.getElementById('rn').value='';document.getElementById('rp').value='';document.getElementById('rt').value='';document.getElementById('rd').value='';
+  document.getElementById('gv').textContent='Location not captured yet';document.getElementById('gbtn').textContent='📍 Capture GPS';document.getElementById('prevs').innerHTML='';document.getElementById('aib').classList.remove('on');
+  imgs=[];gps=null;renderRecent();
+}
+
+document.addEventListener('DOMContentLoaded',initRv);
+</script>
+</body>
+</html>
