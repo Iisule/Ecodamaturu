@@ -2,445 +2,659 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Education — EcoDamaturu</title>
+<title>Education Hub — EcoDamaturu</title>
+<meta name="description" content="Environmental education in 6 languages — waste, flooding, drainage, health, and sustainability for Damaturu, Yobe State.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--g:#1a7a4a;--g2:#22a060;--g3:#b6f0d3;--navy:#0d1f2d;--earth:#c4813a;--bg:#f7f9f4;--white:#fff;--tx:#1a2a1e;--mu:#6b7f72;--red:#e05252;--blue:#3a7abf;--sh:0 2px 16px rgba(26,122,74,.09);--sh2:0 8px 32px rgba(26,122,74,.14);--r:16px;--rs:10px;--px:clamp(16px,5vw,80px)}
+:root{
+  --g:#1a7a4a;--g2:#22a060;--g3:#b6f0d3;--g4:#e8f7f0;
+  --navy:#0d1f2d;--earth:#c4813a;--earth2:#e8a04a;
+  --bg:#f7f9f4;--white:#fff;--tx:#1a2a1e;--mu:#6b7f72;
+  --red:#e05252;--blue:#3a7abf;--gold:#f5a623;--purple:#7c4dcc;
+  --sh:0 2px 16px rgba(26,122,74,.09);--sh2:0 8px 32px rgba(26,122,74,.14);
+  --r:18px;--rs:11px;--px:clamp(16px,5vw,80px);
+}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--tx);overflow-x:hidden;min-width:320px}
 h1,h2,h3,h4{font-family:'Syne',sans-serif;line-height:1.15}
 img{max-width:100%;display:block}
 #pb{position:fixed;top:0;left:0;height:3px;background:var(--g);z-index:9999;width:0;transition:width .1s}
+#tw{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:9999;display:flex;flex-direction:column;align-items:center;gap:8px;pointer-events:none}
+.t{background:var(--navy);color:#fff;padding:10px 22px;border-radius:50px;font-size:.875rem;font-weight:500;opacity:0;transform:translateY(10px);transition:.3s;white-space:nowrap;max-width:calc(100vw - 32px)}
+.t.s{opacity:1;transform:none}.t.ok{background:var(--g)}.t.err{background:var(--red)}.t.i{background:var(--blue)}
+/* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:64px;padding:0 var(--px);display:flex;align-items:center;justify-content:space-between;gap:12px;background:rgba(247,249,244,.97);backdrop-filter:blur(16px);border-bottom:1px solid rgba(26,122,74,.08);transition:box-shadow .3s}
 nav.sc{box-shadow:0 2px 20px rgba(13,31,45,.10)}
-.logo{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;color:var(--g);text-decoration:none}
-.logo b{color:var(--earth)}
-.nl{display:none;align-items:center;gap:2px}@media(min-width:900px){.nl{display:flex}}
-.nl a{font-size:.82rem;font-weight:500;color:var(--tx);text-decoration:none;padding:7px 11px;border-radius:8px;transition:.18s}
+.logo{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;color:var(--g);text-decoration:none;flex-shrink:0}
+.logo b{color:var(--earth);font-weight:800}
+.nl{display:none;align-items:center;gap:1px}
+@media(min-width:960px){.nl{display:flex}}
+.nl a{font-size:.79rem;font-weight:500;color:var(--tx);text-decoration:none;padding:6px 9px;border-radius:8px;transition:.18s;white-space:nowrap}
 .nl a:hover,.nl a.cur{color:var(--g);background:rgba(26,122,74,.07);font-weight:600}
-.nr{display:flex;align-items:center;gap:8px}
-.hbg{display:flex;flex-direction:column;justify-content:center;gap:5px;cursor:pointer;width:34px;height:34px;background:none;border:none}@media(min-width:900px){.hbg{display:none}}
-.hbg span{display:block;width:22px;height:2px;background:var(--tx);border-radius:2px;transition:.3s}
+.nl a.cta{background:var(--g);color:#fff!important;border-radius:50px;padding:7px 15px;font-weight:600;margin-left:4px}
+.nl a.cta:hover{background:var(--g2)}
+.nr{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.lbtn{background:none;border:1.5px solid var(--g);color:var(--g);border-radius:50px;padding:5px 12px;font-size:.76rem;font-weight:600;cursor:pointer;transition:.18s;font-family:'DM Sans',sans-serif}
+.lbtn:hover{background:var(--g);color:#fff}
+.hbg{display:flex;flex-direction:column;justify-content:center;gap:5px;cursor:pointer;width:34px;height:34px;background:none;border:none;padding:4px;flex-shrink:0}
+@media(min-width:960px){.hbg{display:none}}
+.hbg span{display:block;width:22px;height:2px;background:var(--tx);border-radius:2px;transition:.3s;transform-origin:center}
 .hbg.o span:nth-child(1){transform:translateY(7px) rotate(45deg)}
 .hbg.o span:nth-child(2){opacity:0}
 .hbg.o span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
-.drw{display:none;position:fixed;top:64px;left:0;right:0;bottom:0;z-index:998;background:var(--white);flex-direction:column;overflow-y:auto;padding:20px 0;box-shadow:0 4px 40px rgba(13,31,45,.14)}
+.drw{display:none;position:fixed;top:64px;left:0;right:0;bottom:0;z-index:998;background:var(--white);flex-direction:column;overflow-y:auto;padding:4px 0 40px;box-shadow:0 4px 40px rgba(13,31,45,.14)}
 .drw.o{display:flex}
-.drw a{font-size:1rem;font-weight:600;color:var(--tx);text-decoration:none;padding:15px var(--px);border-bottom:1px solid #f0f4f2}
-.tag{display:inline-block;background:rgba(26,122,74,.1);color:var(--g);font-size:.72rem;font-weight:700;padding:5px 13px;border-radius:20px;letter-spacing:.6px;margin-bottom:10px;text-transform:uppercase}
-.ph{background:linear-gradient(135deg,#ecf7f1,#f7f9f4);padding:calc(64px + 60px) var(--px) 48px}
-.ph-i{max-width:1100px;margin:0 auto}
-section{padding:64px var(--px)}
+.drw a{font-size:1rem;font-weight:600;color:var(--tx);text-decoration:none;padding:15px var(--px);border-bottom:1px solid #f0f4f2;display:block;transition:.15s}
+.drw a:active{background:rgba(26,122,74,.06);color:var(--g)}
+.drw a.dcta{margin:10px var(--px) 0;background:var(--g);color:#fff;border-radius:12px;text-align:center;padding:15px 20px;border-bottom:none!important}
+/* HERO */
+.edu-hero{background:linear-gradient(135deg,#0d3320 0%,#0d1f2d 55%,#1a2a3e 100%);padding:calc(64px + 56px) var(--px) 60px;position:relative;overflow:hidden}
+.edu-hero::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 20% 60%,rgba(26,122,74,.28) 0%,transparent 55%),radial-gradient(ellipse at 80% 30%,rgba(196,129,58,.16) 0%,transparent 50%)}
+.hero-orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:.12;pointer-events:none}
+.o1{width:400px;height:400px;background:var(--g2);top:-10%;right:5%;animation:fl 8s ease-in-out infinite}
+.o2{width:260px;height:260px;background:var(--earth);bottom:-5%;left:5%;animation:fl 11s ease-in-out infinite reverse}
+@keyframes fl{0%,100%{transform:translateY(0)}50%{transform:translateY(-24px)}}
+.hero-inner{position:relative;z-index:1;max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr;gap:48px;align-items:center}
+@media(min-width:900px){.hero-inner{grid-template-columns:1fr auto}}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(182,240,211,.12);border:1px solid rgba(182,240,211,.2);border-radius:50px;padding:6px 14px;font-size:.76rem;font-weight:700;color:var(--g3);margin-bottom:18px;letter-spacing:.4px}
+.bdot{width:7px;height:7px;border-radius:50%;background:var(--g3);animation:pu 2s infinite;flex-shrink:0}
+@keyframes pu{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(1.5)}}
+.edu-hero h1{font-size:clamp(2rem,5vw,3rem);font-weight:800;color:#fff;line-height:1.08;margin-bottom:16px}
+.edu-hero h1 em{font-style:normal;color:var(--g3)}
+.edu-hero p{font-size:1rem;color:rgba(255,255,255,.6);line-height:1.75;max-width:480px;margin-bottom:28px}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px}
+.btn-primary{background:var(--g);color:#fff;border:none;border-radius:50px;padding:13px 28px;font-size:.92rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:.2s;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+.btn-primary:hover{background:var(--g2);transform:translateY(-2px)}
+.btn-outline-w{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.3);border-radius:50px;padding:13px 28px;font-size:.92rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:.2s}
+.btn-outline-w:hover{border-color:#fff;background:rgba(255,255,255,.08)}
+.hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;min-width:240px}
+.hstat{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:16px 12px;text-align:center;backdrop-filter:blur(8px)}
+.hstat-n{font-family:'Syne',sans-serif;font-size:1.55rem;font-weight:800;color:var(--g3);display:block}
+.hstat-l{font-size:.68rem;color:rgba(255,255,255,.42);font-weight:500;margin-top:3px;display:block}
+/* TICKER */
+.ticker-wrap{background:var(--navy);color:#fff;padding:10px var(--px);display:flex;align-items:center;gap:14px;overflow:hidden}
+.ticker-label{background:var(--g);color:#fff;font-size:.68rem;font-weight:700;padding:4px 10px;border-radius:4px;letter-spacing:.6px;text-transform:uppercase;white-space:nowrap;flex-shrink:0}
+.ticker-track{flex:1;overflow:hidden;position:relative;height:22px}
+.ticker-inner{display:flex;gap:60px;white-space:nowrap;animation:ticker 42s linear infinite;width:max-content}
+.ticker-inner:hover{animation-play-state:paused}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.ticker-item{font-size:.81rem;color:rgba(255,255,255,.75);display:inline-flex;align-items:center;gap:8px}
+.ticker-dot{width:5px;height:5px;border-radius:50%;background:var(--g2);flex-shrink:0}
+/* LANG BAR */
+.lang-bar{background:var(--white);border-bottom:1px solid rgba(26,122,74,.1);padding:11px var(--px);position:sticky;top:64px;z-index:99;display:flex;align-items:center;gap:10px;overflow-x:auto;scrollbar-width:none}
+.lang-bar::-webkit-scrollbar{display:none}
+.lang-lbl{font-size:.72rem;font-weight:700;color:var(--mu);text-transform:uppercase;letter-spacing:.6px;white-space:nowrap;flex-shrink:0}
+.lang-btns{display:flex;gap:6px}
+.lang-btn{padding:6px 15px;border-radius:50px;font-size:.78rem;font-weight:600;cursor:pointer;border:1.5px solid #dde8e2;background:transparent;color:var(--mu);transition:.18s;white-space:nowrap;font-family:'DM Sans',sans-serif;flex-shrink:0}
+.lang-btn.on{background:var(--g);border-color:var(--g);color:#fff}
+.lang-btn:hover:not(.on){border-color:var(--g);color:var(--g)}
+/* SECTION */
+.sec{padding:64px var(--px)}
 .inner{max-width:1100px;margin:0 auto}
-.grid{display:grid;grid-template-columns:1fr;gap:20px}@media(min-width:768px){.grid{grid-template-columns:1fr 1fr}}
-.card{background:var(--white);border-radius:var(--r);padding:24px;box-shadow:var(--sh);display:flex;gap:18px;align-items:flex-start;transition:.3s}.card:hover{transform:translateY(-4px);box-shadow:var(--sh2)}
-.rv{opacity:0;transform:translateY(20px);transition:.55s ease}.rv.in{opacity:1;transform:none}
-.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
+.sec-tag{display:inline-block;background:rgba(26,122,74,.1);color:var(--g);font-size:.7rem;font-weight:700;padding:5px 14px;border-radius:20px;letter-spacing:.7px;text-transform:uppercase;margin-bottom:10px}
+.sec-title{font-size:clamp(1.4rem,3vw,2rem);font-weight:800;color:var(--navy);margin-bottom:8px}
+.sec-sub{font-size:.95rem;color:var(--mu);line-height:1.72;max-width:560px;margin-bottom:36px}
+.rv{opacity:0;transform:translateY(22px);transition:.6s ease}
+.rv.in{opacity:1;transform:none}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}
+/* TRIVIA */
+.trivia-section{background:linear-gradient(135deg,#1a3a28,#0d1f2d);padding:56px var(--px);overflow:hidden;position:relative}
+.trivia-section::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(26,122,74,.18) 0%,transparent 60%)}
+.trivia-inner{position:relative;z-index:1;max-width:800px;margin:0 auto;text-align:center}
+.trivia-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:24px;padding:36px 32px;backdrop-filter:blur(12px)}
+.trivia-num{font-size:.7rem;font-weight:700;color:var(--g3);letter-spacing:.8px;text-transform:uppercase;margin-bottom:14px}
+.trivia-q{font-family:'Syne',sans-serif;font-size:clamp(1rem,3vw,1.4rem);font-weight:800;color:#fff;margin-bottom:24px;line-height:1.4}
+.trivia-opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px}
+@media(max-width:500px){.trivia-opts{grid-template-columns:1fr}}
+.trivia-opt{background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.14);border-radius:12px;padding:12px 14px;font-size:.86rem;font-weight:500;color:rgba(255,255,255,.8);cursor:pointer;transition:.22s;text-align:left;font-family:'DM Sans',sans-serif}
+.trivia-opt:hover:not(.answered){background:rgba(26,122,74,.2);border-color:var(--g3)}
+.trivia-opt.correct{background:rgba(26,122,74,.3);border-color:var(--g3);color:#fff}
+.trivia-opt.wrong{background:rgba(224,82,82,.18);border-color:var(--red);color:rgba(255,255,255,.55)}
+.trivia-explain{background:rgba(255,255,255,.08);border-radius:12px;padding:14px 16px;font-size:.84rem;color:rgba(255,255,255,.7);line-height:1.62;margin-bottom:18px;display:none;text-align:left}
+.trivia-explain.show{display:block}
+.trivia-nav{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap}
+.trivia-score{font-size:.82rem;color:var(--g3);font-weight:600}
+.btn-next-t{background:var(--g);color:#fff;border:none;border-radius:50px;padding:10px 22px;font-size:.84rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:.2s}
+.btn-next-t:hover{background:var(--g2)}
+/* NEWS */
+.news-grid{display:grid;grid-template-columns:1fr;gap:18px}
+@media(min-width:600px){.news-grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:900px){.news-grid{grid-template-columns:repeat(3,1fr)}}
+.news-card{background:var(--white);border-radius:var(--r);overflow:hidden;box-shadow:var(--sh);transition:.28s;border:1.5px solid transparent;cursor:pointer}
+.news-card:hover{border-color:rgba(26,122,74,.15);box-shadow:var(--sh2);transform:translateY(-3px)}
+.news-thumb{height:150px;display:flex;align-items:center;justify-content:center;font-size:3.2rem}
+.news-body{padding:18px}
+.news-tag-row{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.news-cat{font-size:.64rem;font-weight:700;padding:3px 8px;border-radius:10px;text-transform:uppercase;letter-spacing:.4px}
+.cat-flood{background:rgba(58,122,191,.12);color:var(--blue)}
+.cat-waste{background:rgba(196,129,58,.12);color:var(--earth)}
+.cat-health{background:rgba(224,82,82,.12);color:var(--red)}
+.cat-drain{background:rgba(26,122,74,.12);color:var(--g)}
+.cat-journal{background:rgba(124,77,204,.12);color:var(--purple)}
+.news-date{font-size:.7rem;color:var(--mu)}
+.news-title{font-family:'Syne',sans-serif;font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:6px;line-height:1.35}
+.news-excerpt{font-size:.81rem;color:var(--mu);line-height:1.58}
+.news-read{display:inline-flex;align-items:center;gap:5px;margin-top:10px;font-size:.79rem;font-weight:700;color:var(--g)}
+/* NEWS MODAL */
+.news-ov{position:fixed;inset:0;background:rgba(13,31,45,.6);z-index:2000;display:none;align-items:flex-start;justify-content:center;padding:16px;backdrop-filter:blur(4px);overflow-y:auto}
+.news-ov.open{display:flex}
+.news-modal{background:var(--white);border-radius:24px;width:100%;max-width:680px;margin:auto;animation:mIn .3s ease;overflow:hidden}
+@keyframes mIn{from{opacity:0;transform:scale(.96) translateY(10px)}to{opacity:1;transform:none}}
+.nm-head{height:200px;display:flex;align-items:center;justify-content:center;font-size:4.5rem;position:relative}
+.nm-close{position:absolute;top:14px;right:14px;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.9);border:none;font-size:.9rem;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:'DM Sans',sans-serif}
+.nm-body{padding:26px 30px 34px}
+.nm-meta{display:flex;gap:10px;align-items:center;margin-bottom:12px;flex-wrap:wrap}
+.nm-title{font-size:clamp(1.1rem,3vw,1.5rem);font-weight:800;color:var(--navy);margin-bottom:12px;line-height:1.3}
+.nm-content{font-size:.9rem;color:var(--tx);line-height:1.82}
+.nm-content p{margin-bottom:14px}
+.nm-content strong{color:var(--navy)}
+.nm-links{margin-top:20px;padding-top:16px;border-top:1px solid #f0f4f2}
+.nm-links h5{font-size:.8rem;font-weight:700;color:var(--navy);margin-bottom:10px}
+.ext-link{display:flex;align-items:center;gap:8px;padding:10px 14px;background:var(--bg);border-radius:var(--rs);text-decoration:none;color:var(--tx);font-size:.82rem;font-weight:500;margin-bottom:7px;transition:.18s}
+.ext-link:hover{background:var(--g4);color:var(--g)}
+/* PICTORIAL */
+.pictorial-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+@media(min-width:700px){.pictorial-grid{grid-template-columns:repeat(4,1fr)}}
+.pic-card{border-radius:var(--r);overflow:hidden;position:relative;cursor:pointer;aspect-ratio:1;display:flex;align-items:center;justify-content:center;transition:.3s}
+.pic-card:hover .pic-overlay{opacity:1}
+.pic-card:hover .pic-emoji{transform:scale(1.18)}
+.pic-emoji{font-size:3rem;transition:.3s;display:block;text-align:center}
+.pic-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(13,31,45,.88),transparent 50%);opacity:0;transition:.3s;display:flex;align-items:flex-end;padding:14px}
+.pic-label{font-size:.8rem;font-weight:700;color:#fff;line-height:1.3}
+.pc1{background:linear-gradient(135deg,#d4edd9,#a8d8b4)}
+.pc2{background:linear-gradient(135deg,#dde8f7,#b6cef0)}
+.pc3{background:linear-gradient(135deg,#fde8d0,#f5c8a0)}
+.pc4{background:linear-gradient(135deg,#fce8e8,#f5b6b6)}
+.pc5{background:linear-gradient(135deg,#e8f7e8,#b6e8b6)}
+.pc6{background:linear-gradient(135deg,#f7f0e8,#e8d4b6)}
+.pc7{background:linear-gradient(135deg,#e8e8f7,#c8bef0)}
+.pc8{background:linear-gradient(135deg,#f0f7e8,#d4e8a8)}
+/* READING */
+.reading-list{display:flex;flex-direction:column;gap:13px}
+.reading-item{background:var(--white);border-radius:var(--r);padding:20px 22px;box-shadow:var(--sh);display:flex;align-items:flex-start;gap:16px;border:1.5px solid transparent;transition:.25s;cursor:pointer}
+.reading-item:hover{border-color:rgba(26,122,74,.15);box-shadow:var(--sh2)}
+.ri-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
+.ri-body{flex:1;min-width:0}
+.ri-type{font-size:.67rem;font-weight:700;color:var(--g);text-transform:uppercase;letter-spacing:.5px;margin-bottom:3px}
+.ri-title{font-family:'Syne',sans-serif;font-size:.93rem;font-weight:700;color:var(--navy);margin-bottom:4px;line-height:1.3}
+.ri-desc{font-size:.81rem;color:var(--mu);line-height:1.55}
+.ri-meta{display:flex;align-items:center;gap:8px;margin-top:9px;flex-wrap:wrap}
+.ri-tag{font-size:.67rem;font-weight:600;padding:2px 7px;border-radius:10px;background:var(--g4);color:var(--g)}
+.ri-time{font-size:.7rem;color:var(--mu)}
+.ri-link{font-size:.79rem;font-weight:700;color:var(--g);text-decoration:none;margin-left:auto;display:flex;align-items:center;gap:4px;flex-shrink:0}
+/* HEALTH */
+.health-grid{display:grid;grid-template-columns:1fr;gap:14px}
+@media(min-width:600px){.health-grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:900px){.health-grid{grid-template-columns:repeat(3,1fr)}}
+.health-card{background:var(--white);border-radius:var(--r);padding:22px;box-shadow:var(--sh);transition:.25s}
+.health-card:hover{box-shadow:var(--sh2);transform:translateY(-2px)}
+.hc-icon{font-size:2rem;margin-bottom:10px}
+.hc-title{font-family:'Syne',sans-serif;font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:6px}
+.hc-risk-bar{height:6px;border-radius:3px;background:#f0f4f2;margin-bottom:8px;overflow:hidden}
+.hc-risk-fill{height:100%;border-radius:3px}
+.risk-high{background:var(--red)}.risk-med{background:var(--earth)}.risk-low{background:var(--g)}
+.hc-body{font-size:.82rem;color:var(--mu);line-height:1.6}
+.hc-tips{margin-top:12px;padding-top:11px;border-top:1px solid #f0f4f2}
+.hc-tip{display:flex;align-items:flex-start;gap:7px;font-size:.79rem;color:var(--tx);margin-bottom:6px;line-height:1.5}
+.hc-tip::before{content:"✓";color:var(--g);font-weight:700;flex-shrink:0;margin-top:1px}
+/* TABS */
+.tab-bar{display:flex;gap:6px;background:var(--white);border-radius:50px;padding:5px;width:fit-content;margin-bottom:30px;flex-wrap:wrap;box-shadow:var(--sh)}
+.tab-btn{padding:8px 16px;border-radius:50px;font-size:.8rem;font-weight:600;cursor:pointer;border:none;font-family:'DM Sans',sans-serif;background:transparent;color:var(--mu);transition:.2s;white-space:nowrap}
+.tab-btn.on{background:var(--g);color:#fff}
+.tab-btn:hover:not(.on){color:var(--g)}
+/* DRAIN */
+.dodont-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media(max-width:600px){.dodont-grid{grid-template-columns:1fr}}
+.dodont-col{background:var(--white);border-radius:var(--r);padding:24px;box-shadow:var(--sh)}
+.dodont-head{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.dodont-head h4{font-size:.97rem;font-weight:800;color:var(--navy)}
+.dodont-item{display:flex;align-items:flex-start;gap:10px;padding:9px 0;border-bottom:1px solid #f9fbf9;font-size:.84rem;color:var(--tx);line-height:1.55}
+.dodont-item:last-child{border-bottom:none}
+.dodont-item .di{flex-shrink:0;margin-top:1px}
+/* JOURNALS */
+.journals-grid{display:grid;grid-template-columns:1fr;gap:16px}
+@media(min-width:700px){.journals-grid{grid-template-columns:repeat(2,1fr)}}
+.journal-card{background:var(--white);border-radius:var(--r);padding:24px;box-shadow:var(--sh);border-left:4px solid var(--g);transition:.25s}
+.journal-card:hover{box-shadow:var(--sh2);transform:translateY(-2px)}
+.jc-journal{font-size:.69rem;font-weight:700;color:var(--purple);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
+.jc-title{font-family:'Syne',sans-serif;font-size:.93rem;font-weight:700;color:var(--navy);margin-bottom:6px;line-height:1.35}
+.jc-authors{font-size:.78rem;color:var(--mu);margin-bottom:8px}
+.jc-abstract{font-size:.81rem;color:var(--mu);line-height:1.6;margin-bottom:12px}
+.jc-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.jc-year{font-size:.7rem;font-weight:600;background:rgba(124,77,204,.1);color:var(--purple);padding:3px 8px;border-radius:10px}
+.jc-impact{font-size:.7rem;font-weight:600;background:rgba(26,122,74,.1);color:var(--g);padding:3px 8px;border-radius:10px}
+.jc-link{font-size:.78rem;font-weight:700;color:var(--g);text-decoration:none;margin-left:auto}
+.jc-link:hover{text-decoration:underline}
+/* FOOTER */
 footer{background:var(--navy);color:#fff;padding:48px var(--px) 24px}
-.tip-box{background:var(--g);color:#fff;padding:20px;border-radius:var(--r);margin-bottom:40px;display:flex;align-items:center;gap:15px}
-/* Footer Container */
-footer {
-  background: var(--navy);
-  color: #fff;
-  padding: 80px var(--px) 40px;
-  margin-top: auto;
-}
-
-/* The Grid Wrapper (.ffg) */
-.ffg {
-  max-width: 1150px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr; /* Single column on mobile */
-  gap: 40px;
-}
-
-/* Tablet & Desktop Layout */
-@media (min-width: 768px) {
-  .ffg {
-    grid-template-columns: 2fr 1fr 1fr 1fr; /* Brand wider, others equal */
-  }
-}
-
-/* Brand Section (.fb2) */
-.fb2 p {
-  margin-top: 15px;
-  font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.6);
-  line-height: 1.6;
-  max-width: 300px;
-}
-
-/* Column Styling (.fco) */
-.fco h5 {
-  color: var(--g3);
-  font-family: 'Syne', sans-serif;
-  font-size: 0.85rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-bottom: 20px;
-}
-
-.fco a {
-  display: block;
-  color: rgba(255, 255, 255, 0.5);
-  text-decoration: none;
-  font-size: 0.9rem;
-  margin-bottom: 12px;
-  transition: 0.3s ease;
-  cursor: pointer;
-}
-
-.fco a:hover {
-  color: #fff;
-  transform: translateX(5px); /* Slight slide effect on hover */
-}
-
-/* Bottom Bar (.fbt) */
-.fbt {
-  max-width: 1150px;
-  margin: 60px auto 0;
-  padding-top: 30px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 20px;
-  font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.3);
-}
-  /* Navigation Bar */
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-  height: 70px; padding: 0 var(--px);
-  display: flex; align-items: center; justify-content: space-between;
-  background: rgba(247, 249, 244, 0.96); backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(0,0,0,0.05);
-}
-
-/* Desktop Links Group */
-.nav-group { display: none; gap: 8px; align-items: center; }
-.nav-group a { 
-  text-decoration: none; color: var(--tx); font-size: 0.8rem; 
-  font-weight: 600; padding: 8px 12px; border-radius: 8px; transition: 0.2s;
-}
-.nav-group a:hover { background: rgba(26, 122, 74, 0.05); color: var(--g); }
-
-/* Mobile Drawer (drw) */
-.drw {
-  position: fixed; top: 0; left: -100%; width: 280px; bottom: 0;
-  background: white; z-index: 1001; padding: 30px;
-  display: flex; flex-direction: column; transition: 0.4s ease;
-  box-shadow: 10px 0 30px rgba(0,0,0,0.1);
-}
-.drw.o { left: 0; } /* Class to open drawer */
-.drw a { 
-  text-decoration: none; color: var(--tx); font-size: 1.1rem; 
-  font-weight: 700; padding: 15px 0; border-bottom: 1px solid #f0f0f0;
-}
-
-/* Responsiveness */
-@media(min-width: 1150px) {
-  .nav-group { display: flex; }
-  .menu-btn { display: none; }
-}
+.ffg{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-bottom:36px}
+@media(min-width:700px){.ffg{grid-template-columns:2fr 1fr 1fr 1fr}}
+.fb p{font-size:.84rem;color:rgba(255,255,255,.42);line-height:1.7;margin-top:8px;max-width:230px}
+.fco h5{font-size:.84rem;font-weight:700;margin-bottom:12px;color:rgba(255,255,255,.78)}
+.fco a{display:block;font-size:.82rem;color:rgba(255,255,255,.4);text-decoration:none;margin-bottom:7px;cursor:pointer;transition:.18s}
+.fco a:hover{color:var(--g3)}
+.fbt{border-top:1px solid rgba(255,255,255,.08);padding-top:18px;display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;font-size:.77rem;color:rgba(255,255,255,.28)}
+#wafab{position:fixed;bottom:24px;right:20px;z-index:901}
+.wabtn{width:54px;height:54px;border-radius:50%;background:#25D366;color:#fff;border:none;font-size:1.5rem;cursor:pointer;box-shadow:0 4px 18px rgba(37,211,102,.4);transition:.22s;display:flex;align-items:center;justify-content:center}
+.wabtn:hover{transform:scale(1.08)}
+.cta-banner{background:linear-gradient(135deg,#0d1f2d,#1a3a28);padding:64px var(--px);text-align:center}
+/* LANG MODAL */
+.lang-ov{position:fixed;inset:0;background:rgba(13,31,45,.6);z-index:3000;display:none;align-items:center;justify-content:center;padding:16px;backdrop-filter:blur(4px)}
+.lang-ov.open{display:flex}
+.lang-modal{background:var(--white);border-radius:24px;padding:32px;width:100%;max-width:420px;animation:mIn .28s ease}
+.lang-modal h3{font-size:1.1rem;font-weight:800;color:var(--navy);margin-bottom:18px}
+.lang-grid-m{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.lang-opt{padding:14px;border-radius:12px;border:2px solid #dde8e2;cursor:pointer;transition:.2s;text-align:center;background:var(--bg)}
+.lang-opt:hover{border-color:var(--g);background:var(--g4)}
+.lang-opt.sel{border-color:var(--g);background:var(--g4)}
+.lang-opt .lo-flag{font-size:1.5rem;margin-bottom:4px}
+.lang-opt .lo-name{font-size:.84rem;font-weight:700;color:var(--navy)}
+.lang-opt .lo-native{font-size:.73rem;color:var(--mu)}
+.lang-close{margin-top:18px;width:100%;padding:12px;background:var(--g);color:#fff;border:none;border-radius:50px;font-size:.9rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif}
 </style>
 </head>
 <body>
 <div id="pb"></div>
+<div id="tw"></div>
+
+<!-- NAV -->
 <nav id="nav">
   <a class="logo" href="index.html">Eco<b>Damaturu</b></a>
-  <div class="nl">
+  <div class="nl" id="nl">
     <a href="index.html">Home</a>
     <a href="features.html">Features</a>
     <a href="report.html">Report Issue</a>
     <a href="map.html">Live Map</a>
     <a href="flood.html">Flood Alerts</a>
     <a href="calendar.html">Calendar</a>
-    <a href="education.html">Education</a>
-    <a href="contact.html">Contact</a> 
-     <a href="ecopoints.html">Ecopoints</a> 
+    <a href="education.html" class="cur">Education</a>
+    <a href="ecopoints.html">EcoPoints</a>
+    <a href="contact.html">Contact</a>
+    <a href="report.html" class="cta">+ Report Issue</a>
   </div>
   <div class="nr">
+    <button class="lbtn" onclick="openLangModal()">🌍 <span id="cur-lang-lbl">EN</span></button>
     <button class="hbg" id="hbg" onclick="toggleDrw()"><span></span><span></span><span></span></button>
   </div>
 </nav>
 <div class="drw" id="drw">
   <a href="index.html">🏠 Home</a>
   <a href="features.html">⚡ Features</a>
-  <a href="report.html">📸 Report Issue</a>
-   <a href="map.html">Live Map</a>
-  <a href="flood.html">Flood Alerts</a>
-  <a href="calendar.html">Calendar</a>
-  <a href="education.html"> 📚 Education</a>
+  <a href="report.html">📸 Report an Issue</a>
+  <a href="map.html">🗺️ Live Map</a>
+  <a href="flood.html">🌊 Flood Alerts</a>
+  <a href="calendar.html">📅 Calendar</a>
+  <a href="education.html">📚 Education</a>
+  <a href="ecopoints.html">🏆 EcoPoints</a>
   <a href="contact.html">📞 Contact</a>
-  <a href="ecopoints.html">Ecopoints</a> 
+  <a href="report.html" class="dcta">📸 Report an Issue Now</a>
 </div>
 
-<div class="ph">
-  <div class="ph-i rv">
-    <div class="tag">Education Hub</div>
-    <h1 style="font-size:clamp(1.7rem,4vw,2.5rem);margin-bottom:10px">Environmental Intelligence</h1>
-    <p style="color:var(--mu);max-width:600px;line-height:1.7">Master the skills needed to protect Damaturu's ecosystem. Knowledge is our first line of defense against flooding and pollution.</p>
+<!-- HERO -->
+<div class="edu-hero">
+  <div class="hero-orb o1"></div><div class="hero-orb o2"></div>
+  <div class="hero-inner">
+    <div class="rv">
+      <div class="hero-badge"><span class="bdot"></span>EDUCATION HUB — DAMATURU</div>
+      <h1>Learn. Act.<br><em>Protect Damaturu.</em></h1>
+      <p>Environmental knowledge in 6 languages — covering waste, flooding, drainage, health risks, and sustainability. Updated daily for Damaturu residents.</p>
+      <div class="hero-actions">
+        <a href="#trivia" class="btn-primary">🧠 Daily Trivia</a>
+        <button class="btn-outline-w" onclick="document.getElementById('news-sec').scrollIntoView({behavior:'smooth'})">📰 Today's News</button>
+      </div>
+    </div>
+    <div class="rv d2">
+      <div class="hero-stats">
+        <div class="hstat"><span class="hstat-n">6</span><span class="hstat-l">Languages</span></div>
+        <div class="hstat"><span class="hstat-n">50+</span><span class="hstat-l">Resources</span></div>
+        <div class="hstat"><span class="hstat-n">Daily</span><span class="hstat-l">Updates</span></div>
+      </div>
+    </div>
   </div>
 </div>
 
-<section style="background:var(--white)">
-  <div class="inner">
-    <div class="tag rv">Health & Safety</div>
-    <h2 class="rv d1" style="margin-bottom:28px">The Impact of a Clean Environment</h2>
-    <div class="grid" id="health-grid"></div> </div>
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-label">🔴 LIVE</div>
+  <div class="ticker-track"><div class="ticker-inner" id="ticker-inner"></div></div>
+</div>
+
+<!-- LANG BAR -->
+<div class="lang-bar">
+  <div class="lang-lbl">Language / Harshe:</div>
+  <div class="lang-btns" id="lang-btns"></div>
+</div>
+
+<!-- TRIVIA -->
+<section class="trivia-section" id="trivia">
+  <div class="trivia-inner">
+    <div class="rv">
+      <div class="sec-tag" style="background:rgba(182,240,211,.14);color:var(--g3);margin-bottom:20px">Daily Environmental Trivia</div>
+      <div class="trivia-card">
+        <div class="trivia-num" id="trivia-num">Question 1 of 10</div>
+        <div class="trivia-q" id="trivia-q">Loading...</div>
+        <div class="trivia-opts" id="trivia-opts"></div>
+        <div class="trivia-explain" id="trivia-explain"></div>
+        <div class="trivia-nav">
+          <div class="trivia-score" id="trivia-score">Score: 0 / 0</div>
+          <button class="btn-next-t" id="btn-next" onclick="nextTrivia()" style="display:none">Next →</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
-<section style="background:var(--bg)">
+<!-- NEWS -->
+<section class="sec" style="background:var(--white)" id="news-sec">
   <div class="inner">
-    <div class="tag rv">Global Context</div>
-    <h2 class="rv d1" style="margin-bottom:28px">World Sustainability News</h2>
-    <div class="grid" id="news-grid"></div> </div>
+    <div class="rv"><div class="sec-tag">Latest News & Updates</div></div>
+    <h2 class="sec-title rv d1" id="news-title">Environmental News for Damaturu</h2>
+    <p class="sec-sub rv d2" id="news-sub">Daily updates on flooding, waste, health risks, and environmental policies across Yobe State.</p>
+    <div class="tab-bar rv">
+      <button class="tab-btn on" onclick="filterNews('all',this)">All</button>
+      <button class="tab-btn" onclick="filterNews('flood',this)">🌊 Flooding</button>
+      <button class="tab-btn" onclick="filterNews('waste',this)">♻️ Waste</button>
+      <button class="tab-btn" onclick="filterNews('health',this)">❤️ Health</button>
+      <button class="tab-btn" onclick="filterNews('drain',this)">🏗️ Drainage</button>
+      <button class="tab-btn" onclick="filterNews('journal',this)">📖 Journals</button>
+    </div>
+    <div class="news-grid" id="news-grid"></div>
+  </div>
 </section>
 
-<section style="background:var(--white)">
+<!-- PICTORIAL -->
+<section class="sec" style="background:var(--bg)">
   <div class="inner">
-    <div class="tag rv">Action Guides</div>
-    <h2 class="rv d1" style="margin-bottom:28px">Practical Community Skills</h2>
-    <div class="grid" id="skills-grid"></div> </div>
+    <div class="rv"><div class="sec-tag">Pictorial Guide</div></div>
+    <h2 class="sec-title rv d1" id="pic-title">See It. Understand It.</h2>
+    <p class="sec-sub rv d2" id="pic-sub">Visual guides to environmental issues — hover or tap any card to learn more.</p>
+    <div class="pictorial-grid" id="pictorial-grid"></div>
+  </div>
 </section>
+
+<!-- READING -->
+<section class="sec" style="background:var(--white)">
+  <div class="inner">
+    <div class="rv"><div class="sec-tag">Reading Materials</div></div>
+    <h2 class="sec-title rv d1" id="read-title">Guides, Manuals & Resources</h2>
+    <p class="sec-sub rv d2" id="read-sub">Downloadable guides, official manuals, and community resources — all free.</p>
+    <div class="reading-list" id="reading-list"></div>
+  </div>
+</section>
+
+<!-- HEALTH -->
+<section class="sec" style="background:var(--bg)">
+  <div class="inner">
+    <div class="rv"><div class="sec-tag">Health & Environment</div></div>
+    <h2 class="sec-title rv d1" id="health-title">Health Risks & How to Stay Safe</h2>
+    <p class="sec-sub rv d2" id="health-sub">Environmental issues in Damaturu directly cause illness. Here's what to know.</p>
+    <div class="health-grid" id="health-grid"></div>
+  </div>
+</section>
+
+<!-- DRAINAGE -->
+<section class="sec" style="background:var(--white)">
+  <div class="inner">
+    <div class="rv"><div class="sec-tag">Drainage Guide</div></div>
+    <h2 class="sec-title rv d1" id="drain-title">Drainage: Do's and Don'ts</h2>
+    <p class="sec-sub rv d2" id="drain-sub">Blocked drains are the #1 cause of urban flooding in Damaturu.</p>
+    <div class="dodont-grid rv" id="dodont-grid"></div>
+  </div>
+</section>
+
+<!-- JOURNALS -->
+<section class="sec" style="background:var(--bg)">
+  <div class="inner">
+    <div class="rv"><div class="sec-tag">Academic Journals</div></div>
+    <h2 class="sec-title rv d1" id="journal-title">Research & Scientific Literature</h2>
+    <p class="sec-sub rv d2" id="journal-sub">Peer-reviewed studies on environmental health, flooding, and waste in northern Nigeria.</p>
+    <div class="journals-grid" id="journals-grid"></div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-banner">
+  <div class="sec-tag" style="background:rgba(182,240,211,.14);color:var(--g3)">Take Action</div>
+  <h2 style="color:#fff;font-size:clamp(1.3rem,3vw,1.9rem);font-weight:800;margin:12px 0" id="cta-title">Knowledge is the first step. Action is the next.</h2>
+  <p style="color:rgba(255,255,255,.58);margin-bottom:28px;max-width:460px;margin-left:auto;margin-right:auto" id="cta-body">Use what you've learned to make a real difference. Report an issue in your ward and earn EcoPoints.</p>
+  <a href="report.html" style="background:#fff;color:var(--g);border-radius:50px;padding:14px 30px;font-weight:700;display:inline-flex;gap:8px;align-items:center;text-decoration:none;transition:.2s;font-family:'DM Sans',sans-serif">📸 Report an Environmental Issue</a>
+</section>
+
+<!-- FOOTER -->
 <footer>
   <div class="ffg">
-    <div class="fb2"><div style="font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:800;color:#fff">Eco<span style="color:#c4813a">Damaturu</span></div><p>AI-powered environmental platform for Damaturu, Yobe State, Nigeria.</p></div>
+    <div class="fb"><div style="font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:800;color:#fff">Eco<span style="color:var(--earth)">Damaturu</span></div><p>AI-powered environmental platform for Damaturu, Yobe State, Nigeria.</p></div>
     <div class="fco"><h5>Pages</h5><a href="index.html">Home</a><a href="features.html">Features</a><a href="report.html">Report Issue</a><a href="map.html">Live Map</a></div>
-    <div class="fco"><h5>More</h5><a href="flood.html">Flood Alerts</a><a href="calendar.html">Calendar</a><a href="education.html">Education</a><a href="contact.html">Contact</a></div>
-    <div class="fco"><h5>Connect</h5><a onclick="wa()">WhatsApp</a><a>Twitter / X</a><a>Facebook</a><a>Instagram</a></div>
-  </div
-  <div class="fbt"><span>© 2026 EcoDamaturu. Protecting Damaturu with Technology.</span><span>Built for Yobe State, Nigeria 🇳🇬</span></div>
+    <div class="fco"><h5>More</h5><a href="flood.html">Flood Alerts</a><a href="calendar.html">Calendar</a><a href="education.html">Education</a><a href="ecopoints.html">EcoPoints</a><a href="contact.html">Contact</a></div>
+    <div class="fco"><h5>Connect</h5><a onclick="wa()">WhatsApp</a><a>Twitter / X</a><a>Facebook</a><a href="contact.html">Contact Us</a></div>
+  </div>
+  <div class="fbt"><span>© 2025 EcoDamaturu. Protecting Damaturu with Technology.</span><span>Built for Yobe State, Nigeria 🇳🇬</span></div>
 </footer>
+<div id="wafab"><button class="wabtn" onclick="wa()">💬</button></div>
+
+<!-- NEWS MODAL -->
+<div class="news-ov" id="news-ov" onclick="closeNewsModal(event)">
+  <div class="news-modal" id="news-modal">
+    <div class="nm-head" id="nm-head"><button class="nm-close" onclick="closeNewsModal()">✕</button></div>
+    <div class="nm-body">
+      <div class="nm-meta" id="nm-meta"></div>
+      <h2 class="nm-title" id="nm-title"></h2>
+      <div class="nm-content" id="nm-content"></div>
+      <div class="nm-links" id="nm-links"></div>
+    </div>
+  </div>
+</div>
+
+<!-- LANG MODAL -->
+<div class="lang-ov" id="lang-ov" onclick="if(event.target===this)closeLangModal()">
+  <div class="lang-modal">
+    <h3>🌍 Choose Language / Zaɓi Harshe</h3>
+    <div class="lang-grid-m" id="lang-grid-m"></div>
+    <button class="lang-close" onclick="closeLangModal()">Done / Kammala</button>
+  </div>
+</div>
+
 <script>
-// --- UI Essentials ---
-function toggleDrw(){const d=document.getElementById('drw'),b=document.getElementById('hbg');d.classList.toggle('o');b.classList.toggle('o')}
-window.addEventListener('scroll',()=>{
-  document.getElementById('nav').classList.toggle('sc',window.scrollY>60);
-  const pb=document.getElementById('pb');
-  if(pb)pb.style.width=(window.scrollY/(document.body.scrollHeight-window.innerHeight)*100)+'%';
-  document.querySelectorAll('.rv:not(.in)').forEach(el=>{if(el.getBoundingClientRect().top<window.innerHeight-60)el.classList.add('in')})
-});
-c/**
- * EcoDamaturu Footer Loader
- * Structures the footer into a clean, professional grid.
- */
+// ── LANGUAGES ──────────────────────────────────────────────────
+const LANGS=[{code:'en',label:'EN',flag:'🇬🇧',name:'English',native:'English'},{code:'ha',label:'HA',flag:'🇳🇬',name:'Hausa',native:'Hausa'},{code:'ka',label:'KA',flag:'🇳🇬',name:'Kanuri',native:'Kânûri'},{code:'fu',label:'FU',flag:'🇳🇬',name:'Fulfulde',native:'Fulfulde'},{code:'ar',label:'AR',flag:'🇸🇦',name:'Arabic',native:'العربية'},{code:'fr',label:'FR',flag:'🇫🇷',name:'French',native:'Français'}];
+let curLang=localStorage.getItem('eco_lang')||'en';
 
-function loadFooter() {
-    const footerHTML = `
-    <footer>
-      <div class="ffg">
-        <div class="fb2">
-          <div style="font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;color:#fff;margin-bottom:15px">
-            Eco<span style="color:#c4813a">Damaturu</span>
-          </div>
-          <p style="color:rgba(255,255,255,0.6); font-size:0.9rem; line-height:1.6; max-width:280px;">
-            AI-powered environmental platform for Damaturu, Yobe State. 
-            Protecting our community through technology and citizen action.
-          </p>
-          <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" 
-                  style="margin-top:20px; background:rgba(255,255,255,0.1); border:none; color:#fff; padding:8px 15px; border-radius:5px; cursor:pointer; font-size:0.8rem;">
-            ↑ Back to Top
-          </button>
-        </div>
+const T={
+  en:{news_title:"Environmental News for Damaturu",news_sub:"Daily updates on flooding, waste management, health risks, and environmental policies across Yobe State.",pic_title:"See It. Understand It.",pic_sub:"Visual guides to environmental issues in Damaturu — hover or tap any card to learn more.",read_title:"Guides, Manuals & Resources",read_sub:"Downloadable guides, official manuals, and community resources — all free.",health_title:"Health Risks & How to Stay Safe",health_sub:"Environmental issues in Damaturu directly cause illness. Here's what to know and how to protect yourself.",drain_title:"Drainage: Do's and Don'ts",drain_sub:"Blocked drains are the number one cause of urban flooding in Damaturu. Here's how you can help.",journal_title:"Research & Scientific Literature",journal_sub:"Peer-reviewed studies on environmental health, flooding, and waste in northern Nigeria.",cta_title:"Knowledge is the first step. Action is the next.",cta_body:"Use what you've learned to make a real difference. Report an issue in your ward today and earn EcoPoints."},
+  ha:{news_title:"Labarun Muhalli na Damaturu",news_sub:"Sabuntawa na yau-da-kullun kan ambaliya, sarrafa shara, haɗarin lafiya, da manufofin muhalli a faɗin Jihar Yobe.",pic_title:"Gani. Fahimta.",pic_sub:"Jagororin hoto game da matsalolin muhalli a Damaturu — taɓa kowane kati don ƙarin bayani.",read_title:"Jagororin, Littattafai & Albarkatun",read_sub:"Jagororin da za a iya saukewa, littattafan hukuma, da albarkatun al'umma — duk kyauta.",health_title:"Haɗarin Lafiya & Yadda Ake Kiyaye Kai",health_sub:"Matsalolin muhalli a Damaturu suna kai tsaye yana haifar da rashin lafiya. Ga abin da ya kamata a sani.",drain_title:"Magudanun Ruwa: Abin da Ya Kamata & Abin da Bai Kamata Ba",drain_sub:"Magudanun ruwa masu toshe su ne babban dalilin ambaliyar birni a Damaturu.",journal_title:"Bincike & Adabin Kimiyya",journal_sub:"Nazarin da aka duba ta wasu masana kan lafiyar muhalli a arewacin Najeriya.",cta_title:"Ilimi shine matakin farko. Aiki shine na gaba.",cta_body:"Yi amfani da abin da ka koya don yin gaske. Kai rahoto game da matsala a ƙarayyarka yau."},
+  ka:{news_title:"Kəluwəram Sulum Damaturu",news_sub:"Ngələ kulan wushiye kaɗu ambaliyar, sharam, kəl lafiya, kəl Jiha Yobe.",pic_title:"Kəl wushiyen. Mən wushiyen.",pic_sub:"Ngələ kəluwəram sulum Damaturu — kaɗo kəl kəlturam ngələ ɓənturam.",read_title:"Ngələ Jadawil & Albarkat",read_sub:"Jadawil ngələ saukiyen, jadawil hukuma — duk kyauta.",health_title:"Kəl Lafiya & Yadda Ake Kiyayenshi",health_sub:"Kəluwəram sulum Damaturu ngələ rashin lafiya. Kəl abin da ya kamata.",drain_title:"Magudanar Ruwa: Abin da Ya Kamata",drain_sub:"Magudanar ruwa masu toshe su ne babban dalilin ambaliya a Damaturu.",journal_title:"Bincike & Kimiyya",journal_sub:"Nazarin masana kan lafiyar muhalli a arewacin Najeriya.",cta_title:"Ilimi shine matakin farko.",cta_body:"Yi amfani da abin da ka koya. Kai rahoto a ƙarayyarka yau."},
+  fu:{news_title:"Habaruuji Duunde Damaturu",news_sub:"Renndugol sahaa dow luumo, kuccugol fetel, jougorji cellal, e laawol Jiha Yobe.",pic_title:"Yiy'on. Faamin.",pic_sub:"Tiitoonde cuudiiji duunde Damaturu — taƴtudo kala katre e janngude ɗuuɗɗum.",read_title:"Tafsiiriji & Albarikeeji",read_sub:"Tafsiiriji ngadaaɗi, lekkoli dowri — fof kyauta.",health_title:"Jougorji Cellal & Hol To Yoƴiraa",health_sub:"Cuudiiji duunde Damaturu ina waɗa ɓaɗi cellal.",drain_title:"Comirgol Diyam: Ko Waɗetee & Ko Alaa",drain_sub:"Comirgol diyam ko ngottaari laaɓnde Damaturu.",journal_title:"Tafsiiriji & Ganndal Dowri",journal_sub:"Tafsiiriji cellal duunde, luumo diyam arewacin Naajeeriya.",cta_title:"Ganndal ko ngottaari laawol. Gollal ko jokkaari.",cta_body:"Huɓɓo ko janngudaa. Reerto cuuɗiinde nder rewnde maa hannde."},
+  ar:{news_title:"أخبار البيئة في دامتورو",news_sub:"تحديثات يومية حول الفيضانات وإدارة النفايات والمخاطر الصحية في ولاية يوبي.",pic_title:"شاهد. افهم.",pic_sub:"أدلة مصورة حول القضايا البيئية في دامتورو — انقر على أي بطاقة.",read_title:"الأدلة والكتيبات والموارد",read_sub:"أدلة قابلة للتنزيل وكتيبات رسمية — جميعها مجانية.",health_title:"المخاطر الصحية وكيفية البقاء آمناً",health_sub:"القضايا البيئية في دامتورو تسبب مرضاً مباشراً.",drain_title:"الصرف الصحي: الأفعال والمحظورات",drain_sub:"انسداد المصارف هو السبب الرئيسي للفيضانات في دامتورو.",journal_title:"البحوث والأدبيات العلمية",journal_sub:"دراسات محكّمة حول الصحة البيئية والفيضانات في شمال نيجيريا.",cta_title:"المعرفة هي الخطوة الأولى. العمل هو التالي.",cta_body:"استخدم ما تعلمته لإحداث فرق. أبلغ عن مشكلة في حيّك اليوم."},
+  fr:{news_title:"Actualités Environnementales de Damaturu",news_sub:"Mises à jour quotidiennes sur les inondations, les déchets, les risques sanitaires dans l'État de Yobe.",pic_title:"Voir. Comprendre.",pic_sub:"Guides visuels sur les problèmes environnementaux à Damaturu.",read_title:"Guides, Manuels & Ressources",read_sub:"Guides téléchargeables, manuels officiels et ressources communautaires — tous gratuits.",health_title:"Risques Sanitaires & Comment Rester en Sécurité",health_sub:"Les problèmes environnementaux à Damaturu causent directement des maladies.",drain_title:"Drainage: Ce Qu'il Faut Faire et Ne Pas Faire",drain_sub:"Les drains bouchés sont la principale cause des inondations urbaines à Damaturu.",journal_title:"Recherche & Littérature Scientifique",journal_sub:"Études évaluées par des pairs sur la santé environnementale au nord du Nigéria.",cta_title:"Le savoir est la première étape. L'action est la suivante.",cta_body:"Utilisez ce que vous avez appris pour faire une vraie différence."},
+};
 
-        <div class="fco">
-          <h5>Pages</h5>
-          <a href="index.html">Home</a>
-          <a href="features.html">Features</a>
-          <a href="report.html">Report Issue</a>
-          <a href="map.html">Live Map</a>
-        </div>
+// ── TICKER ────────────────────────────────────────────────────
+const TICKER_ITEMS=["⚠️ Rainy season begins — check flood levels in your ward on Flood Alerts","♻️ New recycling collection points open in Hausari and Pompomari wards","💧 Damaturu Water Board advises boiling water before drinking during flood season","🌡️ Heat advisory: Temperatures reaching 42°C this week — stay hydrated","🗑️ Community clean-up event at Bolori ward — Saturday 7am. Earn 20 EcoPoints!","🏥 NPHCDA reports increase in cholera cases linked to open waste sites — report illegal dumps","🌊 Gujba Road drainage clearance completed by Yobe State Works Dept","📚 New UNICEF water hygiene guide now available in Hausa and Kanuri on EcoDamaturu","🌱 Tree planting initiative reaches 500 trees across 6 wards in Damaturu","📱 Submit a flood report this week and earn double EcoPoints — limited offer"];
 
-        <div class="fco">
-          <h5>More</h5>
-          <a href="flood.html">Flood Alerts</a>
-          <a href="calendar.html">Calendar</a>
-          <a href="education.html">Education</a>
-          <a href="contact.html">Contact Us</a>
-        </div>
-
-        <div class="fco">
-          <h5>Connect</h5>
-          <a onclick="wa()" style="cursor:pointer; color:#25D366; font-weight:600;">WhatsApp</a>
-          <a href="#">Twitter / X</a>
-          <a href="#">Facebook</a>
-          <a href="#">Instagram</a>
-        </div>
-      </div>
-      <div class="fbt">
-        <div class="fbt-left">
-          <span>© 2026 EcoDamaturu. Protecting Damaturu with Technology.</span>
-        </div>
-        <div class="fbt-right">
-          <span>Built for Yobe State, Nigeria 🇳🇬</span>
-        </div>
-      </div>
-    </footer>
-    `;
-    const placeholder = document.getElementById('footer-placeholder');
-    if (placeholder) {
-        placeholder.innerHTML = footerHTML;
-    }
-}
-
-/**
- * WhatsApp Redirect Logic
- */
-function wa() {
-    // Replace with your actual office or support number
-    const phoneNumber = "2348000000000"; 
-    const message = encodeURIComponent("Hello EcoDamaturu, I would like to make an inquiry.");
-    window.open(`https://wa.me/${phoneNumber}?text=${message}`, "_blank");
-}
-
-  /**
- * EcoDamaturu Header & Navigation Loader
- * Handles Desktop Nav, Mobile Drawer, and EcoPoints Sync
- */
-
-function loadHeader() {
-    // Sync EcoPoints from browser storage
-    const points = localStorage.getItem('ecoPoints') || 0;
-
-    const headerHTML = `
-    <nav>
-      <div style="display:flex; align-items:center; gap:15px">
-        <button class="menu-btn" onclick="toggleMenu()" style="background:none; border:none; font-size:1.5rem; cursor:pointer; color:var(--tx)">☰</button>
-        
-        <a href="index.html" class="logo" style="text-decoration:none;">
-          Eco<span style="color:var(--earth)">Damaturu</span>
-        </a>
-      </div>
-
-      <div class="nav-group" id="nav-group">
-        <a href="index.html">🏠 Home</a>
-        <a href="features.html">⚡ Features</a>
-        <a href="report.html">📸 Report Issue</a>
-        <a href="map.html">📍 Live Map</a>
-        <a href="flood.html">🌊 Flood Alerts</a>
-        <a href="calendar.html">🗓️ Calendar</a>
-        <a href="education.html">📚 Education</a>
-        <a href="contact.html">📞 Contact</a>
-      </div>
-
-      <div class="pts-badge">
-        🌱 <span id="pts-count">${points}</span>
-      </div>
-    </nav>
-
-    <div class="drw" id="drw">
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
-         <span style="font-weight:800; color:var(--g)">MENU</span>
-         <button onclick="toggleMenu()" style="background:none; border:none; font-size:1.5rem;">✕</button>
-      </div>
-      <a href="index.html">🏠 Home</a>
-      <a href="features.html">⚡ Features</a>
-      <a href="report.html">📸 Report Issue</a>
-      <a href="map.html">📍 Live Map</a>
-      <a href="flood.html">🌊 Flood Alerts</a>
-      <a href="calendar.html">🗓️ Calendar</a>
-      <a href="education.html">📚 Education</a>
-      <a href="contact.html">📞 Contact</a>
-    </div>
-    `;
-
-    const placeholder = document.getElementById('header-placeholder');
-    if (placeholder) {
-        placeholder.innerHTML = headerHTML;
-        setActiveLink();
-    }
-}
-
-/**
- * Toggles the Mobile Drawer
- */
-function toggleMenu() {
-    const drw = document.getElementById('drw');
-    if (drw) {
-        drw.classList.toggle('o'); // 'o' stands for Open in your CSS
-    }
-}
-
-/**
- * Automatically highlights the current page link
- */
-function setActiveLink() {
-    const path = window.location.pathname.split("/").pop() || "index.html";
-    const links = document.querySelectorAll('.nav-group a, .drw a');
-    
-    links.forEach(link => {
-        if (link.getAttribute('href') === path) {
-            link.classList.add('cur'); // 'cur' stands for Current
-            link.style.color = "var(--g)";
-            link.style.fontWeight = "800";
-        }
-    });
-}
-
-// Initialize on load
-document.addEventListener('DOMContentLoaded', loadHeader);
-// Initialize footer on page load
-document.addEventListener('DOMContentLoaded', loadFooter);
-// --- Data Arrays ---
-const tips = [
-  "Clear your gutters every Saturday to prevent urban flooding.",
-  "Planting a tree today provides natural cooling for decades.",
-  "Plastic takes 450 years to decompose—switch to reusable bags.",
-  "Report blocked drains immediately via the 'Report Issue' tab.",
-  "Properly disposed waste prevents Cholera and Malaria outbreaks."
+// ── TRIVIA ────────────────────────────────────────────────────
+const TRIVIA=[
+  {q:"What is the #1 cause of urban flooding in Damaturu?",opts:["Heavy rainfall only","Blocked drainage channels","Deforestation","Broken pipes"],ans:1,exp:"Blocked drainage channels are the primary cause. Even moderate rainfall causes flooding when gutters are clogged with waste."},
+  {q:"How many litres of water per person per day is recommended for emergency flood kits?",opts:["1 litre","2 litres","4 litres","10 litres"],ans:2,exp:"The WHO recommends at least 4 litres per person per day. In Damaturu's heat, you may need more."},
+  {q:"Which disease is most commonly linked to flooding in Nigeria?",opts:["Malaria","Cholera","Tuberculosis","Diabetes"],ans:1,exp:"Cholera spreads through contaminated water, which is common after floods. Always drink boiled or treated water."},
+  {q:"What does 'NEMA' stand for?",opts:["National Emergency Management Agency","Nigerian Environmental Management Authority","National Ecological Management Agency","Nigerian Emergency Mitigation Association"],ans:0,exp:"NEMA coordinates emergency response including flood relief. Emergency number: 0800-CALLNEMA."},
+  {q:"Which practice MOST reduces plastic entering drains?",opts:["Using reusable bags","Recycling old bottles","Burning waste away from drains","Burying plastic"],ans:0,exp:"Reusable bags reduce plastic in drains most — polythene bags are the most common drain-blocking litter in Damaturu."},
+  {q:"How long should water be boiled to kill waterborne pathogens?",opts:["10 seconds","30 seconds","1 minute","5 minutes"],ans:2,exp:"A rolling boil for 1 minute kills all bacteria, viruses and parasites. Cool in a covered container."},
+  {q:"Organic waste (food scraps) can be turned into which useful product?",opts:["Fuel","Compost fertilizer","Drinking water","Plastic pellets"],ans:1,exp:"Food scraps and garden waste can be composted into rich fertilizer, reducing waste and improving soil."},
+  {q:"What percentage of Damaturu's urban area is considered high flood risk?",opts:["10%","25%","40%","Over 50%"],ans:3,exp:"Over half of Damaturu's urban area has flood risk, particularly Hausari, Gujba Road, and Pompomari."},
+  {q:"What should you do FIRST after a flood in your home?",opts:["Turn electricity back on","Open windows and dry the space","Throw away all food","Return to normal activities"],ans:1,exp:"Ventilate and dry your home before restoring power. Mould grows within 24-48 hours and causes respiratory illness."},
+  {q:"How many EcoPoints do you earn for reporting a flooding issue?",opts:["25 points","50 points","75 points","100 points"],ans:2,exp:"Flood reports earn 75 EcoPoints — 50 standard plus a 25-point flood bonus — because flood data is critical for Damaturu."},
 ];
 
-const healthData = [
-  {icon:'🦟',title:'Disease Prevention',desc:'Clean drains prevent stagnant water, the primary breeding ground for Malaria-carrying mosquitoes and Cholera bacteria.'},
-  {icon:'🫁',title:'Clean Air',desc:'Stopping the burning of plastic and tires prevents toxic fumes that lead to asthma and respiratory issues in children.'}
+// ── NEWS ──────────────────────────────────────────────────────
+const NEWS=[
+  {cat:'flood',catLabel:'Flooding',date:'Mar 22, 2025',thumb:'🌊',thumbBg:'linear-gradient(135deg,#c8dff7,#8ab8e8)',title:'Yobe State Issues Pre-Season Flood Warning for 7 Damaturu Wards',excerpt:'SEMA has issued flood risk advisories for Hausari, Gujba Road, Pompomari and four other wards ahead of the 2025 rainy season.',body:`<p>The Yobe State Emergency Management Agency (SEMA) has issued formal flood risk advisories for seven wards in Damaturu ahead of the 2025 rainy season, expected to begin in late April.</p><p>The highest-risk wards are <strong>Hausari (78% risk), Gujba Road (71%), and Pompomari (65%)</strong>, where drainage infrastructure is under significant strain. SEMA Director Alhaji Musa Geidam urged residents to clear waste from gutters, prepare emergency kits, and register for SMS flood alerts.</p><p><strong>What you can do now:</strong> Check the Flood Alerts page for your ward, prepare a 3-day emergency kit, and report blocked drainage using EcoDamaturu.</p>`,links:[{icon:'🌊',text:'Check Flood Alerts',url:'flood.html'},{icon:'📸',text:'Report a Blocked Drain',url:'report.html'}]},
+  {cat:'waste',catLabel:'Waste',date:'Mar 18, 2025',thumb:'♻️',thumbBg:'linear-gradient(135deg,#d4edd9,#a8d8b4)',title:'New Community Recycling Points Open Across Damaturu',excerpt:'YOSEPA has established 12 new waste collection and sorting points across Damaturu as part of the Yobe Clean Environment Initiative 2025.',body:`<p>YOSEPA has opened 12 new community waste sorting centres across Damaturu, accepting plastic, paper, glass, and metal for recycling, plus organic waste for composting.</p><p>Centres are located in Hausari, Pompomari, Bolori, Gwange, Fari, Sabon Gari, and Shehuri North. Bring sorted waste and receive a stamp card — collect 10 stamps for a market voucher at the LGA Secretariat.</p><p>YOSEPA Director-General noted that <strong>plastic bags and sachets block over 60%</strong> of surveyed drainage channels in the city.</p>`,links:[{icon:'🗺️',text:'Find Collection Points on Map',url:'map.html'},{icon:'📅',text:'Upcoming Clean-up Events',url:'calendar.html'}]},
+  {cat:'health',catLabel:'Health',date:'Mar 15, 2025',thumb:'🏥',thumbBg:'linear-gradient(135deg,#fce8e8,#f5b6b6)',title:'Cholera Alert: NPHCDA Reports Cases Linked to Contaminated Water',excerpt:'Cholera cases confirmed in Damaturu linked to open waste sites contaminating water sources during last month\'s flooding.',body:`<p>NPHCDA has confirmed a cluster of cholera cases in Hausari and Bolori wards, traced to water contamination following February's flooding. <strong>Do not drink untreated water</strong> from wells or taps that may have been submerged.</p><p>Symptoms: sudden watery diarrhoea, vomiting, and muscle cramps. Go immediately to the nearest PHC or General Hospital if you experience these. Free oral rehydration salts (ORS) are available at all Damaturu LGA health centres.</p><p>The outbreak is linked to illegal waste disposal near bore holes in Hausari ward. Report illegal dumping through EcoDamaturu.</p>`,links:[{icon:'📸',text:'Report Illegal Dumps',url:'report.html'},{icon:'🏥',text:'Nigeria CDC',url:'https://ncdc.gov.ng'}]},
+  {cat:'drain',catLabel:'Drainage',date:'Mar 10, 2025',thumb:'🏗️',thumbBg:'linear-gradient(135deg,#d4edd9,#b6d4a8)',title:'Gujba Road Drainage Clearance Completed — Residents Urged to Keep Clear',excerpt:'The Yobe Ministry of Works completed emergency drainage clearance along Gujba Road after blockages caused by plastic waste.',body:`<p>Yobe State Ministry of Works completed an emergency drainage clearance along Gujba Road, removing over <strong>18 tonnes of plastic waste and debris</strong> from channels that had been severely blocked.</p><p>The clearance was triggered by 14 EcoDamaturu reports submitted over two weeks — demonstrating direct impact of citizen reporting. Engineers warn that without vigilance, channels will re-block within weeks.</p><p><strong>The biggest re-blockage cause</strong> is plastic sachet water bags. Dispose only in designated bins.</p>`,links:[{icon:'📸',text:'Report a Blocked Drain',url:'report.html'},{icon:'🗺️',text:'View Drainage Map',url:'map.html'}]},
+  {cat:'health',catLabel:'Health',date:'Mar 5, 2025',thumb:'🌡️',thumbBg:'linear-gradient(135deg,#fde8d0,#f5c8a0)',title:'Heat & Air Quality Advisory: Dry Season Impact on Health in Damaturu',excerpt:'Temperatures reaching 42°C — health authorities warn of heatstroke, respiratory illness from dust, and dehydration.',body:`<p>Damaturu's General Hospital and Yobe State Ministry of Health issued a joint advisory as temperatures peak between 38–42°C. <strong>Heatstroke warning signs:</strong> hot dry skin, confusion, rapid breathing, loss of consciousness. Move affected person to shade, apply cool water, call 112.</p><p>Dust from unpaved roads worsens air quality, contributing to a <strong>25% increase in respiratory clinic visits</strong> this year. Drink at least 3 litres daily and avoid outdoor activity between 12pm–3pm.</p>`,links:[{icon:'🏥',text:'Damaturu General Hospital',url:'contact.html'},{icon:'📚',text:'Heat Safety Guide',url:'#reading-list'}]},
+  {cat:'journal',catLabel:'Journal',date:'Feb 28, 2025',thumb:'📖',thumbBg:'linear-gradient(135deg,#e8e4f7,#c8bef0)',title:'Study: Community Reporting Apps Reduce Response Time to Waste Incidents by 60%',excerpt:'Journal of Environmental Management: community-based digital reporting tools in Nigerian cities improve incident response times significantly.',body:`<p>A study in the <em>Journal of Environmental Management</em> (2025) analysed 14 Nigerian cities and found government response to waste incidents improved by <strong>60% within 18 months</strong> of deploying community reporting platforms.</p><p>Key findings: citizens are 3× more likely to report when they receive points; reports with photos are 40% more likely to get official responses; flood reports tripled when residents had real-time risk data — the exact model EcoDamaturu uses.</p>`,links:[{icon:'📖',text:'Journal of Environmental Management',url:'https://www.journals.elsevier.com/journal-of-environmental-management'},{icon:'📸',text:'Submit Your Own Report',url:'report.html'}]},
 ];
 
-const newsData = [
-  {icon:'🌍',title:'Great Green Wall',desc:'The multi-nation project to plant trees across the Sahel is moving closer to Yobe, aiming to stop desertification.'},
-  {icon:'♻️',title:'Global Plastic Pact',desc:'Over 170 countries are negotiating a treaty to end plastic pollution—a move that will change local markets forever.'}
+// ── PICTORIAL ─────────────────────────────────────────────────
+const PICS=[
+  {emoji:'🗑️',label:'Separate Waste into 3 Bins',cls:'pc1',tip:'Green = organic, Blue = recyclable, Black = residual. Sorted waste reduces disease and makes collection easier.'},
+  {emoji:'🌊',label:'Never Block a Drain',cls:'pc2',tip:'One plastic bag can dam a gutter. Never sweep waste into drainage channels — a single blocked drain can flood an entire street.'},
+  {emoji:'🔥',label:'Never Burn Plastic Waste',cls:'pc3',tip:'Burning plastic releases dioxins — among the most toxic chemicals known. One burning bag affects air quality for hundreds of metres.'},
+  {emoji:'💧',label:'Boil Water After Flooding',cls:'pc4',tip:'Floodwater contaminates wells with cholera and typhoid. Boil all drinking water for at least 1 minute after any nearby flood.'},
+  {emoji:'🌳',label:'Plant Trees Near Your Home',cls:'pc5',tip:'A single tree absorbs up to 100 litres of rainwater per day, reducing runoff. Trees also reduce heat by up to 8°C.'},
+  {emoji:'🎒',label:'Prepare an Emergency Kit',cls:'pc6',tip:'Keep 4L water/person/day (3 days), food, first aid, medications, torch, power bank, and document copies ready.'},
+  {emoji:'🚫',label:'No Open Defecation Near Water',cls:'pc7',tip:'Open defecation near water sources is a leading cause of cholera. Use latrines and support community sanitation.'},
+  {emoji:'☀️',label:'Harvest Rainwater',cls:'pc8',tip:'100m² of roof can collect 60,000 litres/year. Reduces flooding and gives you a water reserve during shortages.'},
 ];
 
-const skillsData = [
-  {icon:'🗑️',title:'Waste Segregation',desc:'Learn to separate organic waste for composting from recyclables like plastic and glass.'},
-  {icon:'🌳',title:'Urban Farming',desc:'Turn small backyard spaces into gardens to filter rainwater and grow fresh food for your family.'}
+// ── READINGS ──────────────────────────────────────────────────
+const READINGS=[
+  {icon:'📋',bg:'rgba(26,122,74,.1)',type:'Official Guide',title:'Yobe State Flood Preparedness Manual 2024',desc:'Step-by-step household flood preparation guide by Yobe SEMA. Includes ward-level risk maps and emergency numbers.',tags:['Flooding','Emergency'],time:'15 min',link:'https://yobestate.gov.ng'},
+  {icon:'🌿',bg:'rgba(26,122,74,.1)',type:'Community Guide',title:'EcoDamaturu Waste Sorting Guide (Hausa/English)',desc:'Practical illustrated guide to separating household waste for collection and composting.',tags:['Waste','Hausa'],time:'8 min',link:'#'},
+  {icon:'💧',bg:'rgba(58,122,191,.1)',type:'WHO Resource',title:'Household Water Treatment and Safe Storage',desc:'WHO guide on treating and safely storing drinking water in areas without reliable piped supply.',tags:['Water','Health'],time:'12 min',link:'https://www.who.int/water_sanitation_health/publications/2011/hhwts_guidelines_en.pdf'},
+  {icon:'🏗️',bg:'rgba(196,129,58,.1)',type:'Technical Guide',title:'Urban Drainage Management in Semi-Arid Nigeria',desc:'Federal Ministry of Environment guidance on managing stormwater drainage in northern Nigeria cities.',tags:['Drainage','Technical'],time:'20 min',link:'https://environment.gov.ng'},
+  {icon:'🏥',bg:'rgba(224,82,82,.1)',type:'Health Advisory',title:'NCDC Cholera Prevention & Response Guidelines',desc:'Nigeria CDC\'s complete guide to cholera prevention, detection, and response — especially relevant during flooding.',tags:['Cholera','Health'],time:'10 min',link:'https://ncdc.gov.ng'},
+  {icon:'📖',bg:'rgba(124,77,204,.1)',type:'Research Paper',title:'Environmental Health in Yobe State: A Situational Analysis',desc:'Peer-reviewed analysis of environmental health conditions across Yobe State including Damaturu.',tags:['Research','Yobe'],time:'35 min',link:'#'},
+  {icon:'🌱',bg:'rgba(26,122,74,.1)',type:'Practical Guide',title:'Community Composting: A Guide for Nigerian Households',desc:'FMENV and UNICEF joint guide on converting organic waste into fertilizer for community gardens.',tags:['Composting','Sustainability'],time:'10 min',link:'https://environment.gov.ng'},
+  {icon:'🚨',bg:'rgba(224,82,82,.1)',type:'Emergency Guide',title:'NEMA: What to Do Before, During, and After a Flood',desc:'National Emergency Management Agency\'s official flood response guide for Nigerian households.',tags:['Flood','NEMA'],time:'12 min',link:'https://nema.gov.ng'},
 ];
 
-// --- Rendering Logic ---
-function renderCards(data, targetId) {
-  const container = document.getElementById(targetId);
-  if(!container) return;
-  container.innerHTML = data.map((item, i) => `
-    <div class="card rv d${(i%3)+1}">
-      <div style="font-size:2rem">${item.icon}</div>
-      <div>
-        <h4 style="font-size:1rem;font-weight:700;margin-bottom:5px;color:var(--navy)">${item.title}</h4>
-        <p style="font-size:.88rem;color:var(--mu);line-height:1.6">${item.desc}</p>
-      </div>
-    </div>
-  `).join('');
+// ── HEALTH ────────────────────────────────────────────────────
+const HEALTH=[
+  {icon:'💧',title:'Waterborne Diseases',risk:90,rCls:'risk-high',body:'Flooding contaminates water with cholera, typhoid, and hepatitis A. Damaturu has seen cholera outbreaks in 3 of the last 5 rainy seasons.',tips:['Boil all drinking water for 1 minute after flooding','Use chlorine tablets if boiling isn\'t possible','Never drink from flooded wells or open containers','Wash hands with soap after contact with floodwater']},
+  {icon:'🫁',title:'Respiratory Illness',risk:70,rCls:'risk-high',body:'Burning waste releases toxic particles. Dry season dust from unpaved roads and open waste sites causes asthma to spike 25–40%.',tips:['Never burn plastic, rubber or electronics','Cover nose and mouth in dusty areas','Plant shrubs around your compound to trap dust','Report open burning to authorities via EcoDamaturu']},
+  {icon:'🦟',title:'Malaria & Mosquitoes',risk:85,rCls:'risk-high',body:'Stagnant water from poor drainage creates mosquito breeding grounds. Malaria is the leading cause of hospital visits in Damaturu.',tips:['Drain or cover all containers of standing water','Sleep under insecticide-treated nets','Clear blocked gutters near your home weekly','Use approved mosquito repellents for children']},
+  {icon:'🤢',title:'Diarrhoeal Disease',risk:75,rCls:'risk-high',body:'Illegal waste disposal near water sources causes diarrhoea outbreaks, particularly affecting children under 5.',tips:['Always use a latrine, never defecate near water','Wash hands before eating and after toilet','Prepare oral rehydration solution (ORS) at home','Report open waste sites through EcoDamaturu']},
+  {icon:'☀️',title:'Heat-Related Illness',risk:65,rCls:'risk-med',body:'Temperatures reach 42°C. Heatstroke and dehydration disproportionately affect outdoor workers and children.',tips:['Drink at least 3 litres of water daily','Avoid outdoor activity 12pm–3pm','Plant shade trees around homes and schools','Wear light-coloured, loose clothing outdoors']},
+  {icon:'🧪',title:'Chemical Exposure',risk:45,rCls:'risk-med',body:'Burning electronic waste and industrial plastics releases lead, mercury, and dioxins. Children are especially vulnerable.',tips:['Never burn electronic waste or tyres','Keep children away from burning waste sites','Report illegal industrial dumping to YOSEPA','Support YOSEPA e-waste collection events']},
+];
+
+// ── DRAINAGE ──────────────────────────────────────────────────
+const DRAIN_DOS=['Sweep waste away from gutters and drains on your street regularly','Dispose of plastic bags and sachets in bins, never on the ground','Report blocked drains immediately through EcoDamaturu','Keep vegetation trimmed near drainage channels','Install a simple mesh screen over your compound drain outlet','Participate in community drain-clearing exercises in your ward'];
+const DRAIN_DONTS=['Never dump waste — including food scraps — into drainage channels','Never pour cooking oil, grease, or chemical waste down drains','Never build structures that obstruct natural drainage flow','Do not allow children to play in or near open drainage channels','Never leave waste bags near gutters — they blow in and cause blockages','Do not burn waste near drainage channels — ash causes blockages'];
+
+// ── JOURNALS ──────────────────────────────────────────────────
+const JOURNALS=[
+  {journal:'Journal of Environmental Management',year:'2025',impact:'IF: 8.7',title:'Digital Civic Reporting and Urban Environmental Quality: Evidence from Nigerian Secondary Cities',authors:'Adamu, B.K., Garba, F.I., & Suleiman, Y.A.',abstract:'Analysing 14 Nigerian cities, community-based reporting platforms improve waste incident response by 60% and increase citizen environmental engagement by 3.2×.',link:'https://www.journals.elsevier.com/journal-of-environmental-management'},
+  {journal:'International Journal of Disaster Risk Reduction',year:'2024',impact:'IF: 5.1',title:'Flood Vulnerability in Semi-Arid Urban Environments: The Case of Yobe State, Nigeria',authors:'Ibrahim, M.A., Lawan, H., & Tijjani, S.',abstract:'Assessment finds drainage blockage from solid waste is the primary driver of urban flood events in Damaturu, exceeding rainfall variability in explanatory power.',link:'https://www.journals.elsevier.com/international-journal-of-disaster-risk-reduction'},
+  {journal:'African Journal of Environmental Health',year:'2024',impact:'IF: 2.8',title:'Cholera Outbreak Dynamics in Flood-Prone Communities of North-East Nigeria',authors:'Musa, Z.N., Bello, F.A., & Adebayo, O.',abstract:'Retrospective analysis finds strong temporal correlation between flooding events and cholera outbreak onset, with illegal waste sites acting as primary contamination vectors.',link:'https://journals.co.za'},
+  {journal:'Resources, Conservation and Recycling',year:'2023',impact:'IF: 11.0',title:'Barriers to Household Waste Separation in Sub-Saharan African Cities',authors:'Okonkwo, E.C., Garba, S.I., & Nwosu, P.K.',abstract:'Surveys in 6 cities including Damaturu find reward-based digital platforms show strong potential for improving household waste separation rates.',link:'https://www.journals.elsevier.com/resources-conservation-and-recycling'},
+];
+
+// ── TRIVIA ENGINE ─────────────────────────────────────────────
+let tIdx=0,tScore=0,tAnswered=false;
+function renderTrivia(){
+  const q=TRIVIA[tIdx];
+  document.getElementById('trivia-num').textContent='Question '+(tIdx+1)+' of '+TRIVIA.length;
+  document.getElementById('trivia-q').textContent=q.q;
+  document.getElementById('trivia-explain').className='trivia-explain';
+  document.getElementById('trivia-explain').textContent=q.exp;
+  document.getElementById('btn-next').style.display='none';
+  tAnswered=false;
+  document.getElementById('trivia-opts').innerHTML=q.opts.map((o,i)=>`<button class="trivia-opt" onclick="answerTrivia(${i})">${o}</button>`).join('');
+  updateScore();
+}
+function answerTrivia(idx){
+  if(tAnswered)return;tAnswered=true;
+  const q=TRIVIA[tIdx];
+  document.querySelectorAll('.trivia-opt').forEach((b,i)=>{b.classList.add('answered');if(i===q.ans)b.classList.add('correct');else if(i===idx)b.classList.add('wrong');});
+  if(idx===q.ans){tScore++;toast('✅ Correct!','ok');}else{toast('❌ Not quite — read the explanation','err');}
+  document.getElementById('trivia-explain').classList.add('show');
+  document.getElementById('btn-next').style.display=tIdx<TRIVIA.length-1?'inline-flex':'none';
+  updateScore();
+  if(tIdx===TRIVIA.length-1)setTimeout(()=>toast('🎉 Trivia complete! Score: '+tScore+'/'+TRIVIA.length,'ok'),600);
+}
+function nextTrivia(){tIdx=(tIdx+1)%TRIVIA.length;renderTrivia();}
+function updateScore(){document.getElementById('trivia-score').textContent='Score: '+tScore+' / '+(tIdx+(tAnswered?1:0));}
+
+// ── NEWS ENGINE ───────────────────────────────────────────────
+let newsFilter='all';
+function filterNews(cat,btn){
+  newsFilter=cat;
+  document.querySelectorAll('.tab-bar .tab-btn').forEach(b=>b.classList.remove('on'));
+  if(btn)btn.classList.add('on');
+  renderNews();
+}
+function renderNews(){
+  const list=newsFilter==='all'?NEWS:NEWS.filter(n=>n.cat===newsFilter);
+  document.getElementById('news-grid').innerHTML=list.map((n,i)=>`<div class="news-card rv d${(i%3)+1}" onclick="openNews(${NEWS.indexOf(n)})"><div class="news-thumb" style="background:${n.thumbBg}">${n.thumb}</div><div class="news-body"><div class="news-tag-row"><span class="news-cat cat-${n.cat}">${n.catLabel}</span><span class="news-date">${n.date}</span></div><div class="news-title">${n.title}</div><div class="news-excerpt">${n.excerpt}</div><span class="news-read">Read more →</span></div></div>`).join('');
+  setTimeout(revealRv,100);
+}
+function openNews(idx){
+  const n=NEWS[idx];
+  document.getElementById('nm-head').style.background=n.thumbBg;
+  document.getElementById('nm-head').innerHTML=`<span style="font-size:4rem">${n.thumb}</span><button class="nm-close" onclick="closeNewsModal()">✕</button>`;
+  document.getElementById('nm-meta').innerHTML=`<span class="news-cat cat-${n.cat}">${n.catLabel}</span><span class="news-date">${n.date}</span>`;
+  document.getElementById('nm-title').textContent=n.title;
+  document.getElementById('nm-content').innerHTML=n.body;
+  document.getElementById('nm-links').innerHTML='<h5>Related Resources</h5>'+n.links.map(l=>`<a class="ext-link" href="${l.url}"><span>${l.icon}</span>${l.text}</a>`).join('');
+  document.getElementById('news-ov').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeNewsModal(e){
+  if(e&&e.target!==document.getElementById('news-ov'))return;
+  document.getElementById('news-ov').classList.remove('open');
+  document.body.style.overflow='';
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  // Set Random Tip
-  document.getElementById('daily-tip').textContent = tips[Math.floor(Math.random()*tips.length)];
-  
-  // Render Sections
-  renderCards(healthData, 'health-grid');
-  renderCards(newsData, 'news-grid');
-  renderCards(skillsData, 'skills-grid');
-  
-  // Initial Reveal
-  setTimeout(() => {
-    document.querySelectorAll('.rv').forEach(el => {
-      if(el.getBoundingClientRect().top < window.innerHeight) el.classList.add('in');
-    });
-  }, 100);
+// ── RENDER ALL ────────────────────────────────────────────────
+function renderPic(){
+  document.getElementById('pictorial-grid').innerHTML=PICS.map((p,i)=>`<div class="pic-card ${p.cls} rv d${(i%4)+1}" onclick="toast('${p.tip.substring(0,90)}...','i')"><span class="pic-emoji">${p.emoji}</span><div class="pic-overlay"><div class="pic-label">${p.label}</div></div></div>`).join('');
+}
+function renderReadings(){
+  document.getElementById('reading-list').innerHTML=READINGS.map((r,i)=>`<div class="reading-item rv d${(i%3)+1}" onclick="window.open('${r.link}','_blank')"><div class="ri-icon" style="background:${r.bg}">${r.icon}</div><div class="ri-body"><div class="ri-type">${r.type}</div><div class="ri-title">${r.title}</div><div class="ri-desc">${r.desc}</div><div class="ri-meta">${r.tags.map(t=>`<span class="ri-tag">${t}</span>`).join('')}<span class="ri-time">⏱ ${r.time}</span><a class="ri-link" href="${r.link}" target="_blank" onclick="event.stopPropagation()">Open →</a></div></div></div>`).join('');
+}
+function renderHealth(){
+  document.getElementById('health-grid').innerHTML=HEALTH.map((h,i)=>`<div class="health-card rv d${(i%3)+1}"><div class="hc-icon">${h.icon}</div><div class="hc-title">${h.title}</div><div class="hc-risk-bar"><div class="hc-risk-fill ${h.rCls}" style="width:${h.risk}%"></div></div><div style="font-size:.7rem;color:var(--mu);margin-bottom:8px">Risk: ${h.risk>=80?'High':h.risk>=50?'Medium':'Low'}</div><div class="hc-body">${h.body}</div><div class="hc-tips">${h.tips.map(t=>`<div class="hc-tip">${t}</div>`).join('')}</div></div>`).join('');
+}
+function renderDrain(){
+  document.getElementById('dodont-grid').innerHTML=`<div class="dodont-col"><div class="dodont-head"><span style="font-size:1.7rem">✅</span><h4>Do This</h4></div>${DRAIN_DOS.map(d=>`<div class="dodont-item"><span class="di">✅</span>${d}</div>`).join('')}</div><div class="dodont-col"><div class="dodont-head"><span style="font-size:1.7rem">❌</span><h4>Never Do This</h4></div>${DRAIN_DONTS.map(d=>`<div class="dodont-item"><span class="di">❌</span>${d}</div>`).join('')}</div>`;
+}
+function renderJournals(){
+  document.getElementById('journals-grid').innerHTML=JOURNALS.map((j,i)=>`<div class="journal-card rv d${(i%2)+1}"><div class="jc-journal">${j.journal}</div><div class="jc-title">${j.title}</div><div class="jc-authors">${j.authors}</div><div class="jc-abstract">${j.abstract}</div><div class="jc-meta"><span class="jc-year">${j.year}</span><span class="jc-impact">${j.impact}</span><a class="jc-link" href="${j.link}" target="_blank">Access →</a></div></div>`).join('');
+}
+function renderTicker(){
+  const items=[...TICKER_ITEMS,...TICKER_ITEMS];
+  document.getElementById('ticker-inner').innerHTML=items.map(t=>`<span class="ticker-item"><span class="ticker-dot"></span>${t}</span>`).join('');
+}
+
+// ── LANGUAGE ──────────────────────────────────────────────────
+function renderLangBtns(){
+  document.getElementById('lang-btns').innerHTML=LANGS.map(l=>`<button class="lang-btn${curLang===l.code?' on':''}" onclick="setLang('${l.code}')">${l.flag} ${l.label}</button>`).join('');
+}
+function renderLangGrid(){
+  document.getElementById('lang-grid-m').innerHTML=LANGS.map(l=>`<div class="lang-opt${curLang===l.code?' sel':''}" onclick="setLang('${l.code}');closeLangModal()"><div class="lo-flag">${l.flag}</div><div class="lo-name">${l.name}</div><div class="lo-native">${l.native}</div></div>`).join('');
+}
+function setLang(code){
+  curLang=code;localStorage.setItem('eco_lang',code);
+  document.getElementById('cur-lang-lbl').textContent=LANGS.find(l=>l.code===code).label;
+  renderLangBtns();applyTr();
+  toast('Language: '+LANGS.find(l=>l.code===code).name,'ok');
+}
+function applyTr(){
+  const tr=T[curLang]||T.en;
+  const map={news_title:'news-title',news_sub:'news-sub',pic_title:'pic-title',pic_sub:'pic-sub',read_title:'read-title',read_sub:'read-sub',health_title:'health-title',health_sub:'health-sub',drain_title:'drain-title',drain_sub:'drain-sub',journal_title:'journal-title',journal_sub:'journal-sub',cta_title:'cta-title',cta_body:'cta-body'};
+  Object.keys(map).forEach(k=>{const el=document.getElementById(map[k]);if(el&&tr[k])el.textContent=tr[k];});
+  document.body.style.direction=curLang==='ar'?'rtl':'ltr';
+}
+function openLangModal(){renderLangGrid();document.getElementById('lang-ov').classList.add('open');}
+function closeLangModal(){document.getElementById('lang-ov').classList.remove('open');}
+
+// ── NAV ───────────────────────────────────────────────────────
+function toggleDrw(){const d=document.getElementById('drw'),b=document.getElementById('hbg');const o=d.classList.contains('o');d.classList.toggle('o',!o);b.classList.toggle('o',!o);}
+document.addEventListener('click',e=>{const d=document.getElementById('drw'),b=document.getElementById('hbg');if(d&&d.classList.contains('o')&&!d.contains(e.target)&&b&&!b.contains(e.target)){d.classList.remove('o');b.classList.remove('o');}});
+window.addEventListener('scroll',()=>{document.getElementById('nav').classList.toggle('sc',window.scrollY>60);const p=document.getElementById('pb');if(p)p.style.width=(window.scrollY/(document.body.scrollHeight-window.innerHeight)*100)+'%';revealRv();});
+function revealRv(){document.querySelectorAll('.rv:not(.in)').forEach(el=>{if(el.getBoundingClientRect().top<window.innerHeight-60)el.classList.add('in');});}
+function toast(m,t='i'){const el=document.createElement('div');el.className='t '+t;el.textContent=m;const w=document.getElementById('tw');if(w){w.appendChild(el);requestAnimationFrame(()=>requestAnimationFrame(()=>el.classList.add('s')));setTimeout(()=>{el.classList.remove('s');setTimeout(()=>el.remove(),400);},3200);}}
+function wa(){window.open('https://wa.me/2349034567890?text='+encodeURIComponent('Hi EcoDamaturu! I need help.'),'_blank');}
+
+// ── INIT ──────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded',()=>{
+  renderTicker();renderLangBtns();renderNews();renderPic();
+  renderReadings();renderHealth();renderDrain();renderJournals();renderTrivia();
+  applyTr();setTimeout(revealRv,150);
 });
 </script>
 </body>
