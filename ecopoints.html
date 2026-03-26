@@ -58,7 +58,7 @@ nav.sc{box-shadow:0 2px 24px rgba(13,31,45,.10)}
 /* ── HERO BANNER ── */
 .pts-hero{
   background:linear-gradient(135deg,#0d1f2d 0%,#0f2818 50%,#0d1f2d 100%);
-  padding:calc(66px + 52px) var(--px) 56px;
+  padding:calc(66px + 46px + 52px) var(--px) 56px;
   position:relative;overflow:hidden;
 }
 .pts-hero::before{
@@ -240,7 +240,47 @@ nav.sc{box-shadow:0 2px 24px rgba(13,31,45,.10)}
 @keyframes bounce{0%,100%{transform:scale(1)}40%{transform:scale(1.3)}70%{transform:scale(.9)}}
 .confetti{position:absolute;pointer-events:none}
 
-/* ── FOOTER ── */
+/* ── API ADDITIONS ───────────────────────────────────────────── */
+
+/* Live weather bar */
+#eco-api-bar{background:linear-gradient(135deg,#0d1f2d 0%,#122b1a 100%);padding:11px var(--px);margin-top:66px}
+.api-bar-inner{max-width:1100px;margin:0 auto;display:flex;flex-wrap:wrap;gap:6px 20px;align-items:center;justify-content:space-between}
+.api-chip{display:inline-flex;align-items:center;gap:7px;font-size:.78rem;font-weight:500;color:rgba(255,255,255,.7)}
+.api-chip strong{color:#fff;font-weight:700}
+.api-chip .api-dot{width:6px;height:6px;border-radius:50%;background:var(--g2);animation:pulseD 2s infinite;flex-shrink:0}
+.api-chip .lbl{font-size:.66rem;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.5px;line-height:1}
+.api-chip-inner{display:flex;flex-direction:column;gap:1px}
+.api-divider{width:1px;height:24px;background:rgba(255,255,255,.08);display:none}
+@media(min-width:640px){.api-divider{display:block}}
+.api-sk{display:inline-block;height:12px;border-radius:5px;background:rgba(255,255,255,.07);animation:apisk 1.4s ease infinite;background-size:200% 100%}
+@keyframes apisk{0%{opacity:.4}50%{opacity:.8}100%{opacity:.4}}
+.api-flag{height:14px;border-radius:2px;vertical-align:middle;margin-right:4px}
+.api-updated{font-size:.63rem;color:rgba(255,255,255,.22);white-space:nowrap}
+
+/* AI Tips card */
+.ai-tips-box{background:linear-gradient(135deg,#f0faf5,#eaf7f0);border-radius:var(--r);padding:26px 24px;border:1.5px solid rgba(26,122,74,.13);margin-top:24px;position:relative;overflow:hidden}
+.ai-tips-box::after{content:"✨";position:absolute;right:18px;top:14px;font-size:1.8rem;opacity:.13;pointer-events:none}
+.ai-tips-hd{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+.ai-tips-hd h4{font-family:"Syne",sans-serif;font-size:.97rem;font-weight:800;color:var(--navy)}
+.ai-tips-btn{background:none;border:1.5px solid var(--g);color:var(--g);border-radius:50px;padding:5px 14px;font-size:.74rem;font-weight:600;cursor:pointer;font-family:"DM Sans",sans-serif;display:inline-flex;align-items:center;gap:5px;transition:.18s}
+.ai-tips-btn:hover{background:var(--g);color:#fff}
+.ai-tips-btn.loading svg{animation:spin360 .7s linear infinite}
+@keyframes spin360{to{transform:rotate(360deg)}}
+#ai-tips-body{font-size:.875rem;color:var(--tx);line-height:1.75;min-height:32px}
+.ai-tips-foot{font-size:.68rem;color:var(--mu);margin-top:10px}
+.tip-line{display:flex;gap:8px;margin-bottom:7px;align-items:flex-start}
+.tip-bullet{color:var(--g);font-weight:800;font-size:.85rem;flex-shrink:0;line-height:1.6}
+.tips-sk-line{display:block;height:12px;border-radius:5px;background:linear-gradient(90deg,#d6ede1 25%,#e8f5ed 50%,#d6ede1 75%);background-size:200% 100%;animation:apisk 1.4s ease infinite;margin-bottom:9px}
+
+/* NGN exchange card inside hero */
+.fx-mini{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:7px 14px;margin-top:14px;font-size:.79rem;color:rgba(255,255,255,.65)}
+.fx-mini strong{color:var(--gold);font-family:"Syne",sans-serif;font-weight:800}
+.fx-mini span.fx-lbl{font-size:.65rem;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.4px}
+
+/* Particle rain */
+@keyframes fall{0%{transform:translateY(-30px) rotate(0deg);opacity:1}100%{transform:translateY(110vh) rotate(540deg);opacity:0}}
+.eco-particle{position:fixed;top:0;z-index:9990;font-size:1.3rem;pointer-events:none;animation:fall linear forwards}
+
 footer{background:var(--navy);color:#fff;padding:48px var(--px) 24px}
 .ffg{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-bottom:36px}
 @media(min-width:700px){.ffg{grid-template-columns:2fr 1fr 1fr 1fr}}
@@ -268,6 +308,43 @@ footer{background:var(--navy);color:#fff;padding:48px var(--px) 24px}
 <div id="pb"></div>
 <div id="tw"></div>
 
+<!-- API BAR: live weather + Nigeria info -->
+<div id="eco-api-bar">
+  <div class="api-bar-inner">
+    <div class="api-chip">
+      <span class="api-dot"></span>
+      <div class="api-chip-inner">
+        <span class="lbl">Live Weather · Damaturu</span>
+        <strong id="ab-weather"><span class="api-sk" style="width:130px">&nbsp;</span></strong>
+      </div>
+    </div>
+    <div class="api-divider"></div>
+    <div class="api-chip">
+      <div class="api-chip-inner">
+        <span class="lbl">Humidity</span>
+        <strong id="ab-hum"><span class="api-sk" style="width:45px">&nbsp;</span></strong>
+      </div>
+    </div>
+    <div class="api-divider"></div>
+    <div class="api-chip">
+      <div class="api-chip-inner">
+        <span class="lbl">Rain Today</span>
+        <strong id="ab-rain"><span class="api-sk" style="width:55px">&nbsp;</span></strong>
+      </div>
+    </div>
+    <div class="api-divider"></div>
+    <div class="api-chip">
+      <div class="api-chip-inner">
+        <span class="lbl">Wind</span>
+        <strong id="ab-wind"><span class="api-sk" style="width:60px">&nbsp;</span></strong>
+      </div>
+    </div>
+    <div class="api-divider"></div>
+    <div class="api-chip" id="ab-country"><span class="api-sk" style="width:120px">&nbsp;</span></div>
+    <span class="api-updated" id="ab-ts"></span>
+  </div>
+</div>
+
 <!-- NAV -->
 <nav id="nav">
   <a class="logo" href="index.html"><span class="logo-dot"></span>Eco<b>Damaturu</b></a>
@@ -285,7 +362,7 @@ footer{background:var(--navy);color:#fff;padding:48px var(--px) 24px}
   </div>
   <div class="nr">
     <button class="lbtn" onclick="openLang()">🌍 EN</button>
-    <button class="hbg" id="hbg" onclick="toggleDrw()"><span></span><span></span><span></span></button>
+    <button class="hbg" id="hbg" onclick="toggleDrw(event)"><span></span><span></span><span></span></button>
   </div>
 </nav>
 <div class="drw" id="drw">
@@ -319,6 +396,11 @@ footer{background:var(--navy);color:#fff;padding:48px var(--px) 24px}
         <div class="bal-num" id="hero-pts">0</div>
         <div class="bal-unit">EcoPoints</div>
         <div class="bal-streak" id="hero-streak">🔥 0-day streak</div>
+        <div class="fx-mini" id="fx-mini" style="display:none">
+          <div><span class="fx-lbl">USD/NGN</span><br><strong id="fx-rate">—</strong></div>
+          <div style="width:1px;height:24px;background:rgba(255,255,255,.12)"></div>
+          <div><span class="fx-lbl">Live Rate</span><br><span id="fx-src" style="font-size:.68rem;color:rgba(255,255,255,.4)">loading…</span></div>
+        </div>
       </div>
     </div>
   </div>
@@ -355,6 +437,22 @@ footer{background:var(--navy);color:#fff;padding:48px var(--px) 24px}
     <!-- EARN -->
     <div class="tab-panel on" id="tab-earn">
       <div class="earn-grid" id="earn-grid"></div>
+      <!-- AI PERSONALISED TIPS -->
+      <div class="ai-tips-box rv">
+        <div class="ai-tips-hd">
+          <h4>🤖 Your Personalised EcoPoints Tips</h4>
+          <button class="ai-tips-btn" id="ai-tips-btn" onclick="fetchAITips()">
+            <svg id="ai-tips-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M1 4v6h6M23 20v-6h-6"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4-4.64 4.36A9 9 0 0 1 3.51 15"/></svg>
+            Refresh
+          </button>
+        </div>
+        <div id="ai-tips-body">
+          <span class="tips-sk-line" style="width:95%"></span>
+          <span class="tips-sk-line" style="width:80%"></span>
+          <span class="tips-sk-line" style="width:65%"></span>
+        </div>
+        <div class="ai-tips-foot" id="ai-tips-foot"></div>
+      </div>
     </div>
 
     <!-- REDEEM -->
@@ -415,7 +513,7 @@ footer{background:var(--navy);color:#fff;padding:48px var(--px) 24px}
     <div class="fco"><h5>Connect</h5><a onclick="window.open('https://wa.me/2349034567890','_blank')">WhatsApp</a><a>Twitter / X</a><a>Facebook</a><a href="contact.html">Contact Us</a></div>
   </div>
   <div class="fbt">
-    <span>© 2026 EcoDamaturu. Protecting Damaturu with Technology.</span>
+    <span>© 2025 EcoDamaturu. Protecting Damaturu with Technology.</span>
     <span>Built for Yobe State, Nigeria 🇳🇬</span>
     <a href="admin/index.html" class="admin-link" title="System">⚙</a>
   </div>
@@ -528,7 +626,8 @@ var LEADERBOARD = [
 ];
 
 // ── NAV ──────────────────────────────────────────────────────
-function toggleDrw() {
+function toggleDrw(e) {
+  if (e) e.stopPropagation();
   var d = document.getElementById("drw"), b = document.getElementById("hbg");
   var o = d.classList.contains("o");
   d.classList.toggle("o", !o); b.classList.toggle("o", !o);
@@ -541,12 +640,19 @@ document.addEventListener("click", function(e) {
 });
 window.addEventListener("scroll", function() {
   document.getElementById("nav").classList.toggle("sc", window.scrollY > 60);
-  var pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
-  document.getElementById("pb").style.width = pct + "%";
+  var scrollable = document.body.scrollHeight - window.innerHeight;
+  if (scrollable > 0) document.getElementById("pb").style.width = (window.scrollY / scrollable * 100) + "%";
   document.querySelectorAll(".rv:not(.in)").forEach(function(el) {
     if (el.getBoundingClientRect().top < window.innerHeight - 60) el.classList.add("in");
   });
 });
+function initRv() {
+  setTimeout(function() {
+    document.querySelectorAll(".rv").forEach(function(el) {
+      if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add("in");
+    });
+  }, 80);
+}
 
 // ── TOAST ────────────────────────────────────────────────────
 function toast(msg, type) {
@@ -824,6 +930,7 @@ function confirmRedeem() {
   document.getElementById("rm-confirm").style.display = "none";
   document.getElementById("redeem-modal-inner").classList.add("success-modal");
   toast("🎉 " + pendingReward.name + " redeemed! Visit LGA office to collect.", "ok");
+  particleRain(12);
   setTimeout(function() {
     closeModal();
     document.getElementById("rm-confirm").style.display = "";
@@ -853,6 +960,162 @@ function seedHistory() {
   if (getP() === 0) saveP(rs.length * 50);
 }
 
+// ── API 1: Open-Meteo — Live Weather (Damaturu 11.7449°N, 11.9611°E) ────────
+var _weatherCtx = "";
+function fetchWeather() {
+  var url = "https://api.open-meteo.com/v1/forecast" +
+    "?latitude=11.7449&longitude=11.9611" +
+    "&current=temperature_2m,relative_humidity_2m,precipitation,wind_speed_10m,weather_code" +
+    "&daily=precipitation_sum&timezone=Africa%2FLagos&forecast_days=1";
+  fetch(url)
+    .then(function(r) { return r.json(); })
+    .then(function(d) {
+      var c = d.current || {};
+      var codes = {0:"☀️ Clear",1:"🌤 Mostly Clear",2:"⛅ Partly Cloudy",3:"☁️ Overcast",
+        45:"🌫 Foggy",51:"🌦 Light Drizzle",61:"🌧 Rain",80:"🌧 Showers",95:"⛈️ Thunderstorm"};
+      function wmo(code) {
+        var nearest = 0;
+        Object.keys(codes).forEach(function(k) { if (parseInt(k) <= code) nearest = parseInt(k); });
+        return codes[nearest] || ("🌡️ " + code);
+      }
+      var todayRain = (d.daily && d.daily.precipitation_sum) ? d.daily.precipitation_sum[0] : c.precipitation;
+      document.getElementById("ab-weather").textContent = wmo(c.weather_code || 0) + "  " + c.temperature_2m + "°C";
+      document.getElementById("ab-hum").textContent  = c.relative_humidity_2m + "%";
+      document.getElementById("ab-rain").textContent = (todayRain || 0).toFixed(1) + " mm";
+      document.getElementById("ab-wind").textContent = c.wind_speed_10m + " km/h";
+      document.getElementById("ab-ts").textContent   = "Updated " + new Date().toLocaleTimeString("en-NG",{hour:"2-digit",minute:"2-digit"});
+      _weatherCtx = "Temp:" + c.temperature_2m + "°C, Humidity:" + c.relative_humidity_2m +
+        "%, Rain today:" + (todayRain||0).toFixed(1) + "mm, Wind:" + c.wind_speed_10m + "km/h";
+    })
+    .catch(function() {
+      document.getElementById("ab-weather").textContent = "Unavailable";
+    });
+}
+
+// ── API 2: REST Countries — Nigeria flag + official name ──────────────────
+function fetchCountry() {
+  fetch("https://restcountries.com/v3.1/alpha/NGA?fields=name,flags,population,subregion")
+    .then(function(r) { return r.json(); })
+    .then(function(d) {
+      var el = document.getElementById("ab-country");
+      if (!d || !el) return;
+      el.innerHTML =
+        "<img class='api-flag' src='" + d.flags.svg + "' alt='NG flag'>" +
+        "<div class='api-chip-inner'>" +
+          "<span class='lbl'>Country</span>" +
+          "<strong>Nigeria &nbsp;·&nbsp; Pop: " + Math.round(d.population / 1e6) + "M</strong>" +
+        "</div>";
+    })
+    .catch(function() {});
+}
+
+// ── API 3: ExchangeRate-API — Live USD/NGN rate ───────────────────────────
+function fetchExchangeRate() {
+  // Uses open exchange rates endpoint (no key needed for this pair)
+  fetch("https://open.er-api.com/v6/latest/USD")
+    .then(function(r) { return r.json(); })
+    .then(function(d) {
+      if (!d || !d.rates || !d.rates.NGN) return;
+      var rate = d.rates.NGN.toLocaleString("en-NG", {maximumFractionDigits: 0});
+      var el = document.getElementById("fx-rate");
+      var src = document.getElementById("fx-src");
+      var wrap = document.getElementById("fx-mini");
+      if (el) el.textContent = "₦" + rate;
+      if (src) src.textContent = "er-api.com";
+      if (wrap) wrap.style.display = "inline-flex";
+    })
+    .catch(function() {});
+}
+
+// ── API 4: Anthropic Claude AI — Personalised tips ───────────────────────
+function fetchAITips() {
+  var btn  = document.getElementById("ai-tips-btn");
+  var body = document.getElementById("ai-tips-body");
+  var foot = document.getElementById("ai-tips-foot");
+  btn.classList.add("loading");
+  body.innerHTML =
+    "<span class='tips-sk-line' style='width:95%'></span>" +
+    "<span class='tips-sk-line' style='width:80%'></span>" +
+    "<span class='tips-sk-line' style='width:65%'></span>";
+  foot.textContent = "";
+
+  var pts    = getP();
+  var cur    = getCurrentTier(pts);
+  var nxt    = getNextTier(pts);
+  var streak = getStreak();
+  var rpts   = getR().length;
+  var badges = getB().length;
+
+  var prompt =
+    "You are a friendly eco-engagement coach for EcoDamaturu, a community environmental app in Damaturu, Yobe State, Nigeria.\n\n" +
+    "User's current stats:\n" +
+    "• EcoPoints: " + pts + "\n" +
+    "• Tier: " + cur.name + " " + cur.icon + "\n" +
+    (nxt ? "• Next tier: " + nxt.name + " (needs " + (nxt.pts - pts) + " more pts)\n" : "• MAX TIER reached 🏆\n") +
+    "• Daily streak: " + streak + " days\n" +
+    "• Reports submitted: " + rpts + "\n" +
+    "• Badges earned: " + badges + " / 12\n" +
+    "• Live Damaturu weather: " + (_weatherCtx || "not available") + "\n\n" +
+    "Write exactly 3 short, specific, actionable tips to help this user earn more EcoPoints and level up. " +
+    "Reference their real numbers. If rain is high, mention flood reporting earns bonus points. " +
+    "Use bullet points starting with •. Be encouraging, concise, and local to Damaturu.";
+
+  fetch("https://api.anthropic.com/v1/messages", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      model: "claude-sonnet-4-20250514",
+      max_tokens: 1000,
+      messages: [{ role: "user", content: prompt }]
+    })
+  })
+  .then(function(r) { return r.json(); })
+  .then(function(d) {
+    var block = d.content && d.content.find(function(b) { return b.type === "text"; });
+    var text  = block ? block.text : null;
+    if (text) {
+      var lines = text.split("\n").filter(function(l) { return l.trim(); });
+      body.innerHTML = lines.map(function(l) {
+        var clean = l.replace(/^[•\-\*]\s*/, "");
+        if (l.trim().match(/^[•\-\*]/)) {
+          return "<div class='tip-line'><span class='tip-bullet'>•</span><span>" + clean + "</span></div>";
+        }
+        return "<p style='margin-bottom:7px'>" + clean + "</p>";
+      }).join("");
+    } else {
+      body.innerHTML = "<div class='tip-line'><span class='tip-bullet'>•</span><span>Keep submitting reports to earn more EcoPoints and unlock the next tier!</span></div>";
+    }
+    foot.textContent = "Generated by Claude AI · " + new Date().toLocaleString("en-NG") + " · Based on your live stats";
+    toast("✨ Tips refreshed!", "ok");
+  })
+  .catch(function() {
+    body.innerHTML =
+      "<div class='tip-line'><span class='tip-bullet'>•</span><span>Submit a flood or drainage report today — they earn +75 pts!</span></div>" +
+      "<div class='tip-line'><span class='tip-bullet'>•</span><span>Maintain your daily streak to unlock a 25 pts/day bonus.</span></div>" +
+      "<div class='tip-line'><span class='tip-bullet'>•</span><span>Check the Badges tab — you may be close to unlocking a new achievement.</span></div>";
+    foot.textContent = "Offline tips — AI temporarily unavailable";
+  })
+  .finally(function() { btn.classList.remove("loading"); });
+}
+
+// ── Particle celebration (used on redemption) ────────────────────────────
+function particleRain(count) {
+  var emojis = ["🌿","🍃","🌱","✨","💚"];
+  for (var i = 0; i < (count || 8); i++) {
+    (function(delay) {
+      setTimeout(function() {
+        var p = document.createElement("div");
+        p.className = "eco-particle";
+        p.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+        p.style.left = (5 + Math.random() * 90) + "vw";
+        p.style.animationDuration = (1.2 + Math.random() * 1.4) + "s";
+        document.body.appendChild(p);
+        p.addEventListener("animationend", function() { p.remove(); });
+      }, delay);
+    })(i * 110);
+  }
+}
+
 // ── LANGUAGE ─────────────────────────────────────────────────
 function openLang() { toast("Language settings available on the Homepage.", "i"); }
 
@@ -862,18 +1125,19 @@ function renderAll() {
   renderEarn();
   renderRedeem();
   checkBadges();
-  // Reveal animations
-  setTimeout(function() {
-    document.querySelectorAll(".rv").forEach(function(el) {
-      if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add("in");
-    });
-  }, 100);
+  initRv();
 }
 
 document.addEventListener("DOMContentLoaded", function() {
   seedHistory();
   updateStreak();
   renderAll();
+  // Boot APIs
+  fetchWeather();
+  fetchCountry();
+  fetchExchangeRate();
+  // Delay AI tips slightly so weather context loads first
+  setTimeout(fetchAITips, 1400);
 });
 </script>
 </body>
