@@ -4,19 +4,30 @@
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Flood Alerts — EcoDamaturu</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
 <style>
-:root{--g:#1a7a4a;--g2:#22a060;--g3:#b6f0d3;--navy:#0d1f2d;--earth:#c4813a;--bg:#f7f9f4;--white:#fff;--tx:#1a2a1e;--mu:#6b7f72;--red:#e05252;--blue:#3a7abf;--sh:0 2px 16px rgba(26,122,74,.09);--sh2:0 8px 32px rgba(26,122,74,.14);--r:16px;--rs:10px;--px:clamp(16px,5vw,80px)}
+:root{
+  --g:#1a7a4a;--g2:#22a060;--g3:#b6f0d3;
+  --navy:#0d1f2d;--earth:#c4813a;--bg:#f7f9f4;--white:#fff;
+  --tx:#1a2a1e;--mu:#6b7f72;--red:#e05252;--blue:#3a7abf;
+  --sh:0 2px 16px rgba(26,122,74,.09);--sh2:0 8px 32px rgba(26,122,74,.14);
+  --r:16px;--rs:12px;--px:clamp(16px,5vw,80px)
+}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--tx);overflow-x:hidden;min-width:320px}
 h1,h2,h3,h4{font-family:'Syne',sans-serif;line-height:1.15}
 img{max-width:100%;display:block}
-#pb{position:fixed;top:0;left:0;height:3px;background:var(--g);z-index:9999;width:0;transition:width .1s}
+
+/* Progress bar */
+#pb{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--g),var(--g2));z-index:9999;width:0;transition:width .1s}
+
+/* Toast */
 #tw{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:9999;display:flex;flex-direction:column;align-items:center;gap:8px;pointer-events:none}
 .t{background:var(--navy);color:#fff;padding:10px 22px;border-radius:50px;font-size:.875rem;font-weight:500;opacity:0;transform:translateY(10px);transition:.3s;white-space:nowrap;max-width:calc(100vw - 32px)}
 .t.s{opacity:1;transform:none}.t.ok{background:var(--g)}.t.err{background:var(--red)}.t.i{background:var(--blue)}
+
+/* Nav */
 nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:64px;padding:0 var(--px);display:flex;align-items:center;justify-content:space-between;gap:12px;background:rgba(247,249,244,.97);backdrop-filter:blur(16px);border-bottom:1px solid rgba(26,122,74,.08);transition:box-shadow .3s}
 nav.sc{box-shadow:0 2px 20px rgba(13,31,45,.10)}
 .logo{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;color:var(--g);text-decoration:none;flex-shrink:0}
@@ -41,6 +52,7 @@ nav.sc{box-shadow:0 2px 20px rgba(13,31,45,.10)}
 .drw a{font-size:1rem;font-weight:600;color:var(--tx);text-decoration:none;padding:15px var(--px);border-bottom:1px solid #f0f4f2;display:block;transition:.15s;-webkit-tap-highlight-color:transparent}
 .drw a:active{background:rgba(26,122,74,.06);color:var(--g)}
 .drw a.dcta{margin:10px var(--px) 0;background:var(--g);color:#fff;border-radius:12px;text-align:center;padding:15px 20px;border-bottom:none!important}
+
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 26px;border-radius:50px;font-size:.92rem;font-weight:600;cursor:pointer;border:none;transition:.22s;text-decoration:none;font-family:'DM Sans',sans-serif;white-space:nowrap}
 .btng{background:var(--g);color:#fff}.btng:hover{background:var(--g2);transform:translateY(-2px);box-shadow:0 6px 20px rgba(26,122,74,.28)}
 .btno{background:transparent;color:var(--g);border:2px solid var(--g)}.btno:hover{background:var(--g);color:#fff;transform:translateY(-2px)}
@@ -51,7 +63,7 @@ nav.sc{box-shadow:0 2px 20px rgba(13,31,45,.10)}
 .ph p{font-size:.97rem;color:var(--mu);max-width:540px;line-height:1.72}
 section{padding:64px var(--px)}
 .inner{max-width:1100px;margin:0 auto}
-.sec-t{font-size:clamp(1.4rem,3vw,2rem);font-weight:800;color:var(--navy);margin-bottom:12px}
+
 footer{background:var(--navy);color:#fff;padding:48px var(--px) 24px}
 .ffg{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-bottom:36px}
 @media(min-width:700px){.ffg{grid-template-columns:2fr 1fr 1fr 1fr}}
@@ -60,17 +72,76 @@ footer{background:var(--navy);color:#fff;padding:48px var(--px) 24px}
 .fco a{display:block;font-size:.82rem;color:rgba(255,255,255,.4);text-decoration:none;margin-bottom:7px;cursor:pointer;transition:.18s}
 .fco a:hover{color:var(--g3)}
 .fbt{border-top:1px solid rgba(255,255,255,.08);padding-top:18px;display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;font-size:.77rem;color:rgba(255,255,255,.28)}
+
 #wafab{position:fixed;bottom:24px;right:20px;z-index:901}
 .wabtn{width:54px;height:54px;border-radius:50%;background:#25D366;color:#fff;border:none;font-size:1.5rem;cursor:pointer;box-shadow:0 4px 18px rgba(37,211,102,.4);transition:.22s;display:flex;align-items:center;justify-content:center}
 .wabtn:hover{transform:scale(1.08)}
+
+/* Animations */
 .rv{opacity:0;transform:translateY(20px);transition:.55s ease}
 .rv.in{opacity:1;transform:none}
 .d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 26px;border-radius:50px;font-size:.92rem;font-weight:600;cursor:pointer;border:none;transition:.22s;text-decoration:none;font-family:'DM Sans',sans-serif}.btng{background:var(--g);color:#fff}.btng:hover{background:var(--g2);transform:translateY(-2px)}</style>
+
+/* ── NEW: Weather strip ── */
+#weather-strip{background:linear-gradient(135deg,var(--navy),#1a3a50);color:#fff;padding:14px var(--px)}
+.ws-inner{max-width:1100px;margin:0 auto;display:flex;flex-wrap:wrap;gap:18px;align-items:center;justify-content:space-between}
+.ws-title{font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:rgba(255,255,255,.5)}
+.ws-items{display:flex;flex-wrap:wrap;gap:20px}
+.ws-item{display:flex;align-items:center;gap:7px;font-size:.88rem;font-weight:500}
+.ws-item span.label{color:rgba(255,255,255,.5);font-size:.77rem}
+.ws-dot{width:8px;height:8px;border-radius:50%;background:var(--g2);display:inline-block;flex-shrink:0;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+.ws-updated{font-size:.73rem;color:rgba(255,255,255,.35)}
+
+/* ── NEW: Stat cards row ── */
+.stat-row{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-bottom:32px}
+@media(min-width:600px){.stat-row{grid-template-columns:repeat(4,1fr)}}
+.stat-card{background:var(--white);border-radius:var(--rs);padding:18px 16px;box-shadow:var(--sh);text-align:center}
+.stat-card .sc-val{font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;line-height:1}
+.stat-card .sc-lbl{font-size:.75rem;color:var(--mu);margin-top:6px;font-weight:500}
+
+/* ── Ward grid ── */
+.ward-card{background:var(--white);border-radius:var(--rs);padding:16px 18px;box-shadow:var(--sh);border-top:3px solid #ddd;transition:.2s;cursor:default}
+.ward-card:hover{box-shadow:var(--sh2);transform:translateY(-2px)}
+.ward-hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.ward-name{font-weight:700;font-size:.92rem;color:var(--navy)}
+.ward-badge{font-size:.72rem;font-weight:700;padding:3px 9px;border-radius:20px}
+.ward-sub{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.ward-sub span:first-child{font-size:.82rem;color:var(--mu)}
+.ward-pct{font-weight:800;font-family:'Syne',sans-serif;font-size:1.1rem}
+.ward-bar-bg{height:8px;background:#e8f0ea;border-radius:4px;overflow:hidden}
+.ward-bar-fill{height:100%;width:0%;border-radius:4px;transition:width 1.2s ease}
+.ward-rain{font-size:.73rem;color:var(--mu);margin-top:8px}
+
+/* ── AI Advisory box ── */
+#ai-advisory{margin-top:32px;background:linear-gradient(135deg,#fff8ee,#fff3e0);border-radius:var(--r);padding:24px;border-left:4px solid var(--earth)}
+.adv-header{display:flex;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap}
+.adv-header h4{font-size:1rem;font-weight:800;color:var(--navy);flex:1}
+.adv-refresh{background:none;border:1.5px solid var(--earth);color:var(--earth);border-radius:50px;padding:5px 14px;font-size:.76rem;font-weight:600;cursor:pointer;transition:.18s;font-family:'DM Sans',sans-serif;display:inline-flex;align-items:center;gap:5px}
+.adv-refresh:hover{background:var(--earth);color:#fff}
+.adv-refresh.spin svg{animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+#adv-text{font-size:.9rem;color:var(--tx);line-height:1.7;min-height:40px}
+.adv-src{font-size:.73rem;color:var(--mu);margin-top:10px}
+
+/* ── Forecast mini chart ── */
+#forecast-section{padding:48px var(--px)}
+.forecast-bar-wrap{display:flex;gap:10px;align-items:flex-end;height:120px;margin-top:16px}
+.fc-day{display:flex;flex-direction:column;align-items:center;gap:4px;flex:1}
+.fc-bar-bg{width:100%;background:#e8f0ea;border-radius:6px;display:flex;flex-direction:column;justify-content:flex-end;height:100px;overflow:hidden}
+.fc-bar-fill{width:100%;background:linear-gradient(to top,var(--g),var(--g2));border-radius:6px;transition:height 1s ease;height:0}
+.fc-label{font-size:.7rem;color:var(--mu);font-weight:500;text-align:center}
+.fc-mm{font-size:.68rem;color:var(--tx);font-weight:600}
+
+/* skeleton shimmer */
+.sk{background:linear-gradient(90deg,#e8ede9 25%,#f0f5f1 50%,#e8ede9 75%);background-size:200% 100%;animation:sk 1.4s infinite;border-radius:6px}
+@keyframes sk{to{background-position:-200% 0}}
+</style>
 </head>
 <body>
 <div id="pb"></div>
 <div id="tw"></div>
+
 <nav id="nav">
   <a class="logo" href="index.html">Eco<b>Damaturu</b></a>
   <div class="nl" id="nl">
@@ -81,44 +152,102 @@ footer{background:var(--navy);color:#fff;padding:48px var(--px) 24px}
     <a href="flood.html" class="cur">Flood Alerts</a>
     <a href="calendar.html">Calendar</a>
     <a href="education.html">Education</a>
+    <a href="ecopoints.html">EcoPoints</a>
     <a href="contact.html">Contact</a>
-    <a href="ecopoints.html" class="cur">EcoPoints</a>
+    <a href="report.html" class="cta">+ Report Issue</a>
   </div>
   <div class="nr">
     <button class="lbtn">🌍 EN</button>
     <button class="hbg" id="hbg" onclick="toggleDrw()"><span></span><span></span><span></span></button>
   </div>
 </nav>
+
 <div class="drw" id="drw">
   <a href="index.html">🏠 Home</a>
   <a href="features.html">⚡ Features</a>
-  <a href="report.html">📸 Report an Issue</a>
-  <a href="map.html">🗺️ Live Map</a>
-  <a href="flood.html" class="cur">🌊 Flood Alerts</a>
+  <a href="report.html">📝 Report Issue</a>
+  <a href="map.html">🗺 Live Map</a>
+  <a href="flood.html">🌊 Flood Alerts</a>
   <a href="calendar.html">📅 Calendar</a>
   <a href="education.html">📚 Education</a>
+  <a href="ecopoints.html">🏆 EcoPoints</a>
   <a href="contact.html">📞 Contact</a>
   <a href="report.html" class="dcta">📸 Report an Issue Now</a>
 </div>
 
-<div class="ph"><div class="ph-i rv"><div class="tag">Flood Intelligence</div><h1>Ward-by-Ward Flood Risk Dashboard</h1><p>Live AI risk scores for all major Damaturu wards, updated every 6 hours using rainfall data, drainage reports, and satellite imagery.</p></div></div>
+<!-- ── Live weather strip ── -->
+<div id="weather-strip" style="margin-top:64px">
+  <div class="ws-inner">
+    <div>
+      <div class="ws-title">Live Conditions — Damaturu, Yobe</div>
+      <div id="ws-items" class="ws-items">
+        <div class="ws-item sk" style="width:180px;height:18px;border-radius:9px">&nbsp;</div>
+      </div>
+    </div>
+    <div id="ws-updated" class="ws-updated"></div>
+  </div>
+</div>
+
+<div class="ph"><div class="ph-i rv">
+  <div class="tag">Flood Intelligence</div>
+  <h1>Ward-by-Ward Flood Risk Dashboard</h1>
+  <p>Live AI risk scores for all major Damaturu wards, updated every 6 hours using real rainfall data, drainage reports, and satellite imagery.</p>
+</div></div>
+
 <section style="background:var(--white)">
   <div class="inner">
-    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:14px" id="wards-grid"></div>
-    <div style="margin-top:32px;background:linear-gradient(135deg,#fff8ee,#fff3e0);border-radius:var(--r);padding:24px;border-left:4px solid var(--earth)">
-      <h4 style="font-size:1rem;font-weight:800;color:var(--navy);margin-bottom:8px">⚠️ Current Flood Advisory</h4>
-      <p style="font-size:.9rem;color:var(--tx);line-height:1.6">Hausari and Gujba Road wards are currently at <strong>HIGH RISK</strong>. Residents in low-lying areas should move valuables to higher ground and prepare emergency supplies. Monitor this page for updates every 6 hours.</p>
+    <!-- Stat summary row -->
+    <div class="stat-row rv" id="stat-row">
+      <div class="stat-card"><div class="sc-val sk" style="width:60px;height:28px;margin:0 auto">&nbsp;</div><div class="sc-lbl">Wards Monitored</div></div>
+      <div class="stat-card"><div class="sc-val sk" style="width:60px;height:28px;margin:0 auto">&nbsp;</div><div class="sc-lbl">High Risk Wards</div></div>
+      <div class="stat-card"><div class="sc-val sk" style="width:80px;height:28px;margin:0 auto">&nbsp;</div><div class="sc-lbl">Rainfall (mm) Today</div></div>
+      <div class="stat-card"><div class="sc-val sk" style="width:60px;height:28px;margin:0 auto">&nbsp;</div><div class="sc-lbl">Overall City Risk</div></div>
+    </div>
+
+    <!-- Wards grid -->
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:14px" id="wards-grid">
+      <!-- skeleton placeholders -->
+      ${[...Array(6)].map(()=>`<div class="sk" style="height:120px;border-radius:12px"></div>`).join('')}
+    </div>
+
+    <!-- AI Advisory -->
+    <div id="ai-advisory">
+      <div class="adv-header">
+        <span>⚠️</span>
+        <h4>AI-Powered Flood Advisory</h4>
+        <button class="adv-refresh" id="adv-btn" onclick="fetchAdvisory()">
+          <svg id="adv-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M1 4v6h6M23 20v-6h-6"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4-4.64 4.36A9 9 0 0 1 3.51 15"/></svg>
+          Refresh Advisory
+        </button>
+      </div>
+      <div id="adv-text"><span class="sk" style="display:block;height:14px;width:90%;margin-bottom:8px"></span><span class="sk" style="display:block;height:14px;width:75%"></span></div>
+      <div class="adv-src" id="adv-src"></div>
     </div>
   </div>
 </section>
-<section style="background:var(--bg)">
+
+<!-- ── 7-day rainfall forecast ── -->
+<section id="forecast-section" style="background:var(--bg)">
+  <div class="inner">
+    <div class="tag rv">7-Day Forecast</div>
+    <h2 class="rv d1" style="font-size:clamp(1.3rem,3vw,1.8rem);font-weight:800;color:var(--navy);margin-bottom:6px">Rainfall Forecast — Damaturu</h2>
+    <p class="rv d2" style="font-size:.88rem;color:var(--mu);margin-bottom:24px">Live data from Open-Meteo weather API. Higher rainfall increases flood probability.</p>
+    <div class="forecast-bar-wrap rv d3" id="forecast-bars">
+      ${[...Array(7)].map(()=>`<div class="fc-day"><div class="sk" style="width:100%;height:100px;border-radius:6px"></div><div class="sk" style="width:30px;height:10px;border-radius:4px;margin-top:4px"></div></div>`).join('')}
+    </div>
+  </div>
+</section>
+
+<!-- ── Preparation guide ── -->
+<section style="background:var(--white)">
   <div class="inner">
     <div class="tag rv">Preparation Guide</div>
     <h2 class="rv d1" style="font-size:clamp(1.3rem,3vw,1.8rem);font-weight:800;color:var(--navy);margin-bottom:28px">What to do in each risk level</h2>
     <div style="display:grid;grid-template-columns:1fr;gap:16px" id="guide-grid"></div>
   </div>
 </section>
-<section style="background:var(--white)">
+
+<section style="background:var(--bg)">
   <div class="inner" style="text-align:center">
     <div class="tag rv">Report Flooding</div>
     <h2 class="rv d1" style="font-size:clamp(1.3rem,3vw,1.8rem);font-weight:800;color:var(--navy);margin-bottom:10px">See flooding in your area?</h2>
@@ -126,150 +255,279 @@ footer{background:var(--navy);color:#fff;padding:48px var(--px) 24px}
     <a class="btn btng rv d3" href="report.html">🌊 Report a Flood Issue</a>
   </div>
 </section>
+
 <footer>
   <div class="ffg">
     <div class="fb2"><div style="font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:800;color:#fff">Eco<span style="color:#c4813a">Damaturu</span></div><p>AI-powered environmental platform for Damaturu, Yobe State, Nigeria.</p></div>
     <div class="fco"><h5>Pages</h5><a href="index.html">Home</a><a href="features.html">Features</a><a href="report.html">Report Issue</a><a href="map.html">Live Map</a></div>
-    <div class="fco"><h5>More</h5><a href="flood.html">Flood Alerts</a><a href="calendar.html">Calendar</a><a href="education.html">Education</a><a href="contact.html">Contact</a></div>
+    <div class="fco"><h5>More</h5><a href="flood.html">Flood Alerts</a><a href="calendar.html">Calendar</a><a href="education.html">Education</a><a href="ecopoints.html">EcoPoints 🏆</a><a href="contact.html">Contact</a></div>
     <div class="fco"><h5>Connect</h5><a onclick="wa()">WhatsApp</a><a>Twitter / X</a><a>Facebook</a><a>Instagram</a></div>
   </div>
-  <div class="fbt"><span>© 2026 EcoDamaturu. Protecting Damaturu with Technology.</span><span>Built for Yobe State, Nigeria 🇳🇬</span></div>
+  <div class="fbt"><span>© 2025 EcoDamaturu. Protecting Damaturu with Technology.</span><span>Built for Yobe State, Nigeria 🇳🇬</span></div>
 </footer>
+
 <div id="wafab"><button class="wabtn" onclick="wa()">💬</button></div>
+
 <script>
-function toggleDrw() {
-    const d = document.getElementById('drw');
-    const b = document.getElementById('hbg');
-    if (!d || !b) return;
-    const isOpen = d.classList.contains('o');
-    d.classList.toggle('o', !isOpen);
-    b.classList.toggle('o', !isOpen);
-}
-
-// Global click listener to close drawer when clicking outside
-document.addEventListener('click', e => {
-    const d = document.getElementById('drw');
-    const b = document.getElementById('hbg');
-    if (d && d.classList.contains('o') && !d.contains(e.target) && b && !b.contains(e.target)) {
-        d.classList.remove('o');
-        b.classList.remove('o');
-    }
+/* ───────────── Utilities ───────────── */
+function toggleDrw(){const d=document.getElementById('drw'),b=document.getElementById('hbg');const o=d.classList.contains('o');d.classList.toggle('o',!o);b.classList.toggle('o',!o)}
+document.addEventListener('click',e=>{const d=document.getElementById('drw'),b=document.getElementById('hbg');if(d&&d.classList.contains('o')&&!d.contains(e.target)&&b&&!b.contains(e.target)){d.classList.remove('o');b.classList.remove('o')}});
+window.addEventListener('scroll',()=>{
+  document.getElementById('nav').classList.toggle('sc',window.scrollY>60);
+  const p=document.getElementById('pb');
+  if(p)p.style.width=(window.scrollY/(document.body.scrollHeight-window.innerHeight)*100)+'%';
+  document.querySelectorAll('.rv:not(.in)').forEach(el=>{if(el.getBoundingClientRect().top<window.innerHeight-60)el.classList.add('in')});
 });
+function toast(m,t='i'){const el=document.createElement('div');el.className='t '+t;el.textContent=m;const w=document.getElementById('tw');if(w){w.appendChild(el);requestAnimationFrame(()=>requestAnimationFrame(()=>el.classList.add('s')));setTimeout(()=>{el.classList.remove('s');setTimeout(()=>el.remove(),400)},3400)}}
+function wa(){window.open('https://wa.me/2349034567890?text='+encodeURIComponent('Hi EcoDamaturu! I need help.'),'_blank')}
+function initRv(){setTimeout(()=>document.querySelectorAll('.rv').forEach(el=>{if(el.getBoundingClientRect().top<window.innerHeight)el.classList.add('in')}),100)}
 
-// Scroll-based interactions: Progress bar, Nav styling, and Reveal animations
-window.addEventListener('scroll', () => {
-    const nav = document.getElementById('nav');
-    const pb = document.getElementById('pb');
-    
-    // Toggle nav shadow
-    if (nav) nav.classList.toggle('sc', window.scrollY > 60);
-    
-    // Update scroll progress bar
-    if (pb) {
-        const scrollPercent = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
-        pb.style.width = scrollPercent + '%';
-    }
-    
-    // Trigger "Reveal" animations
-    document.querySelectorAll('.rv:not(.in)').forEach(el => {
-        if (el.getBoundingClientRect().top < window.innerHeight - 60) {
-            el.classList.add('in');
-        }
-    });
-});
-
-function wa() {
-    const msg = encodeURIComponent('Hi EcoDamaturu! I need help regarding flood alerts.');
-    window.open(`https://wa.me/2349034567890?text=${msg}`, '_blank');
-}
-
-function initRv() {
-    // Initial check for elements already in view on page load
-    setTimeout(() => {
-        document.querySelectorAll('.rv').forEach(el => {
-            if (el.getBoundingClientRect().top < window.innerHeight) {
-                el.classList.add('in');
-            }
-        });
-    }, 100);
-}
-
-// --- Data & Rendering ---
-
-const wards = [
-    { name: 'Hausari', risk: 78, level: 'h' }, { name: 'Gujba Road', risk: 71, level: 'h' },
-    { name: 'Bolori', risk: 65, level: 'm' }, { name: 'Pompomari', risk: 55, level: 'm' },
-    { name: 'Gwange', risk: 48, level: 'm' }, { name: 'Sabon Gari', risk: 44, level: 'm' },
-    { name: 'Fari', risk: 32, level: 'l' }, { name: 'Shehuri North', risk: 22, level: 'l' },
-    { name: 'Buluburde', risk: 58, level: 'm' }, { name: 'Kaliyari', risk: 38, level: 'l' },
-    { name: 'Kukareta', risk: 45, level: 'm' }, { name: 'Njiwaji', risk: 27, level: 'l' }
+/* ───────────── Ward data ───────────── */
+const wards=[
+  {name:'Hausari',risk:78,level:'h'},{name:'Gujba Road',risk:71,level:'h'},
+  {name:'Bolori',risk:65,level:'m'},{name:'Pompomari',risk:55,level:'m'},
+  {name:'Gwange',risk:48,level:'m'},{name:'Sabon Gari',risk:44,level:'m'},
+  {name:'Fari',risk:32,level:'l'},{name:'Shehuri North',risk:22,level:'l'},
+  {name:'Buluburde',risk:58,level:'m'},{name:'Kaliyari',risk:38,level:'l'},
+  {name:'Kukareta',risk:45,level:'m'},{name:'Njiwaji',risk:27,level:'l'}
 ];
+const wc={h:'#e05252',m:'#c4813a',l:'#1a7a4a'};
+const wl={h:'HIGH RISK',m:'MEDIUM RISK',l:'LOW RISK'};
 
-const wc = { h: '#e05252', m: '#c4813a', l: '#1a7a4a' };
-const wl = { h: 'HIGH RISK', m: 'MEDIUM RISK', l: 'LOW RISK' };
-
-function renderWards() {
-    const grid = document.getElementById('wards-grid');
-    if (!grid) return;
-
-    grid.innerHTML = wards.map((w, i) => `
-        <div style="background:var(--white);border-radius:var(--rs);padding:16px 18px;box-shadow:var(--sh);border-top:3px solid ${wc[w.level]}">
-            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
-                <span style="font-weight:700;font-size:.92rem;color:var(--navy)">${w.name} Ward</span>
-                <span style="font-size:.76rem;font-weight:700;padding:3px 9px;border-radius:20px;background:${wc[w.level]}22;color:${wc[w.level]}">${wl[w.level]}</span>
-            </div>
-            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-                <span style="font-size:.82rem;color:var(--mu)">Flood probability</span>
-                <span style="font-weight:800;color:${wc[w.level]};font-family:'Syne',sans-serif;font-size:1.1rem">${w.risk}%</span>
-            </div>
-            <div style="height:8px;background:#e8f0ea;border-radius:4px;overflow:hidden">
-                <div id="bar-${i}" style="height:100%;width:0%;background:${wc[w.level]};border-radius:4px;transition:width 1.2s cubic-bezier(0.1, 0.5, 0.5, 1)"></div>
-            </div>
-        </div>`).join('');
-
-    // Animate bars after a short delay
-    setTimeout(() => {
-        wards.forEach((w, i) => {
-            const el = document.getElementById(`bar-${i}`);
-            if (el) el.style.width = w.risk + '%';
-        });
-    }, 300);
+/* ───────────── Render wards ───────────── */
+function renderWards(rainMm){
+  const grid=document.getElementById('wards-grid');
+  grid.innerHTML=wards.map(w=>{
+    // Slightly adjust risk if we have real rain data
+    let displayRisk=w.risk;
+    if(rainMm!=null){
+      const boost=Math.min(15,Math.round(rainMm/3));
+      displayRisk=Math.min(99,w.risk+boost);
+    }
+    const lvl=displayRisk>=70?'h':displayRisk>=40?'m':'l';
+    const col=wc[lvl];
+    const safeId='wf'+w.name.replace(/\s+/g,'');
+    return `<div class="ward-card rv" style="border-top-color:${col}">
+      <div class="ward-hd">
+        <span class="ward-name">${w.name} Ward</span>
+        <span class="ward-badge" style="background:${col}22;color:${col}">${wl[lvl]}</span>
+      </div>
+      <div class="ward-sub">
+        <span>Flood probability</span>
+        <span class="ward-pct" style="color:${col}">${displayRisk}%</span>
+      </div>
+      <div class="ward-bar-bg"><div id="${safeId}" class="ward-bar-fill" style="background:${col}"></div></div>
+      ${rainMm!=null?`<div class="ward-rain">🌧 Rain today: ${rainMm.toFixed(1)} mm</div>`:''}
+    </div>`;
+  }).join('');
+  setTimeout(()=>wards.forEach(w=>{
+    let displayRisk=w.risk;
+    if(rainMm!=null)displayRisk=Math.min(99,w.risk+Math.min(15,Math.round(rainMm/3)));
+    const el=document.getElementById('wf'+w.name.replace(/\s+/g,''));
+    if(el)el.style.width=displayRisk+'%';
+  }),350);
+  initRv();
 }
 
-function renderGuides() {
-    const guideGrid = document.getElementById('guide-grid');
-    if (!guideGrid) return;
-
-    const guides = [
-        { 
-            level: '🔴 HIGH RISK (70%+)', col: '#e05252', bg: '#fff0f0', 
-            actions: ['Move valuables to upper floors', 'Prepare emergency bag', 'Identify evacuation routes', 'Check on vulnerable neighbors'] 
-        },
-        { 
-            level: '🟡 MEDIUM RISK (40–69%)', col: '#c4813a', bg: '#fff8ee', 
-            actions: ['Monitor updates every 2-3 hours', 'Clear debris from home drains', 'Park vehicles on higher ground', 'Keep phone charged'] 
-        },
-        { 
-            level: '🟢 LOW RISK (0–39%)', col: '#1a7a4a', bg: '#f0f9f4', 
-            actions: ['Stay informed via WhatsApp/SMS', 'Maintain home drainage', 'Know your ward evacuation route'] 
-        }
-    ];
-
-    guideGrid.innerHTML = guides.map(g => `
-        <div style="background:${g.bg};border-radius:var(--r);padding:22px 24px;border-left:4px solid ${g.col}" class="rv">
-            <h4 style="font-size:.97rem;font-weight:800;color:${g.col};margin-bottom:12px">${g.level}</h4>
-            <ul style="list-style:none;display:flex;flex-direction:column;gap:8px">
-                ${g.actions.map(a => `<li style="font-size:.875rem;color:var(--tx);display:flex;gap:8px;align-items:flex-start"><span style="color:${g.col}">✓</span>${a}</li>`).join('')}
-            </ul>
-        </div>`).join('');
+/* ───────────── Render stat row ───────────── */
+function renderStats(rainMm,highCount){
+  const avgRisk=Math.round(wards.reduce((s,w)=>s+w.risk,0)/wards.length);
+  const cityLevel=avgRisk>=70?'🔴 HIGH':avgRisk>=40?'🟡 MEDIUM':'🟢 LOW';
+  const row=document.getElementById('stat-row');
+  row.innerHTML=`
+    <div class="stat-card rv"><div class="sc-val" style="color:var(--g)">${wards.length}</div><div class="sc-lbl">Wards Monitored</div></div>
+    <div class="stat-card rv d1"><div class="sc-val" style="color:var(--red)">${highCount}</div><div class="sc-lbl">High Risk Wards</div></div>
+    <div class="stat-card rv d2"><div class="sc-val" style="color:var(--blue)">${rainMm!=null?rainMm.toFixed(1):'—'}</div><div class="sc-lbl">Rainfall (mm) Today</div></div>
+    <div class="stat-card rv d3"><div class="sc-val" style="color:var(--earth);font-size:1.1rem">${cityLevel}</div><div class="sc-lbl">Overall City Risk</div></div>`;
+  initRv();
 }
 
-// --- Initialization ---
+/* ───────────── Open-Meteo API ───────────── */
+// Damaturu, Yobe State: 11.7449° N, 11.9611° E
+const LAT=11.7449, LON=11.9611;
 
-document.addEventListener('DOMContentLoaded', () => {
-    initRv();
-    renderWards();
-    renderGuides();
+async function fetchWeather(){
+  try{
+    const url=`https://api.open-meteo.com/v1/forecast?latitude=${LAT}&longitude=${LON}`+
+      `&current=temperature_2m,relative_humidity_2m,precipitation,wind_speed_10m,weather_code`+
+      `&daily=precipitation_sum,precipitation_probability_max,temperature_2m_max`+
+      `&timezone=Africa%2FLagos&forecast_days=7`;
+    const res=await fetch(url);
+    if(!res.ok)throw new Error('Weather fetch failed');
+    const d=await res.json();
+    return d;
+  }catch(e){
+    console.warn('Weather API error:',e);
+    return null;
+  }
+}
+
+function wmoToDesc(code){
+  if(code===0)return'☀️ Clear';
+  if(code<=3)return'⛅ Partly cloudy';
+  if(code<=48)return'🌫️ Foggy';
+  if(code<=57)return'🌦 Drizzle';
+  if(code<=67)return'🌧 Rain';
+  if(code<=77)return'🌨 Snow';
+  if(code<=82)return'🌧 Rain showers';
+  if(code<=99)return'⛈️ Thunderstorm';
+  return'🌡️ Unknown';
+}
+
+function renderWeatherStrip(d){
+  if(!d||!d.current){
+    document.getElementById('ws-items').innerHTML=`<div class="ws-item"><span style="color:rgba(255,255,255,.5)">Weather data unavailable</span></div>`;
+    return;
+  }
+  const c=d.current;
+  const html=`
+    <div class="ws-item"><span class="ws-dot"></span><strong>${wmoToDesc(c.weather_code)}</strong></div>
+    <div class="ws-item"><span class="label">Temp</span><strong>${c.temperature_2m}°C</strong></div>
+    <div class="ws-item"><span class="label">Humidity</span><strong>${c.relative_humidity_2m}%</strong></div>
+    <div class="ws-item"><span class="label">Rain now</span><strong>${c.precipitation} mm</strong></div>
+    <div class="ws-item"><span class="label">Wind</span><strong>${c.wind_speed_10m} km/h</strong></div>`;
+  document.getElementById('ws-items').innerHTML=html;
+  const now=new Date();
+  document.getElementById('ws-updated').textContent=`Updated ${now.toLocaleTimeString('en-NG',{hour:'2-digit',minute:'2-digit'})}`;
+}
+
+function renderForecast(d){
+  const container=document.getElementById('forecast-bars');
+  if(!d||!d.daily){
+    container.innerHTML=`<p style="color:var(--mu);font-size:.88rem">Forecast data unavailable.</p>`;
+    return;
+  }
+  const days=d.daily;
+  const maxRain=Math.max(...days.precipitation_sum,1);
+  const dayNames=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  const html=days.time.map((t,i)=>{
+    const rain=days.precipitation_sum[i]||0;
+    const pct=Math.round((rain/maxRain)*100);
+    const date=new Date(t);
+    const label=i===0?'Today':dayNames[date.getDay()];
+    const prob=days.precipitation_probability_max[i]||0;
+    const col=pct>70?'#e05252':pct>40?'#c4813a':'#1a7a4a';
+    return `<div class="fc-day">
+      <div class="fc-bar-bg">
+        <div class="fc-bar-fill" id="fcb${i}" style="background:linear-gradient(to top,${col},${col}88)"></div>
+      </div>
+      <div class="fc-label">${label}</div>
+      <div class="fc-mm">${rain.toFixed(1)}mm</div>
+      <div class="fc-label" style="color:var(--blue)">${prob}%</div>
+    </div>`;
+  }).join('');
+  container.innerHTML=html;
+  setTimeout(()=>{
+    days.precipitation_sum.forEach((_,i)=>{
+      const el=document.getElementById('fcb'+i);
+      const rain=days.precipitation_sum[i]||0;
+      const pct=Math.round((rain/maxRain)*100);
+      if(el)el.style.height=Math.max(pct,4)+'%';
+    });
+  },400);
+}
+
+/* ───────────── Anthropic AI Advisory ───────────── */
+async function fetchAdvisory(weatherData){
+  const btn=document.getElementById('adv-btn');
+  const textEl=document.getElementById('adv-text');
+  const srcEl=document.getElementById('adv-src');
+  btn.classList.add('spin');
+  textEl.innerHTML=`<span class="sk" style="display:block;height:14px;width:90%;margin-bottom:8px"></span><span class="sk" style="display:block;height:14px;width:75%"></span>`;
+  srcEl.textContent='';
+
+  // Build context from live weather + ward data
+  const highRisk=wards.filter(w=>w.level==='h').map(w=>w.name).join(', ');
+  const medRisk=wards.filter(w=>w.level==='m').map(w=>w.name).join(', ');
+  let weatherCtx='Weather data not available.';
+  if(weatherData&&weatherData.current){
+    const c=weatherData.current;
+    const todayRain=weatherData.daily?.precipitation_sum?.[0]||0;
+    const tomorrowRain=weatherData.daily?.precipitation_sum?.[1]||0;
+    weatherCtx=`Current: ${c.temperature_2m}°C, humidity ${c.relative_humidity_2m}%, precipitation ${c.precipitation}mm. Today's total: ${todayRain}mm. Tomorrow forecast: ${tomorrowRain}mm.`;
+  }
+
+  const prompt=`You are a flood risk advisor for Damaturu, Yobe State, Nigeria. Generate a concise, actionable flood advisory (3-4 sentences) for residents.
+
+Current ward risk data:
+- HIGH RISK wards: ${highRisk}
+- MEDIUM RISK wards: ${medRisk}
+- Live weather: ${weatherCtx}
+
+Write in clear, direct language for Damaturu residents. Mention specific high-risk wards, give practical advice, and note rainfall conditions. Keep it urgent but calm.`;
+
+  try{
+    const res=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        model:'claude-sonnet-4-20250514',
+        max_tokens:1000,
+        messages:[{role:'user',content:prompt}]
+      })
+    });
+    const data=await res.json();
+    const text=data.content?.find(b=>b.type==='text')?.text||'Advisory generation failed. Please check conditions manually.';
+    textEl.textContent=text;
+    srcEl.textContent=`Generated by Claude AI · ${new Date().toLocaleString('en-NG')} · Based on Open-Meteo weather data`;
+    toast('Advisory updated','ok');
+  }catch(e){
+    console.error('AI advisory error:',e);
+    textEl.innerHTML=`<strong>⚠️ Current Flood Advisory:</strong> Hausari and Gujba Road wards are at HIGH RISK. Residents in low-lying areas should move valuables to higher ground and prepare emergency supplies. Monitor this page for updates every 6 hours.`;
+    srcEl.textContent='Static advisory — AI service temporarily unavailable';
+  }
+  btn.classList.remove('spin');
+}
+
+/* ───────────── Guide grid ───────────── */
+function renderGuide(){
+  const guides=[
+    {level:'🔴 HIGH RISK (70%+)',col:'#e05252',bg:'#fff0f0',actions:['Move valuables and important documents to upper floors or higher ground','Prepare an emergency bag with water, food, medications, and torch','Identify your nearest evacuation route and assembly point','Check on elderly and vulnerable neighbours — offer to help them evacuate','Avoid crossing flooded roads — even shallow water can be dangerous']},
+    {level:'🟡 MEDIUM RISK (40–69%)',col:'#c4813a',bg:'#fff8ee',actions:['Monitor this page and local radio for updates every 2–3 hours','Clear debris and leaves from drains and gutters near your home','Park vehicles on higher ground if possible','Keep phone charged and have emergency contacts ready','Report any blocked drains using our Report page']},
+    {level:'🟢 LOW RISK (0–39%)',col:'#1a7a4a',bg:'#f0f9f4',actions:['Stay informed — conditions can change rapidly during rainy season','Ensure your home drains are clear and maintained','Know your ward\'s flood risk level and evacuation route','Report any early warning signs of waterlogging in your area','Subscribe to flood alerts via WhatsApp or SMS']}
+  ];
+  document.getElementById('guide-grid').innerHTML=guides.map(g=>`
+    <div style="background:${g.bg};border-radius:var(--r);padding:22px 24px;border-left:4px solid ${g.col}" class="rv">
+      <h4 style="font-size:.97rem;font-weight:800;color:${g.col};margin-bottom:12px">${g.level}</h4>
+      <ul style="list-style:none;display:flex;flex-direction:column;gap:8px">${g.actions.map(a=>`<li style="font-size:.875rem;color:var(--tx);display:flex;gap:8px;align-items:flex-start"><span style="color:${g.col};font-size:.9rem;flex-shrink:0">✓</span>${a}</li>`).join('')}</ul>
+    </div>`).join('');
+}
+
+/* ───────────── Bootstrap ───────────── */
+document.addEventListener('DOMContentLoaded', async ()=>{
+  initRv();
+  renderGuide();
+
+  // Immediately render wards with static data so grid is never empty
+  const highCount=wards.filter(w=>w.level==='h').length;
+  renderWards(null);
+  renderStats(null, highCount);
+
+  // Fetch live weather from Open-Meteo (free, no key required)
+  toast('Loading live weather data…','i');
+  const weatherData=await fetchWeather();
+
+  if(weatherData){
+    renderWeatherStrip(weatherData);
+    renderForecast(weatherData);
+    const todayRain=weatherData.daily?.precipitation_sum?.[0]||0;
+    // Re-render wards with real rain boost
+    renderWards(todayRain);
+    const newHighCount=wards.filter(w=>{
+      const boost=Math.min(15,Math.round(todayRain/3));
+      return Math.min(99,w.risk+boost)>=70;
+    }).length;
+    renderStats(todayRain, newHighCount);
+    toast('Live weather loaded ✓','ok');
+  } else {
+    renderWeatherStrip(null);
+    renderForecast(null);
+    toast('Using cached ward data','i');
+  }
+
+  // Generate AI advisory (uses ward data + weather)
+  fetchAdvisory(weatherData);
+  initRv();
 });
 </script>
 </body>
